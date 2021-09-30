@@ -1,0 +1,49 @@
+.header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    background-color: var(--azul-menu);
+    width: 100vw;
+    height: 10vh;
+}
+
+
+.input-menu{
+    border: 0;
+    height: 1.5rem;
+    padding-left: 0.5rem;
+    border-radius: 1rem;
+    width: 30%;
+    background-color: var(--azul-menu-input);
+}
+
+.input-menu::placeholder{
+    color: #ffff;
+}
+
+a{
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  .menu-links{
+    width: 20rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .menu-usuario{
+      width: 20rem;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+  }
