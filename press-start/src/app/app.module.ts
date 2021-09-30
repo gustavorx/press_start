@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { JogoComponent } from './components/jogo/jogo/jogo.component';
+import { JogoComponent } from './components/jogo/jogo.component';
 
 @NgModule({
   declarations: [
