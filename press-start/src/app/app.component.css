@@ -1,9 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
 
-.body {
+body {
   font-family: "Roboto", sans-serif;
-  height: 969px;
-  background-color: black;
+  /* height: 969px; */
 }
 
 .menu {

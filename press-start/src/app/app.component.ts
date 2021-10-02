@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'press-start';
+  mostrarMenu = false;
+
+  menu() {
+    this.mostrarMenu = true;
+  }
 }

@@ -1,17 +1,21 @@
-<div class="body">
-<header class="menu py-3">
-  <div class="container">
-    <div class="d-flex">
-      <ul class="nav m-lg-auto">
-        <li><a class="nav-link text-black">Press start</a></li>
-        <li><a href="components/login/login.component.html" target="_self" class="nav-link text-black">Login</a></li>
-        <li><a class="nav-link text-black d-none">Nome de usuário aqui</a></li>
-        <li><a href="./components/cadastro/cadastro.component.html" class="nav-link text-black">Cadastro</a></li>
-        <li><a href="./components/alterar-cadastro/alterar-cadastro.component.html" class="nav-link text-black">Meu perfil</a></li>
-      </ul>
+<div class="body" [hidden]="mostrarMenu">
+  <header class="menu py-3">
+    <div class="container">
+      <div class="d-flex">
+        <ul class="nav m-lg-auto">
+          <li><a routerLink="/" class="nav-link text-black">Press start</a></li>
+          <li><a routerLink="/login" class="nav-link text-black" (click)="menu()">Login</a></li>
+          <li><a class="nav-link text-black d-none" (click)="menu()">Nome de usuário aqui</a></li>
+          <li><a routerLink="/cadastro" class="nav-link text-black" (click)="menu()">Cadastro</a></li>
+          <li><a routerLink="/alterar-cadastro" class="nav-link text-black" (click)="menu()">Meu
+              perfil</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</header>
-
-<h1 class="text-center text-white py-5">login, Cadastro e Alterar cadastro</h1>
+  </header>
+  <h1 class="text-center py-5">login, Cadastro e Alterar cadastro</h1>
 </div>
+<!-- Conteudo das páginas aqui -->
+<router-outlet>
+  <a href="/">Voltar</a>
+</router-outlet>
