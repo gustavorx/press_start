@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { JogoComponent } from './components/jogo/jogo.component';
 import { MenuComponent } from './components/menu/menu.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -12,7 +14,8 @@ import { MenuComponent } from './components/menu/menu.component';
     MenuComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
