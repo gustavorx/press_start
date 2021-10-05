@@ -1,1 +1,38 @@
-<p>login works!</p>
+<html>
+
+<body>
+    <div class="card-login">
+        <form class="form-signin login-dark">
+            <h3 class="mb-3 text-center">{{ titulo }}</h3>
+            <div *ngIf="mostrarEsqueci == false">
+                <label for="inputEmail" class="sr-only">Endereço de Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Email" required autofocus>
+                <label for="inputPassword" class="sr-only">Senha</label>
+                <input type="password" name="senha" class="form-control" placeholder="Senha" required>
+                <a class="text-decoration-none text-muted" routerLink="/login" (click)="esqueci()">Esqueci a
+                    senha</a><br>
+            </div>
+            <div *ngIf="msgErro != null">
+                <span class="msg">{{ msgErro }}</span>
+            </div>
+            <div class="d-flex flex-column mb-2">
+                <div *ngIf="mostrarEsqueci">
+                    <label class="sr-only">Digite seu CPF para recuperar sua senha</label>
+                    <input type="text" name="cpf" class="form-control mb-2" placeholder="CPF - Apenas números" maxlength="11" pattern="[0-9]+$" required>
+                    <input type="text" name="novaSenha" class="form-control mb-2" placeholder="Digite sua nova senha" required>
+                    <input type="text" name="novaSenhaR" class="form-control mb-2" placeholder="Repita a senha" required>
+                </div>
+                <button *ngIf="mostrarEsqueci" class="btn btn-lg btn-info my-3 mb-2" type="submit" (click)="resetarSenha()">Recuperar
+                    senha</button>
+
+                <div class="d-flex flex-column" *ngIf="mostrarEsqueci == false">
+                    <button class="btn btn-lg btn-primary mb-2" type="submit" (click)="fazerLogin()">Entrar</button>
+                    <button routerLink="/cadastro" class="btn btn-lg btn-info mb-2">Inscrever-se</button>
+                </div>
+                <button href="/" class="btn btn-lg btn-light" formnovalidate>Voltar</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
