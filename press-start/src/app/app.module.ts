@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { AlterarCadastroComponent } from './components/alterar-cadastro/alterar-cadastro.component';
+import { PagamentoComponent } from './components/pagamento/pagamento.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'cadastro', component: CadastroComponent },
-  { path: 'alterar-cadastro', component: AlterarCadastroComponent }
+  { path: 'alterar-cadastro', component: AlterarCadastroComponent },
+  { path: 'pagamento', component: PagamentoComponent}
 ];
 
 @NgModule({
@@ -19,7 +21,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     CadastroComponent,
-    AlterarCadastroComponent
+    AlterarCadastroComponent,
+    PagamentoComponent
   ],
   imports: [
     BrowserModule,
