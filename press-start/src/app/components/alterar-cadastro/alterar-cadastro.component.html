@@ -1,1 +1,112 @@
-<p>alterar-cadastro works!</p>
+<html>
+
+<body>
+    <div class="d-flex flex-wrap justify-content-center align-items-center">
+        <div class="container">
+            <form action="" ngNativeValidate>
+                <div class="text-white">
+                    <h3>Editar dados pessoais</h3>
+                    <hr>
+                </div>
+                <fieldset id="desabilitar">
+
+                    <!-- Dados de cadastro -->
+                    <div class="row">
+                        <div class="col">
+                            <label class="text-white" for="nome">Nome</label>
+                            <input type="text" class="form-control" id="nome" placeholder="Digite seu nome" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="text-white mt-2" for="cpf">CPF</label>
+                            <input type="text" class="form-control" id="cpf" placeholder="Digite seu CPF" maxlength="11" pattern="[0-9]+$" required>
+
+                        </div>
+                        <div class="col">
+                            <label class="text-white mt-2" for="telefoneCelular">Telefone Celular</label>
+                            <input type="text" class="form-control" id="telefoneCelular" placeholder="Apenas números com DDD" maxlength="11" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$" required>
+                        </div>
+                        <div class="col">
+                            <label class="text-white mt-2" for="dataDeNascimento">Data De Nascimento</label>
+                            <input type="text" class="form-control" id="dataDeNascimento" placeholder="DD/MM/AAAA" type="text" maxlength="10" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
+                                required>
+
+                        </div>
+                        <div class="col">
+                            <label class="text-white mt-2" for="sexo">Sexo</label>
+                            <select id="sexo" class="form-select">
+                                <option selected>Selecione</option>
+                                <option>Masculino</option>
+                                <option>Feminino</option>
+                                <option>Prefiro não informar</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="text-white mt-2" for="email">E-mail</label>
+                            <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" required>
+                            <label class="text-white mt-2" for="senha">Senha</label>
+                            <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" maxlength="16" required>
+                        </div>
+                    </div>
+
+                    <!-- Dados de endereço -->
+                    <div class="row">
+                        <!-- Search input-->
+                        <div class="col-md-4">
+                            <label class="text-white mt-2" for="cep">CEP</label>
+                            <input id="cep" [(ngModel)]="cep" name="cep" placeholder="Apenas números" class="form-control" value="" type="search" maxlength="8" pattern="[0-9]+$" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label>.</label>
+                            <button type="button" class="btn btn-outline-success form-control mt-2" (click)="pesquisaCep()">Procurar</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="text-white mt-2" for="rua">Rua</label>
+                            <input type="text" class="form-control" id="rua" value="{{ rua }}" readonly="readonly" required>
+
+                        </div>
+                        <div class="col">
+                            <label class="text-white mt-2" for="numero">Número</label>
+                            <input [(ngModel)]="numero" name="numero" type="text" class="form-control" id="numero" placeholder="Digite o número da sua casa" required>
+                        </div>
+                        <div class="col">
+                            <label class="text-white mt-2" for="bairro">Bairro</label>
+                            <input name="bairro" type="text" class="form-control" id="bairro" value="{{ bairro }}" readonly="readonly">
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label class="text-white mt-2" for="cidade">Cidade</label>
+                            <input type="text" class="form-control" id="cidade" value="{{ cidade }}" readonly="readonly">
+
+                        </div>
+                        <div class="col">
+                            <label class="text-white mt-2" for="estado">Estado</label>
+                            <input type="text" class="form-control" id="estado" value="{{ estado }}" readonly="readonly">
+                        </div>
+                        <div class="col">
+                            <label class="text-white mt-2" for="complemento">Complemento</label>
+                            <input [(ngModel)]="complemento" name="complemento" type="text" class="form-control" id="complemento">
+                        </div>
+                    </div>
+
+                </fieldset>
+                <div class="d-flex justify-content-end py-5">
+                    <button class="btn btn-lg btn-info" type="submit">Salvar</button>
+                    <span class="px-2"></span>
+                    <button routerLink="/" class="btn btn-lg btn-light" formnovalidate>Cancelar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</body>
+
+</html>
