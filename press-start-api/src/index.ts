@@ -12,7 +12,7 @@ connectToDatabase()
         app.use("/jogos", jogosRouter);
 
         app.listen(porta, () => {
-            console.log(`API started at http://localhost:${porta}`);
+            console.log(`API em execução na url http://localhost:${porta}`);
         });
     })
     .catch((error: Error) => {
