@@ -1,18 +1,20 @@
-<header class="menu">
+<header class="menu" *ngIf="mostrarMenu == false">
     <ul class="menu-links">
-        <li><img src="../../../assets/logo/Logo5.png" class="logo"></li>
-        <li><a href="">Home</a></li>
-        <li><a href="">Jogos</a></li>
+        <li>
+            <a routerLink="/"><img src="../../../assets/logo/Logo5.png" class="logo"></a>
+        </li>
+        <li><a routerLink="/">Press start</a></li>
+        <li><a routerLink="/">Jogos</a></li>
     </ul>
     <ul class="menu-busca">
         <li><input class="input-busca" type="text" placeholder="O que você quer jogar hoje?"></li>
     </ul>
     <ul class="menu-usuario">
-        <li><a class="menu-usuario-perfil" href="">
-                <img src="../../../assets/avatar/cyberpunk-avatar.jpg" alt="avatar" class="avatar">
-                Gustavo
+        <li>
+            <a class="menu-usuario-perfil" routerLink="/alterar-cadastro" (click)="esconderMenu()">
+                <img src="../../../assets/avatar/cyberpunk-avatar.jpg" alt="avatar" class="avatar"> Gustavo
             </a>
         </li>
-        <li><a href="">Carrinho</a></li>
+        <li><a routerLink="/">Carrinho</a></li>
     </ul>
 </header>
