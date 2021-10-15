@@ -1,0 +1,50 @@
+<html>
+
+<body>
+    <div class="d-flex flex-wrap justify-content-center align-items-center">
+        <div class="container">
+            <form action="" ngNativeValidate>
+                <div class="text-white">
+                    <h3>Carrinho</h3>
+                    <hr>
+                </div>
+                <fieldset id="desabilitar">
+                    <table class="table table-borderless" style="color: white;">
+                        <thead>
+                          <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Cyberpunk</td>
+                            <td>R$ 100,00</td>
+                            <td><a href="#" style="color: white;">Remover</a></td>
+                        </tr>
+                        <tr>
+                            <td>Minecraft</td>
+                            <td>R$ 60,00</td>
+                            <td><a href="#" style="color: white;">Remover</a></td>
+                        </tr>
+                        <tr>
+                            <td>Battlefield 5</td>
+                            <td>R$ 200,00</td>
+                            <td><a href="#" style="color: white;">Remover</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </fieldset>
+                <div class="d-flex justify-content-end py-5">
+                    <a routerLink="/" class="btn btn-lg btn-info" type="submit">Continuar comprando</a>
+                    <span class="px-2"></span>
+                    <a routerLink="/pagamento" class="btn btn-lg btn-light" formnovalidate>Prosseguir para pagamento</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</body>
+
+</html>
