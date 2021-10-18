@@ -7,9 +7,4 @@ import { Component } from '@angular/core';
 })
 export class MenuComponent {
 
-  mostrarMenu = true;
-
-  esconderMenu() {
-    this.mostrarMenu = true;
-  }
 }

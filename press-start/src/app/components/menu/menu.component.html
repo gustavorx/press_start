@@ -1,9 +1,8 @@
-<header class="menu" *ngIf="mostrarMenu == false">
+<header class="menu">
     <ul class="menu-links">
         <li>
             <a routerLink="/"><img src="../../../assets/logo/Logo5.png" class="logo"></a>
         </li>
-        <li><a routerLink="/">Press start</a></li>
         <li><a routerLink="/">Jogos</a></li>
     </ul>
     <ul class="menu-busca">
@@ -11,7 +10,7 @@
     </ul>
     <ul class="menu-usuario">
         <li>
-            <a class="menu-usuario-perfil" routerLink="/alterar-cadastro" (click)="esconderMenu()">
+            <a class="menu-usuario-perfil" routerLink="/">
                 <img src="../../../assets/avatar/cyberpunk-avatar.jpg" alt="avatar" class="avatar"> Gustavo
             </a>
         </li>
