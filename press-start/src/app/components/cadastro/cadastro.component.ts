@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cadastro',
@@ -10,6 +11,15 @@ export class CadastroComponent {
 
   esconderInputs = true;
 
+  //Dados pessoais
+  nome: string = "";
+  cpf: string = "";
+  telefone: string = "";
+  dtNasc: string = "";
+  sexo: string = "";
+  email: string = ""
+  senha: string = "";
+
   //Dados endereço
   cep: string = "";
   rua: string = "";
@@ -19,7 +29,15 @@ export class CadastroComponent {
   estado: string = "";
   complemento: string = "";
 
+  //Insere no banco
+  constructor(private http: HttpClient) { }
 
+  cadastrar(data: JSON) {
+    this.http.post("http://localhost:8080/usuarios", data, {responseType: 'text'}).subscribe();
+    // console.warn(data);
+  }
+
+  //Busca CEP
   pesquisaCep() {
 
     var validacep = /^[0-9]{8}$/;
