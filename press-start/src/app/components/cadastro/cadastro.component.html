@@ -47,7 +47,7 @@
                             <label class="text-white mt-2" for="email">E-mail</label>
                             <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" placeholder="Digite seu e-mail" required>
                             <label class="text-white mt-2" for="senha">Senha</label>
-                            <input type="password" id="senha" [(ngModel)]="senha" name="senha" class="form-control" placeholder="Senha" maxlength="16" required>
+                            <input type="password" id="senha" [(ngModel)]="senha" name="senha" class="form-control" placeholder="Senha" minlength="8" maxlength="16" required>
                         </div>
                     </div>
 
@@ -103,7 +103,6 @@
                     <button routerLink="/" class="btn btn-lg btn-light" formnovalidate>Voltar</button>
                 </div>
             </form>
-
         </div>
     </div>
 </body>

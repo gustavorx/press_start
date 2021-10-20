@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -30,11 +31,11 @@ export class CadastroComponent {
   complemento: string = "";
 
   //Insere no banco
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: Router) { }
 
   cadastrar(data: JSON) {
-    this.http.post("http://localhost:8080/usuarios", data, {responseType: 'text'}).subscribe();
-    // console.warn(data);
+    this.http.post("http://localhost:8080/usuarios", data, { responseType: 'text' }).subscribe();
+    this.route.navigate(['/login']); // navigate to other page
   }
 
   //Busca CEP
