@@ -12,6 +12,21 @@ export class AlterarCadastroComponent implements OnInit {
   constructor(private http: HttpClient, private route: Router) { }
   
   alterarSenhas = false;
+  mostrarSenha = true;
+  sPsw = "password";
+  alerta = "";
+  aviso = "warning";
+
+  //Mostra a senha
+  showPsw(){
+    if (this.mostrarSenha == true) {
+      this.mostrarSenha = false;
+      this.sPsw = "text";
+    }else if (this.mostrarSenha == false) {
+      this.mostrarSenha = true;
+      this.sPsw = "password";
+    }
+  }
   
   //Dados pessoais
   id: string = "6168ce5caeabc7a6248d2756";
@@ -64,22 +79,32 @@ export class AlterarCadastroComponent implements OnInit {
 
   //Alterar senha
   alterarSenha(){
-    this.alterarSenhas = true;
-    alert("senha original = " + this.senhaOg);
+    if (this.alterarSenhas == false) {
+      this.alterarSenhas = true
+    }else if (this.alterarSenhas == true) {
+      this.alterarSenhas = false;
+    }
   }
 
   //Atualiza no banco
   update(data: JSON) {
     if(this.senhaOg == this.senhaAntiga && this.novaSenha == this.repitaSenha){
       this.http.put(`http://localhost:8080/usuarios/${this.id}`, data, { responseType: 'text' }).subscribe();
-      alert("Senhas: \n" + "senhaOg = \n" + this.senhaOg + "senhaAntiga = \n" + this.senhaAntiga + "novaSenha = \n" + this.novaSenha + "repitaSenha = \n" + this.repitaSenha);
+      this.aviso = "success";
+      this.alerta = "Senha alterado com sucesso";
     }
     else if(this.alterarSenhas == false) {
       this.http.put(`http://localhost:8080/usuarios/${this.id}`, data, { responseType: 'text' }).subscribe();
+      this.aviso = "success";
+      this.alerta = "Informações atualizadas com sucesso";
+    }
+    else if(this.senhaAntiga.length <= 7 || this.novaSenha.length <= 7 || this.repitaSenha.length <= 7) {
+      this.aviso = "warning";
+      this.alerta = "Senhas não pode ser vazia e deve conter no mínimo 8 caracteres"
     }
     else{
-      alert("Senhas não conferi. Tente novamente");
-      alert("Senhas: \n" + "\nsenhaOg = " + this.senhaOg + "\nsenhaAntiga = " + this.senhaAntiga + "\nnovaSenha = " + this.novaSenha + "\nrepitaSenha = " + this.repitaSenha);
+      this.aviso = "warning";
+      this.alerta = "Senhas não conferi. Tente novamente."
     }
   }
 

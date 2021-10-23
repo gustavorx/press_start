@@ -11,6 +11,19 @@ import { Router } from '@angular/router';
 export class CadastroComponent {
 
   esconderInputs = true;
+  mostrarSenha = true;
+  sPsw = "password";
+
+  //Mostra a senha
+  showPsw(){
+    if (this.mostrarSenha == true) {
+      this.mostrarSenha = false;
+      this.sPsw = "text";
+    }else if (this.mostrarSenha == false) {
+      this.mostrarSenha = true;
+      this.sPsw = "password";
+    }
+  }
 
   //Dados pessoais
   nome: string = "";
@@ -35,7 +48,7 @@ export class CadastroComponent {
 
   cadastrar(data: JSON) {
     this.http.post("http://localhost:8080/usuarios", data, { responseType: 'text' }).subscribe();
-    this.route.navigate(['/login']); // navigate to other page
+    this.route.navigate(['/login']); // Redireciona para a página de login após cadastro
   }
 
   //Busca CEP
