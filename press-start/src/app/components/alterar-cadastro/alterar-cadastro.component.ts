@@ -10,48 +10,7 @@ import { Router } from '@angular/router';
 export class AlterarCadastroComponent implements OnInit {
 
   constructor(private http: HttpClient, private route: Router) { }
-  
-  alterarSenhas = false;
-  mostrarSenha = true;
-  sPsw = "password";
-  alerta = "";
-  aviso = "warning";
 
-  //Mostra a senha
-  showPsw(){
-    if (this.mostrarSenha == true) {
-      this.mostrarSenha = false;
-      this.sPsw = "text";
-    }else if (this.mostrarSenha == false) {
-      this.mostrarSenha = true;
-      this.sPsw = "password";
-    }
-  }
-  
-  //Dados pessoais
-  id: string = "6168ce5caeabc7a6248d2756";
-  nome: string = "...";
-  cpf: string = "...";
-  telefone: string = "...";
-  dtNasc: string = "...";
-  sexo: string = "...";
-  email: string = "..."
-
-  //Alterar senha
-  senhaOg: string = "";
-  senhaAntiga: string = "";
-  novaSenha: string = "";
-  repitaSenha: string = "";
-  
-  //Dados endereço
-  cep: string = "...";
-  rua: string = "...";
-  numero: string = "...";
-  bairro: string = "...";
-  cidade: string = "...";
-  estado: string = "...";
-  complemento: string = "...";
-  
   //Busca dados do Usuario
   ngOnInit(): void {
     let url: string = `http://localhost:8080/usuarios/${this.id}`;
@@ -74,35 +33,81 @@ export class AlterarCadastroComponent implements OnInit {
         this.cidade = res.cidade;
         this.estado = res.estado;
         this.complemento = res.complemento;
-      }).catch(error => console.error(error))
+      }).catch(error => console.error(error));
   }
 
+  //Dados pessoais
+  id: string = "6168ce5caeabc7a6248d2756";
+  nome: string = "...";
+  cpf: string = "...";
+  telefone: string = "...";
+  dtNasc: string = "...";
+  sexo: string = "...";
+  email: string = "..."
+
   //Alterar senha
-  alterarSenha(){
+  senhaOg: string = "";
+  senhaAntiga: string = "";
+  novaSenha: string = "";
+  repitaSenha: string = "";
+
+  //Dados endereço
+  cep: string = "...";
+  rua: string = "...";
+  numero: string = "...";
+  bairro: string = "...";
+  cidade: string = "...";
+  estado: string = "...";
+  complemento: string = "...";
+
+  //Muda para tela de alterar senha
+  alterarSenhas = false;
+  
+  alterarSenha() {
     if (this.alterarSenhas == false) {
       this.alterarSenhas = true
-    }else if (this.alterarSenhas == true) {
+      this.alerta = ""
+    } else if (this.alterarSenhas == true) {
       this.alterarSenhas = false;
+      this.alerta = ""
+    }
+  }
+
+  //Mostrar alerta
+  alerta = "";
+  aviso = "warning";
+
+  //Mostra a senha
+  mostrarSenha = true;
+  sPsw = "password";
+
+  showPsw() {
+    if (this.mostrarSenha == true) {
+      this.mostrarSenha = false;
+      this.sPsw = "text";
+    } else if (this.mostrarSenha == false) {
+      this.mostrarSenha = true;
+      this.sPsw = "password";
     }
   }
 
   //Atualiza no banco
   update(data: JSON) {
-    if(this.senhaOg == this.senhaAntiga && this.novaSenha == this.repitaSenha){
+    if (this.senhaOg == this.senhaAntiga && this.novaSenha == this.repitaSenha) {
       this.http.put(`http://localhost:8080/usuarios/${this.id}`, data, { responseType: 'text' }).subscribe();
       this.aviso = "success";
       this.alerta = "Senha alterado com sucesso";
     }
-    else if(this.alterarSenhas == false) {
+    else if (this.alterarSenhas == false) {
       this.http.put(`http://localhost:8080/usuarios/${this.id}`, data, { responseType: 'text' }).subscribe();
       this.aviso = "success";
       this.alerta = "Informações atualizadas com sucesso";
     }
-    else if(this.senhaAntiga.length <= 7 || this.novaSenha.length <= 7 || this.repitaSenha.length <= 7) {
+    else if (this.senhaAntiga.length <= 7 || this.novaSenha.length <= 7 || this.repitaSenha.length <= 7) {
       this.aviso = "warning";
       this.alerta = "Senhas não pode ser vazia e deve conter no mínimo 8 caracteres"
     }
-    else{
+    else {
       this.aviso = "warning";
       this.alerta = "Senhas não conferi. Tente novamente."
     }
@@ -132,10 +137,10 @@ export class AlterarCadastroComponent implements OnInit {
         }).catch(error => console.error(error))
 
     } else if (this.cep.length <= 7) {
-      alert("CEP deve conter 8 dígitos e não pode estar vazio")
+      this.alerta = "CEP deve conter 8 dígitos e não pode estar vazio"
     }
     else {
-      alert("Digite apenas números no CEP!!!")
+      this.alerta = "Digite apenas números no CEP!!!"
     }
   }
 }

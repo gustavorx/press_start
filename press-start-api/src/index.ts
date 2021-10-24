@@ -4,7 +4,7 @@ import { connectToDatabase } from "./services/database.service"
 // Rotas
 import { jogosRouter } from "./routes/jogos.router";
 import { usuariosRouter } from "./routes/usuarios.router";
-
+import { loginRouter } from "./routes/login.router";
 
 const app = express();
 const porta = 8080;
@@ -31,11 +31,11 @@ app.use(function (req, res, next) {
 
 app.use(express.json());
 
-
 connectToDatabase()
     .then(() => {
         app.use("/jogos", jogosRouter);
         app.use("/usuarios", usuariosRouter);
+        app.use("/login", loginRouter);
 
         app.listen(porta, () => {
             console.log(`API em execução na url http://localhost:${porta}`);

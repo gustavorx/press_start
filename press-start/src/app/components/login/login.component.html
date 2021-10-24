@@ -2,77 +2,111 @@
 
 <body>
     <div class="card-login">
-        <form class="form-signin login-dark" ngNativeValidate>
-            <h3 class="mb-3 text-center" *ngIf="mostrarEsqueci == false">Fazer login</h3>
-            <div *ngIf="mostrarEsqueci == false">
-                <label for="inputEmail" class="sr-only">E-mail</label>
-                <input type="email" name="email" class="form-control" placeholder="joao.silva@exemplo.com" required autofocus>
-                <label for="inputPassword" class="sr-only">Senha</label>
-                <div class="input-group mb-3">
-                    <input type="{{sPsw}}" name="senha" class="form-control" aria-describedby="show-psw" required>
-                    <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
-                        <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
-                        <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
-                        <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
-                      </svg></i>
-                      <i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == false"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                      </svg></i>
-                    </span>
-                </div>
-                <a class="text-decoration-none text-muted" routerLink="/login" (click)="esqueci()">Esqueci a
-                    senha</a><br>
-                <div *ngIf="msgErro != null">
-                    <span class="msg">{{ msgErro }}</span>
-                </div>
-            </div>
-            <div class="d-flex flex-column mb-2">
-                <div class="pb-2" *ngIf="mostrarEsqueci">
-                    <h3 class="mb-3 text-center" *ngIf="mostrarEsqueci == true">Esqueci minha senha</h3>
-                    <label class="sr-only">Digite seu CPF para recuperar sua senha</label>
-                    <input type="text" name="cpf" class="form-control mb-3" placeholder="CPF - Apenas números" maxlength="11" pattern="[0-9]+$" required>
+        <div class="form-signin login-dark">
+
+            <!-- Seção de login -->
+            <form ngNativeValidate>
+                <h3 class="mb-3 text-center" *ngIf="mostrarEsqueci == false">Fazer login</h3>
+                <div *ngIf="mostrarEsqueci == false">
+                    <label for="inputEmail" class="sr-only">E-mail</label>
+                    <input type="email" [(ngModel)]="email" name="email" class="form-control" placeholder="joao.silva@exemplo.com" required autofocus>
+                    <label for="inputPassword" class="sr-only">Senha</label>
                     <div class="input-group mb-3">
-                        <input type="{{sPsw}}" name="novaSenha" class="form-control" placeholder="Nova senha" required>
-                        <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
-                            <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
-                            <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
-                            <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
-                          </svg></i>
-                          <i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == false"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                          </svg></i>
+                        <input type="{{sPsw}}" [(ngModel)]="senha" name="senha" minlength="8" maxlength="16" class="form-control" aria-describedby="show-psw" required>
+                        <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw"
+                                *ngIf="mostrarSenha == true"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="32" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                                    <path
+                                        d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
+                                    <path
+                                        d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
+                                    <path
+                                        d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
+                                </svg></i>
+                            <i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == false"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor"
+                                    class="bi bi-eye" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                    <path
+                                        d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                </svg></i>
                         </span>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="{{sPsw}}" name="novaSenhaR" class="form-control" placeholder="Confirme a nova senha" aria-describedby="show-psw" required>
-                        <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
-                            <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
-                            <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
-                            <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
-                          </svg></i>
-                          <i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == false"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                          </svg></i>
-                        </span>
-                    </div>
+                    <a class="text-decoration-none text-muted" routerLink="/login" (click)="esqueci()">Esqueci a
+                        senha</a><br>
                     <div *ngIf="msgErro != null">
                         <span class="msg">{{ msgErro }}</span>
                     </div>
                 </div>
-                <button *ngIf="mostrarEsqueci" class="btn btn-lg btn-outline-info my-3 mb-2" type="submit">Recuperar
-                    senha</button>
-                <button *ngIf="mostrarEsqueci" class="btn btn-lg btn-outline-light" (click)="resetarSenha()" formnovalidate>Cancelar</button>
-
                 <div class="d-flex flex-column pt-2" *ngIf="mostrarEsqueci == false">
-                    <button class="btn btn-lg btn-outline-primary mb-2" type="submit" (click)="fazerLogin()">Entrar</button>
+                    <button class="btn btn-lg btn-outline-primary mb-2" (click)="fazerLogin()">Entrar</button>
                     <button routerLink="/cadastro" class="btn btn-lg btn-outline-info mb-2">Inscrever-se</button>
                     <button routerLink="/" class="btn btn-lg btn-outline-light" formnovalidate>Voltar</button>
                 </div>
+            </form>
+
+            <!-- Seção de recuperar senha -->
+            <div class="pb-2" *ngIf="mostrarEsqueci">
+                <form id="formEsqueciSenha" #alterarSenha="ngForm" (ngSubmit)="update(alterarSenha.value)" ngNativeValidate>
+                    <h3 class="mb-3 text-center" *ngIf="mostrarEsqueci == true">Esqueci minha senha</h3>
+                    <label class="sr-only">Digite seu CPF para recuperar sua senha</label>
+                    <input type="text" [(ngModel)]="cpf" name="cpf" class="form-control mb-3" placeholder="CPF - Apenas números" minlength="11" maxlength="11" pattern="[0-9]+$" required>
+                    <div class="input-group mb-3">
+                        <input type="{{sPsw}}" [(ngModel)]="senha" name="senha" minlength="8" maxlength="16" class="form-control" placeholder="Nova senha" required>
+                        <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw"
+                                *ngIf="mostrarSenha == true"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="32" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                                    <path
+                                        d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
+                                    <path
+                                        d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
+                                    <path
+                                        d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
+                                </svg></i>
+                            <i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == false"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor"
+                                    class="bi bi-eye" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                    <path
+                                        d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                </svg></i>
+                        </span>
+                    </div>
+                </form>
+                <div class="input-group mb-3">
+                    <input type="{{sPsw}}" [(ngModel)]="repitaSenha" name="repitaSenha" minlength="8" maxlength="16" class="form-control" placeholder="Confirme a nova senha" aria-describedby="show-psw" required>
+                    <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw"
+                            *ngIf="mostrarSenha == true"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="32" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                                <path
+                                    d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
+                                <path
+                                    d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
+                                <path
+                                    d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
+                            </svg></i>
+                        <i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == false"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor"
+                                class="bi bi-eye" viewBox="0 0 16 16">
+                                <path
+                                    d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                <path
+                                    d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                            </svg></i>
+                    </span>
+                </div>
+                <div *ngIf="msgErro != null">
+                    <span class="msg">{{ msgErro }}</span>
+                </div>
+                <div class="d-flex flex-column pt-2" *ngIf="mostrarEsqueci">
+                    <button class="btn btn-lg btn-outline-info my-3 mb-2" type="submit" form="formEsqueciSenha">Recuperar
+                        senha</button>
+                    <button class="btn btn-lg btn-outline-light" (click)="resetarSenha()" formnovalidate>Cancelar</button>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 </body>
 
