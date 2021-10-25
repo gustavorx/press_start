@@ -51,6 +51,14 @@
                                 <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" placeholder="Digite seu e-mail" required>
                                 <button *ngIf="alterarSenhas == false" type="button" class="btn btn-outline-danger mt-4" (click)="alterarSenha()">Alterar senha</button>
                             </div>
+                            <div class="col" *ngIf="mostraTipo == true">
+                                <label class="text-white mt-2" for="sexo">Tipo de usuário</label>
+                                <select id="tipo" [(ngModel)]="tipo" name="tipo" class="form-select">
+                                    <option>Administrador master</option>
+                                    <option>Administrador</option>
+                                    <option selected>Comum</option>
+                                </select>
+                            </div>
                         </div>
 
                         <!-- Dados de endereço -->

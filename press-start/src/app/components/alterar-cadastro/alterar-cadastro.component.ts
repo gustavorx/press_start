@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-alterar-cadastro',
@@ -9,16 +11,21 @@ import { Router } from '@angular/router';
 })
 export class AlterarCadastroComponent implements OnInit {
 
-  constructor(private http: HttpClient, private route: Router) { }
+  subscription: Subscription = new Subscription;
+
+  constructor(private http: HttpClient, private route: Router, private idUser: LoginService) { }
 
   //Busca dados do Usuario
   ngOnInit(): void {
+    //pega Id do usuario ao fazer login
+    this.subscription = this.idUser.idAtual.subscribe(message => this.id = message);
+    alert("id do usuario = " + this.id);
+
     let url: string = `http://localhost:8080/usuarios/${this.id}`;
 
     fetch(url)
       .then(data => { return data.json() })
       .then(res => {
-        // this.id = res.id;
         this.nome = res.nome;
         this.cpf = res.cpf;
         this.telefone = res.telefone;
@@ -26,6 +33,10 @@ export class AlterarCadastroComponent implements OnInit {
         this.sexo = res.sexo;
         this.email = res.email;
         this.senhaOg = res.senha;
+        this.tipo = res.tipo;
+        if(this.tipo == "Administrador master"){
+          this.mostraTipo = true;
+        }
         this.cep = res.cep;
         this.numero = res.numero;
         this.rua = res.rua;
@@ -34,16 +45,21 @@ export class AlterarCadastroComponent implements OnInit {
         this.estado = res.estado;
         this.complemento = res.complemento;
       }).catch(error => console.error(error));
+
   }
 
   //Dados pessoais
-  id: string = "6168ce5caeabc7a6248d2756";
+  id: string = "";
   nome: string = "...";
   cpf: string = "...";
   telefone: string = "...";
   dtNasc: string = "...";
   sexo: string = "...";
-  email: string = "..."
+  email: string = "...";
+
+  //Tipo de usuario
+  tipo: string = "";
+  mostraTipo = false;
 
   //Alterar senha
   senhaOg: string = "";
@@ -107,9 +123,13 @@ export class AlterarCadastroComponent implements OnInit {
       this.aviso = "warning";
       this.alerta = "Senhas não pode ser vazia e deve conter no mínimo 8 caracteres"
     }
-    else {
+    else if (this.senhaOg != this.senhaAntiga) {
       this.aviso = "warning";
-      this.alerta = "Senhas não conferi. Tente novamente."
+      this.alerta = "Senhas antiga errada. Tente novamente."
+    }
+    else if (this.novaSenha != this.repitaSenha) {
+      this.aviso = "warning";
+      this.alerta = "Senha nova diferentes. Tente novamente."
     }
   }
 

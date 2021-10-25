@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  constructor(private http: HttpClient, private route: Router) { }
+  constructor(private http: HttpClient, private route: Router, private idUser: LoginService) { }
 
   //Dados pessoais
   id: string = "";
@@ -50,6 +51,7 @@ export class LoginComponent {
     }
   }
 
+
   //Busca o usuario com o email e senha passadas
   fazerLogin() {
     let url: string = `http://localhost:8080/login/${this.email}/${this.senha}`;
@@ -58,7 +60,8 @@ export class LoginComponent {
       .then(data => { return data.json() })
       .then(res => {
         this.id = res._id;
-        this.route.navigate(['/']);
+        this.idUser.changeMessage(this.id);
+        this.route.navigate(['/alterar-cadastro']); //Alterar para home depois
       }).catch(msg => this.msgErro = "E-mail ou senha inválidos. Tente novamente");
   }
 

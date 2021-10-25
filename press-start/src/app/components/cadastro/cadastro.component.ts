@@ -17,9 +17,12 @@ export class CadastroComponent {
   cpf: string = "";
   telefone: string = "";
   dtNasc: string = "";
-  sexo: string = "";
+  sexo: string = "Prefiro não informar";
   email: string = ""
   senha: string = "";
+
+  //Tipo de usuario
+  tipo: string = "Comum";
   
   //Dados endereço
   cep: string = "";
