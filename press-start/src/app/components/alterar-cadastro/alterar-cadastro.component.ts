@@ -19,7 +19,6 @@ export class AlterarCadastroComponent implements OnInit {
   ngOnInit(): void {
     //pega Id do usuario ao fazer login
     this.subscription = this.idUser.idAtual.subscribe(message => this.id = message);
-    alert("id do usuario = " + this.id);
 
     let url: string = `http://localhost:8080/usuarios/${this.id}`;
 

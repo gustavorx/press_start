@@ -61,7 +61,7 @@ export class LoginComponent {
       .then(res => {
         this.id = res._id;
         this.idUser.changeMessage(this.id);
-        this.route.navigate(['/alterar-cadastro']); //Alterar para home depois
+        this.route.navigate(['/']);
       }).catch(msg => this.msgErro = "E-mail ou senha inválidos. Tente novamente");
   }
 
