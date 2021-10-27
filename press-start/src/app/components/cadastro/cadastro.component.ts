@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -8,8 +10,20 @@ import { Component } from '@angular/core';
 
 export class CadastroComponent {
 
-  esconderInputs = true;
+  constructor(private http: HttpClient, private route: Router) { }
+  
+  //Dados pessoais
+  nome: string = "";
+  cpf: string = "";
+  telefone: string = "";
+  dtNasc: string = "";
+  sexo: string = "Prefiro não informar";
+  email: string = ""
+  senha: string = "";
 
+  //Tipo de usuario
+  tipo: string = "Comum";
+  
   //Dados endereço
   cep: string = "";
   rua: string = "";
@@ -19,7 +33,30 @@ export class CadastroComponent {
   estado: string = "";
   complemento: string = "";
 
+  //Mostrar alerta
+  alerta = "";
+  
+  //Mostra a senha
+  mostrarSenha = true;
+  sPsw = "password";
 
+  showPsw(){
+    if (this.mostrarSenha == true) {
+      this.mostrarSenha = false;
+      this.sPsw = "text";
+    }else if (this.mostrarSenha == false) {
+      this.mostrarSenha = true;
+      this.sPsw = "password";
+    }
+  }
+
+  //Insere no banco
+  cadastrar(data: JSON) {
+    this.http.post("http://localhost:8080/usuarios", data, { responseType: 'text' }).subscribe();
+    this.route.navigate(['/login']); // Redireciona para a página de login após cadastro
+  }
+
+  //Busca CEP
   pesquisaCep() {
 
     var validacep = /^[0-9]{8}$/;
@@ -43,10 +80,10 @@ export class CadastroComponent {
         }).catch(error => console.error(error))
 
     } else if (this.cep.length <= 7) {
-      alert("CEP deve conter 8 dígitos e não pode estar vazio")
+      this.alerta = "CEP deve conter 8 dígitos e não pode estar vazio";
     }
     else {
-      alert("Digite apenas números no CEP!!!")
+      this.alerta = "Digite apenas números no CEP!!!";
     }
   }
 }
