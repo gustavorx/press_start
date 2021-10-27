@@ -1,12 +1,24 @@
+<!-- ENDEREÇO(Endpoint) /pagamento -->
 <html>
     <body>
         <div class="d-flex flex-wrap justify-content-center align-items-center">
-            <div class="container">
-                <button routerLink="pagamento/boleto">boleto</button>
+            <div class="col-4"></div>
+            <div class="col-4">
+                <div [hidden]="esconderDescricao" class="row">
+                    <h1 class="text-white">Selecione um método de pagamento abaixo: </h1>
+                </div>
+                <div [hidden]="esconderMetodos" class="row">
+                    <p class="opcoes" (click)="mostrarCartao()">Cartão de Crédito</p>
+                    <p routerLink="/pagamento/boleto" class="opcoes" (click)="mostrarBoleto()">Boleto bancário</p>
+                    <p class="opcoes" (click)="mostrarPix()">PIX</p>
+                </div>
             </div>
-            <div class="container">
+            <div class="col-4"></div>           
+
+            <div class="container" [hidden]="esconderCartao">
                 <form>
                     <div class="text-white">
+                        <p class="alterar" (click)="alterarPagameto()">Alterar forma de pagamento</p>
                         <h3>Cartão de Crédito</h3>
                         <hr>
                     </div>

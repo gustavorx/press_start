@@ -1,3 +1,4 @@
+<!-- ENDEREÇO(Endpoint) /pagamento/boleto -->
 <div class="container" id="print-section">
     <div class="row border">
         <div class="col-2 border">
@@ -214,4 +215,5 @@
     <a>12378.11130.65700.000120 01000.222306 1 486200000000000</a>
 </div>
 
-  <button [useExistingCss]="true" printSectionId="print-section" ngxPrint> Imprimir </button>
+  <!-- <button [useExistingCss]="true" printSectionId="print-section" ngxPrint> Imprimir </button> -->
+  <input type="button" value="Imprimir" onClick="window.print()" />
