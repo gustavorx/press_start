@@ -1,4 +1,13 @@
 <!-- ENDEREÇO(Endpoint) /pagamento/boleto -->
+
+<div class="row"><br></div>
+<div class="row" [hidden]="esconderImprimir">
+    <div class="col-2"></div>
+    <div class="col-7"><p class="alterar" routerLink="/pagamento">Alterar forma de pagamento</p></div>
+    <div class="col-3"></div>
+</div>
+<div class="row"><br></div>
+
 <div class="container" id="print-section">
     <div class="row border">
         <div class="col-2 border">
@@ -8,7 +17,7 @@
             237-2
         </div>
         <div class="col-8 border">
-            <p class="font-weight-bold text-right">12378.11130.65700.000120 01000.222306 1 486200000000000</p>
+            <p class="font-weight-bold text-right"> {{ codigo }} </p>
         </div>
     </div>
 
@@ -212,8 +221,15 @@
     <br>
     <img src="../../../../assets/pagamento/codigo-de-barras.jpg" class="codigo">
     <br>
-    <a>12378.11130.65700.000120 01000.222306 1 486200000000000</a>
+    <a> {{ codigo }} </a>
 </div>
 
-  <!-- <button [useExistingCss]="true" printSectionId="print-section" ngxPrint> Imprimir </button> -->
-  <input type="button" value="Imprimir" onClick="window.print()" />
+<!-- <button [useExistingCss]="true" printSectionId="print-section" ngxPrint> Imprimir </button> -->
+<div class="row"><br></div>
+<div class="row">
+<div class="col-2"></div>
+<div class="col-7"><input type="button" value="Imprimir" [hidden]="esconderImprimir" (click)="imprimir()" /></div>
+<div class="col-3"></div>
+</div>
+
+  

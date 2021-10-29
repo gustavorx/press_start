@@ -36,3 +36,8 @@ body {
 .alterar:hover {
   text-decoration: underline;
 }
+
+.codigo {
+  width: 17rem;
+  height: 17rem;
+}

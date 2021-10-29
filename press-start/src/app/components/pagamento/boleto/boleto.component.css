@@ -7,3 +7,11 @@ button {
   float: right;
   margin-right: 300px;
 }
+
+.alterar {
+  color: #030303;
+}
+
+.alterar:hover {
+  text-decoration: underline;
+}
