@@ -1,0 +1,21 @@
+.jogo {
+    padding: 1rem;
+    max-width: 260px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.jogo-card {
+    width: 25rem;
+    height: 20rem;
+    margin: 1rem;
+}
+
+.grid-jogos {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-image: linear-gradient(-60deg, #080427 30%, #211e3d 30%);
+  }

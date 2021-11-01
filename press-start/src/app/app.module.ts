@@ -10,11 +10,14 @@ import { JogoComponent } from './components/jogo/jogo.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { JogoListaComponent } from './components/jogo-lista/jogo-lista.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'cadastro', component: CadastroComponent },
-  { path: 'alterar-cadastro', component: AlterarCadastroComponent }
+  { path: 'alterar-cadastro', component: AlterarCadastroComponent },
+  { path: 'jogos', component: JogoListaComponent },
+  { path: 'jogos/:id', component: JogoComponent }
 ];
 
 @NgModule({
@@ -24,7 +27,8 @@ const appRoutes: Routes = [
     CadastroComponent,
     AlterarCadastroComponent,
     MenuComponent,
-    JogoComponent
+    JogoComponent,
+    JogoListaComponent
   ],
   imports: [
     BrowserModule,
