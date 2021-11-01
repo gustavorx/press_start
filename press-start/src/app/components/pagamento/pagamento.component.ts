@@ -87,4 +87,29 @@ export class PagamentoComponent {
     for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
     return result;
   }
+
+  getProdutos() {
+    var carrinho = localStorage.getItem('carrinho');
+
+    var carrinhoArr = [];
+    if (carrinho) {
+      carrinhoArr = JSON.parse(carrinho);
+    } else {
+      carrinhoArr = [];
+    }
+
+    return carrinhoArr;
+  }
+
+  getValorTotal() {
+    var produtosArr = this.getProdutos();
+    var valorTotal = 0;
+
+    produtosArr.forEach((produto: { valor: string; }) => {
+      var valorInt = parseFloat(produto.valor.replace('R$ ', '').replace(',', '.'))
+      valorTotal += valorInt;
+    });
+
+    return valorTotal;
+  }
 }

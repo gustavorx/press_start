@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-carrinho',
@@ -7,46 +8,41 @@ import { Component } from '@angular/core';
 })
 
 export class CarrinhoComponent {
+  constructor(private toastr: ToastrService) {}
 
-  esconderInputs = true;
+  getProdutos() {
+    var carrinho = localStorage.getItem('carrinho');
 
-  //Dados endereço
-  cep: string = "";
-  rua: string = "";
-  numero: string = "";
-  bairro: string = "";
-  cidade: string = "";
-  estado: string = "";
-  complemento: string = "";
-
-
-  pesquisaCep() {
-
-    var validacep = /^[0-9]{8}$/;
-
-    //Valida o formato do CEP.
-    if (validacep.test(this.cep)) {
-      this.rua = "...";
-      this.bairro = "...";
-      this.cidade = "...";
-      this.estado = "...";
-
-      let url: string = `https://viacep.com.br/ws/${this.cep}/json/`;
-
-      fetch(url)
-        .then(data => { return data.json() })
-        .then(res => {
-          this.rua = res.logradouro;
-          this.bairro = res.bairro;
-          this.cidade = res.localidade;
-          this.estado = res.uf;
-        }).catch(error => console.error(error))
-
-    } else if (this.cep.length <= 7) {
-      alert("CEP deve conter 8 dígitos e não pode estar vazio")
+    var carrinhoArr = [];
+    if (carrinho) {
+      carrinhoArr = JSON.parse(carrinho);
+    } else {
+      carrinhoArr = [];
     }
-    else {
-      alert("Digite apenas números no CEP!!!")
+
+    return carrinhoArr;
+  }
+
+  removerProduto(id: number) {
+    var carrinho = localStorage.getItem('carrinho');
+
+    var carrinhoArr = [];
+
+    if (carrinho) {
+      carrinhoArr = JSON.parse(carrinho);
+    } else {
+      carrinhoArr = [];
     }
+
+    var novoCarrinho: { id: number; }[] = [];
+    carrinhoArr.forEach((jogo: { id: number; }) => {
+      if (jogo.id != id) {
+        novoCarrinho.push(jogo)
+      }
+    });
+
+    this.toastr.success('Produto removido do carrinho!');
+
+    localStorage.setItem('carrinho', JSON.stringify(novoCarrinho)); 
   }
 }

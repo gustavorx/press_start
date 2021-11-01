@@ -11,9 +11,9 @@
                             <h1 class="text-white">Selecione um método de pagamento abaixo: </h1>
                         </div>
                         <div [hidden]="esconderMetodos" class="row">
-                            <p class="opcoes" (click)="mostrarCartao()">Cartão de Crédito</p>
-                            <p routerLink="/pagamento/boleto" class="opcoes" (click)="mostrarBoleto()">Boleto bancário</p>
-                            <p class="opcoes" (click)="mostrarPix()">PIX</p>
+                            <p class="opcoes" (click)="mostrarCartao()" style="cursor: pointer;">Cartão de Crédito</p>
+                            <p routerLink="/pagamento/boleto" class="opcoes" (click)="mostrarBoleto()" style="cursor: pointer;">Boleto bancário</p>
+                            <p class="opcoes" (click)="mostrarPix()" style="cursor: pointer;">PIX</p>
                         </div>
                     </div>
                     <div class="col-4"></div>
@@ -27,15 +27,17 @@
                             <hr class="whiteH1">
                         </div>
                         <div class="row" style="--bs-gutter-x: 0rem">
-                            <label class="text-white">itens do pedido</label>
-                            <div class="col">
-                                <div class="text-white">x1</div>
+                            <label class="text-white">Itens do pedido</label>
+                            <div *ngFor="let produto of getProdutos()" class="row">
+                                <div class="col">
+                                    <div class="text-white">{{produto.nome}}</div>
+                                </div>
+                                <div class="col">
+                                    <div class="text-white">{{produto.valor}}</div>
+                                </div>
                             </div>
-                            <div class="col">
-                                <div class="text-white">R$ 19,74</div>
-                            </div>
-                            <hr class="whiteH1">
                         </div>
+                        <hr class="whiteH1">
                         <div class="row" style="--bs-gutter-x: 0rem">
                             <label class="text-white">Forma de pagamento</label>
                             <div class="text-white">Cartão de Crédito</div>>
@@ -46,8 +48,8 @@
                             <hr class="whiteH1">
                         </div>
                         <div class="row grey" style="--bs-gutter-x: 0rem">
-                            <label class="text-white">1 x de R$ 19,74 sem juros</label>
-                            <div class="text-white">Total a pagar <b class="text-white">R$ 19,74</b></div>
+                            <label class="text-white">1 x de {{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}} sem juros</label>
+                            <div class="text-white">Total a pagar <b class="text-white">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</b></div>
                         </div>
                     </div>
                     <div class="col-4"></div>
@@ -57,7 +59,7 @@
             <div class="container" [hidden]="esconderCartao">
                 <form>
                     <div class="text-white">
-                        <p class="alterar" (click)="alterarPagameto()">Alterar forma de pagamento</p>
+                        <p class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</p>
                         <h3>Cartão de Crédito</h3>
                         <hr>
                     </div>
@@ -110,15 +112,17 @@
                                     <hr class="whiteH1">
                                 </div>
                                 <div class="row" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">itens do pedido</label>
-                                    <div class="col">
-                                        <div class="text-white">x1</div>
+                                    <label class="text-white">Itens do pedido</label>
+                                    <div *ngFor="let produto of getProdutos()" class="row">
+                                        <div class="col">
+                                            <div class="text-white">{{produto.nome}}</div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="text-white">{{produto.valor}}</div>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="text-white">R$ 19,74</div>
-                                    </div>
-                                    <hr class="whiteH1">
                                 </div>
+                                <hr class="whiteH1">
                                 <div class="row" style="--bs-gutter-x: 0rem">
                                     <label class="text-white">Forma de pagamento</label>
                                     <div class="text-white">Cartão de Crédito</div>>
@@ -129,8 +133,8 @@
                                     <hr class="whiteH1">
                                 </div>
                                 <div class="row grey" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">1 x de R$ 19,74 sem juros</label>
-                                    <div class="text-white">Total a pagar <b class="text-white">R$ 19,74</b></div>
+                                    <label class="text-white">1 x de {{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}} sem juros</label>
+                                    <div class="text-white">Total a pagar <b class="text-white">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</b></div>
                                     <hr class="whiteH1">
                                 </div>
                                 <div class="d-flex flex-wrap justify-content-center align-items-center">
@@ -143,7 +147,7 @@
 
             <div class="container" [hidden]="esconderPix">
                 <div class="text-white">
-                    <p class="alterar" (click)="alterarPagameto()">Alterar forma de pagamento</p>
+                    <p class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</p>
                     <h3>Finalize o pagamento usando o Pix!</h3>
                     <hr>
                 </div>
@@ -179,15 +183,17 @@
                                     <hr class="whiteH1">
                                 </div>
                                 <div class="row" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">itens do pedido</label>
-                                    <div class="col">
-                                        <div class="text-white">x1</div>
+                                    <label class="text-white">Itens do pedido</label>
+                                    <div *ngFor="let produto of getProdutos()" class="row">
+                                        <div class="col">
+                                            <div class="text-white">{{produto.nome}}</div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="text-white">{{produto.valor}}</div>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="text-white">R$ 19,74</div>
-                                    </div>
-                                    <hr class="whiteH1">
                                 </div>
+                                <hr class="whiteH1">
                                 <div class="row" style="--bs-gutter-x: 0rem">
                                     <label class="text-white">Forma de pagamento</label>
                                     <div class="text-white">Cartão de Crédito</div>>
@@ -198,8 +204,8 @@
                                     <hr class="whiteH1">
                                 </div>
                                 <div class="row grey" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">1 x de R$ 19,74 sem juros</label>
-                                    <div class="text-white">Total a pagar <b class="text-white">R$ 19,74</b></div>
+                                    <label class="text-white">1 x de {{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}} sem juros</label>
+                                    <div class="text-white">Total a pagar <b class="text-white">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</b></div>
                                 </div>
                             </div>
                         </div>

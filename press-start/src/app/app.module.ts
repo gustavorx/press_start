@@ -14,6 +14,8 @@ import { PagamentoComponent } from './components/pagamento/pagamento.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BoletoComponent } from './components/pagamento/boleto/boleto.component';
 import { NgxPrintModule } from 'ngx-print';
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -44,8 +46,10 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     HttpClientModule,
     NgxPrintModule,
+    CommonModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
