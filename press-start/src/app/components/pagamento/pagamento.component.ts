@@ -13,9 +13,19 @@ export class PagamentoComponent {
   esconderBoleto = true;
   esconderPix = true;
   esconderMetodos = false;
+  creditoFinalizado = false;
 
-  numero: string = "";
-  validade: string = "";
+  numeroCartaoValido = false;
+  cpfValido = false;
+  dataValidadeValida = false;
+  cvvValido = false;
+  nomeValido = false;
+  telefoneValido = false;
+  nascimentoValido = false;
+
+
+  numeroCartao: string = "";
+  dataValidade: string = "";
   cvv: string = "";
   nomeCompleto: string = "";
   cpf: string = "";
@@ -53,14 +63,6 @@ export class PagamentoComponent {
     this.esconderDescricao = false;
   }
 
-  comprarCredito(){
-    
-  }
-
-  // validarCPF(){
-  //   if()
-  // }
-
   gerarCodigoPix(){
     var part1: string = this.stringAleatoria(14, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
     var part2: string = this.stringAleatoria(12, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
@@ -86,5 +88,86 @@ export class PagamentoComponent {
     var result = '';
     for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
     return result;
+  }
+
+  finalizarPagamentoCredito(){
+    this.validaNumeroCartao();
+    this.validaCpf();
+    this.validaDataValidade();
+    this.validaCvv();
+    this.validaNome();
+    this.validaTelefone();
+    this.validaNascimento();
+
+    if(this.cpfValido && this.numeroCartaoValido 
+      && this.dataValidadeValida && this.cvvValido 
+      && this.nomeValido && this.telefoneValido 
+      && this.nascimentoValido){
+        console.log("teste")
+      this.creditoFinalizado = true;
+    }    
+  }
+
+  validaNumeroCartao(){
+    if(this.numeroCartao.length <= 0){
+      alert("Preencha o numero do cartão");
+    } else {
+      console.log("1");
+      this.numeroCartaoValido = true;
+    }
+  }
+
+  validaCpf(){
+    if(this.cpf.length <= 0){
+      alert("Preencha o CPF");
+    } else {
+      console.log("2");
+      this.cpfValido = true;
+    }
+  }
+
+  validaDataValidade(){
+    if(this.dataValidade.length <= 0){
+      alert("Preencha a data de validade");
+    } else {
+      console.log("3");
+      this.dataValidadeValida = true;
+    }
+  }
+
+  validaCvv(){
+    if(this.cvv.length <= 0){
+      alert("Preencha o código de segurança do cartão");
+    } else {
+      console.log("4");
+      this.cvvValido = true;
+    }
+  }
+
+  validaNome(){
+    if(this.nomeCompleto.length <= 0){
+      alert("Preencha seu nome completo");
+    } else {
+      console.log("5");
+      this.nomeValido = true;
+    }
+  }
+
+  validaTelefone(){
+    if(this.telefone.length <= 0){
+      alert("Preencha seu telefone");
+    } else {
+      console.log("6");
+      this.telefoneValido = true;
+    }
+  }
+
+  validaNascimento(){
+    if(this.nascimento.length <= 0){
+      alert("Preencha sua data de nascimento");
+    } else {
+      console.log("7");
+      this.nascimentoValido = true;
+    }
   }
 }
