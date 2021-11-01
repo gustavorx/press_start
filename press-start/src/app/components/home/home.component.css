@@ -1,0 +1,36 @@
+a {
+    text-decoration: none;
+}
+
+.background-home {
+    height: auto;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-image: linear-gradient(-60deg, #080427 30%, #211e3d 30%);
+    color: #ffffff;
+  }
+
+  .jogo {
+    padding: 1rem;
+    max-width: 260px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.jogo-card {
+    width: 20rem;
+    height: 18rem;
+    margin: 1rem;
+    color: black
+}
+
+.mais-vendidos {
+    padding-top: 1rem;
+    padding-left: 1rem;
+}
+
+.nome-jogo {
+    color:dodgerblue
+}

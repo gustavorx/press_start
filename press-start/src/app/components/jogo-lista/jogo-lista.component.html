@@ -1,5 +1,5 @@
-<div class="d-flex grid-jogos" *ngIf="jogos.length > 0">
-    <div class="card jogo-card" *ngFor="let jogo of jogos">
+<div class="d-flex flex-wrap grid-jogos" *ngIf="jogos.length > 0">
+    <div class="card jogo-card" id="{{jogo._id}}" *ngFor="let jogo of jogos">
         <img class="card-img-top" src="{{jogo.imagemLink}}" alt="{{jogo.nome}} background">
         <div class="card-body">
             <h5 class="card-title">{{jogo.nome}}</h5>
