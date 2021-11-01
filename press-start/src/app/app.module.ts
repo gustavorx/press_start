@@ -12,6 +12,8 @@ import { MenuComponent } from './components/menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagamentoComponent } from './components/pagamento/pagamento.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BoletoComponent } from './components/pagamento/boleto/boleto.component';
+import { NgxPrintModule } from 'ngx-print';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,6 +22,7 @@ const appRoutes: Routes = [
   { path: 'alterar-cadastro', component: AlterarCadastroComponent },
   { path: 'alterar-cadastro', component: AlterarCadastroComponent },
   { path: 'pagamento', component: PagamentoComponent},
+  { path: 'pagamento/boleto', component: BoletoComponent}
 ];
 
 @NgModule({
@@ -32,13 +35,15 @@ const appRoutes: Routes = [
     MenuComponent,
     JogoComponent,
     PagamentoComponent,
+    BoletoComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPrintModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

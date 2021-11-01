@@ -15,3 +15,29 @@ body {
 .whiteH1 {
   color: #fdfdfd;
 }
+
+.opcoes {
+  color: #fdfdfd;
+  background-color: rgb(41, 39, 63);
+  border-radius: 4px;
+  line-height: 2.5rem;
+}
+
+.opcoes:hover {
+  border: solid;
+  border-width: 2px;
+  border-color: #fdfdfd;
+}
+
+.alterar {
+  color: #fdfdfd;
+}
+
+.alterar:hover {
+  text-decoration: underline;
+}
+
+.codigo {
+  width: 17rem;
+  height: 17rem;
+}
