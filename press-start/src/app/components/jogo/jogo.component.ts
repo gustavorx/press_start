@@ -11,14 +11,7 @@ import { JogoModel } from '../Models/jogo.model';
 })
 export class JogoComponent implements OnInit {
   Id: string = "";
-  Nome: string = "Grand Theft Auto V";
-  Preco: number = 19.00;
-  Desenvolvedora: string = "Rockstar North";
-  Distribuidora: string = "Rockstar Games";
-  DataLancamento: Date = new Date(2015, 4, 14);
-  Descricao: string = "Quando um malandro de rua, um ladrão de bancos aposentado e um psicopata aterrorizante se veem encrencados, eles precisam realizar uma série de golpes ousados para sobreviver em uma cidade onde não podem confiar em ninguém, nem mesmo um no outro."
-  Classificacao: number = 18;
-
+  carrinhoSession: string = "carrinho";
   Jogo?: JogoModel;
 
   constructor(private route: ActivatedRoute) { }
@@ -41,7 +34,15 @@ export class JogoComponent implements OnInit {
   }
 
   adicionarAoCarrinho() {
-    sessionStorage.setItem("carrinho", JSON.stringify(this.Jogo));
-    location.replace("http://localhost:4200/jogos"); // TODO redirecionar para o carrinho
+    let carrinhoString = sessionStorage.getItem(this.carrinhoSession);
+
+    if (carrinhoString != null) {
+      let carrinho = JSON.parse(carrinhoString);
+      carrinho.push(this.Jogo);
+      sessionStorage.setItem(this.carrinhoSession, JSON.stringify(carrinho));
+    } else {
+      sessionStorage.setItem(this.carrinhoSession, JSON.stringify([this.Jogo]));
+    }
+    // location.replace("http://localhost:4200/jogos"); // TODO redirecionar para o carrinho
   }
 }
