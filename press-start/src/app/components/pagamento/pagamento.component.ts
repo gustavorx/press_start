@@ -35,14 +35,12 @@ export class PagamentoComponent {
 
 
   mostrarCartao(){
-    console.log("jooj");
     this.esconderCartao = false;
     this.esconderMetodos = true;
     this.esconderDescricao = true;
   }
 
   mostrarBoleto(){
-    console.log("jooj");
     this.esconderBoleto = false;
     this.esconderMetodos = true;
     this.esconderDescricao = true;
@@ -169,5 +167,31 @@ export class PagamentoComponent {
       console.log("7");
       this.nascimentoValido = true;
     }
+  }
+
+  getProdutos() {
+    var carrinho = localStorage.getItem('carrinho');
+
+    var carrinhoArr = [];
+    if (carrinho) {
+      carrinhoArr = JSON.parse(carrinho);
+    } else {
+      carrinhoArr = [];
+    }
+
+    return carrinhoArr;
+  }
+
+  getValorTotal() {
+    var produtosArr = this.getProdutos();
+    var valorTotal = 0;
+
+    produtosArr.forEach((produto: { preco: number; }) => {
+      var valorInt = produto.preco
+      valorTotal += valorInt;
+    });
+
+    return valorTotal;
+
   }
 }

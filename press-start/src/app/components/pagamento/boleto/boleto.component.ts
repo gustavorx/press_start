@@ -42,4 +42,28 @@ export class BoletoComponent implements OnInit {
     return result;
   }
 
+  getProdutos() {
+    var carrinho = localStorage.getItem('carrinho');
+
+    var carrinhoArr = [];
+    if (carrinho) {
+      carrinhoArr = JSON.parse(carrinho);
+    } else {
+      carrinhoArr = [];
+    }
+
+    return carrinhoArr;
+  }
+
+  getValorTotal() {
+    var produtosArr = this.getProdutos();
+    var valorTotal = 0;
+
+    produtosArr.forEach((produto: { preco: number; }) => {
+      var valorInt = produto.preco
+      valorTotal += valorInt;
+    });
+
+    return valorTotal;
+  }
 }
