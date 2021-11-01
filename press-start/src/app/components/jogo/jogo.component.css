@@ -1,0 +1,30 @@
+.jogo-section {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        background-size: cover;
+        background-image: linear-gradient(-60deg, #080427 30%, #211e3d 30%);
+        color: #FFFFFF;
+}
+
+.jogo-imagem {
+        height: 50%;
+}
+
+.jogo-cards{
+        width: 90%;
+}
+
+.jogo-info{
+        height: 100%;
+        padding-right: 1rem;
+}
+
+.btn-jogo{
+        width: 40%;
+}
+
+.pegi-icon{
+        width: 4rem;
+        height: 4rem;
+}
