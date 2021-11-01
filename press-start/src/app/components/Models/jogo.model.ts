@@ -1,4 +1,4 @@
-export default class Jogo {
+export class JogoModel {
     _id: string;
     nome: string;
     descricao: string;

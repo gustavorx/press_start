@@ -10,6 +10,7 @@ export default class Usuario {
     sexo: string;
     email: string;
     senha: string;
+    tipo: string;
     cep: string;
     rua: string;
     numero: string;
@@ -18,7 +19,7 @@ export default class Usuario {
     estado: string;
     complemento: string;
 
-    constructor(nome: string, cpf: string, telefone: string, dtNasc: string, sexo: string, email: string, senha: string, cep: string, rua: string, numero: string, bairro: string, cidade: string, estado: string, complemento: string, public id?: ObjectId) {
+    constructor(nome: string, cpf: string, telefone: string, dtNasc: string, sexo: string, email: string, senha: string, tipo: string, cep: string, rua: string, numero: string, bairro: string, cidade: string, estado: string, complemento: string, public id?: ObjectId) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
@@ -26,6 +27,7 @@ export default class Usuario {
         this.sexo = sexo;
         this.email = email;
         this.senha = senha;
+        this.tipo = tipo;
         this.cep = cep;
         this.rua = rua;
         this.numero = numero;
