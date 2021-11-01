@@ -16,6 +16,7 @@ import { BoletoComponent } from './components/pagamento/boleto/boleto.component'
 import { NgxPrintModule } from 'ngx-print';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { JogoListaComponent } from './components/jogo-lista/jogo-lista.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,7 +25,10 @@ const appRoutes: Routes = [
   { path: 'alterar-cadastro', component: AlterarCadastroComponent },
   { path: 'alterar-cadastro', component: AlterarCadastroComponent },
   { path: 'pagamento', component: PagamentoComponent},
-  { path: 'pagamento/boleto', component: BoletoComponent}
+  { path: 'pagamento/boleto', component: BoletoComponent},
+  { path: 'alterar-cadastro', component: AlterarCadastroComponent },
+  { path: 'jogos', component: JogoListaComponent },
+  { path: 'jogos/:id', component: JogoComponent },
 ];
 
 @NgModule({
@@ -38,6 +42,7 @@ const appRoutes: Routes = [
     JogoComponent,
     PagamentoComponent,
     BoletoComponent,
+    JogoListaComponent
   ],
   imports: [
     BrowserModule,

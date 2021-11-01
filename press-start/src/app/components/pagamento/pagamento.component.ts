@@ -105,8 +105,8 @@ export class PagamentoComponent {
     var produtosArr = this.getProdutos();
     var valorTotal = 0;
 
-    produtosArr.forEach((produto: { valor: string; }) => {
-      var valorInt = parseFloat(produto.valor.replace('R$ ', '').replace(',', '.'))
+    produtosArr.forEach((produto: { preco: number; }) => {
+      var valorInt = produto.preco
       valorTotal += valorInt;
     });
 
