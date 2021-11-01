@@ -1,1 +1,60 @@
-<p>jogo works!</p>
+<section class="jogo-section d-flex flex-column" *ngIf="Jogo != null">
+    <div class="d-flex justify-content-center mt-3">
+        <div class="jogo-cards fs-1">{{Jogo.nome}}</div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="jogo-cards mt-3 mb-5 ">
+            <div class="row">
+                <div class="col-md-7">
+                    <img class="img-fluid rounded-start" src="{{Jogo.imagemLink}}">
+                </div>
+                <div class="col-md-5">
+                    <div class="d-flex flex-column justify-content-around jogo-info">
+                        <div class="card-text">{{Jogo.descricao}}</div>
+
+                        <div class="d-flex">
+                            <div class="card-text">
+                                <h5 class="fw-bolder">Desenvolvedor: </h5>
+                                <h6>{{Jogo.desenvolvedora}}</h6>
+                            </div>
+                            <div class="card-text ps-5">
+                                <h5 class="fw-bolder">Distribuidora: </h5>
+                                <h6>{{Jogo.distribuidora}}</h6>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="card-text">
+                                <h5 class="fw-bolder">Preço: </h5>
+                                <h6 class="fs-3 fw-bolder">{{Jogo.preco.toLocaleString('pt-br', { style: 'currency',
+                                    currency: 'BRL' })}}</h6>
+                            </div>
+                            <div class="card-text jogo-lancamento">
+                                <h5 class="fw-bolder">Lançamento: </h5>
+                                <h6>{{Jogo.dataLancamento?.toLocaleDateString('pt-BR', { timeZone: 'UTC' })}}</h6>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <input class="btn btn-lg btn-outline-info btn-jogo" type="button" value="+ Carrinho"
+                                (click)="adicionarAoCarrinho()">
+                            <input class="btn btn-lg btn-outline-success btn-jogo" type="button" value="Ver trailer"
+                                (click)="verTrailer()">
+                            <div class="card-text">
+                                <img class="pegi-icon" src="../../../assets/icons/pegi-3.jpg"
+                                    *ngIf="Jogo.classificacao == 3">
+                                <img class="pegi-icon" src="../../../assets/icons/pegi-7.jpg"
+                                    *ngIf="Jogo.classificacao == 7">
+                                <img class="pegi-icon" src="../../../assets/icons/pegi-12.jpg"
+                                    *ngIf="Jogo.classificacao == 12">
+                                <img class="pegi-icon" src="../../../assets/icons/pegi-16.jpg"
+                                    *ngIf="Jogo.classificacao == 16">
+                                <img class="pegi-icon" src="../../../assets/icons/pegi-18.jpg"
+                                    *ngIf="Jogo.classificacao == 18">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="jogo-section d-flex flex-column" *ngIf="Jogo == undefined">Jogo não encontrado.</section>

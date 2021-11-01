@@ -1,0 +1,14 @@
+<div class="d-flex grid-jogos" *ngIf="jogos.length > 0">
+    <div class="card jogo-card" *ngFor="let jogo of jogos">
+        <img class="card-img-top" src="{{jogo.imagemLink}}" alt="{{jogo.nome}} background">
+        <div class="card-body">
+            <h5 class="card-title">{{jogo.nome}}</h5>
+            <div class="d-flex justify-content-between align-items-center">
+                <h6 class="card-text fs-5">{{jogo.preco?.toLocaleString('pt-br', { style: 'currency',
+                    currency: 'BRL' })}}
+                </h6>
+                <a routerLink="/jogos/{{jogo._id}}" class="btn btn-outline-primary">Comprar</a>
+            </div>
+        </div>
+    </div>
+</div>

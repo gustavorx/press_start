@@ -1,5 +1,4 @@
-export default class Jogo {
-    _id: string;
+export default class JogoRequest {
     nome: string;
     descricao: string;
     preco: number;
@@ -9,8 +8,7 @@ export default class Jogo {
     classificacao: number;
     imagemLink: string;
 
-    constructor(id: string, nome: string, descricao: string, preco: number, desenvolvedora: string, distribuidora: string, lancamento: string, classificacao: number, imagemLink: string) {
-        this._id = id;
+    constructor(nome: string, descricao: string, preco: number, desenvolvedora: string, distribuidora: string, lancamento: string, classificacao: number, imagemLink: string) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
