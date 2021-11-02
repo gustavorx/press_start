@@ -1,0 +1,48 @@
+<section class="background-home">
+    <div class="container p-3">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" [ngClass]="{'active' : primeiro}" id="{{jogo._id}}"
+                    *ngFor="let jogo of jogosCarrosel; first as primeiro">
+                    <img src="{{jogo.imagemLink}}" class="d-block w-100" alt="{{jogo.nome}} background">
+                    <div class="carousel-caption d-none d-md-block">
+                        <a class="nome-jogo fs-5" routerLink="/jogos/{{jogo._id}}">{{jogo.nome}}</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <h5 class="mais-vendidos">Mais vendidos</h5>
+        <hr />
+        <div class="d-flex flex-wrap">
+            <div class="card jogo-card" id="{{jogo._id}}" *ngFor="let jogo of jogosMaisVendidos">
+                <img class="card-img-top" src="{{jogo.imagemLink}}" alt="{{jogo.nome}} background">
+                <div class="card-body">
+                    <h5 class="card-title">{{jogo.nome}}</h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="card-text fs-5">{{jogo.preco.toLocaleString('pt-br', { style: 'currency',
+                            currency: 'BRL' })}}</h6>
+                        <a routerLink="/jogos/{{jogo._id}}" class="btn btn-outline-primary">Comprar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

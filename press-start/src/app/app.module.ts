@@ -13,10 +13,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagamentoComponent } from './components/pagamento/pagamento.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BoletoComponent } from './components/pagamento/boleto/boleto.component';
-import { NgxPrintModule } from 'ngx-print';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { JogoListaComponent } from './components/jogo-lista/jogo-lista.component';
+import { HomeComponent } from './components/home/home.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -25,12 +25,14 @@ const appRoutes: Routes = [
   { path: 'alterar-cadastro', component: AlterarCadastroComponent },
   { path: 'alterar-cadastro', component: AlterarCadastroComponent },
   { path: 'pagamento', component: PagamentoComponent},
-  { path: 'pagamento/boleto', component: BoletoComponent},
+  { path: 'pagamento/boleto/:cpf/:nomeCompleto', component: BoletoComponent},
   { path: 'jogos', component: JogoListaComponent },
   { path: 'jogos/:id', component: JogoComponent },
   { path: 'alterar-cadastro', component: AlterarCadastroComponent },
   { path: 'jogos', component: JogoListaComponent },
-  { path: 'jogos/:id', component: JogoComponent }
+  { path: 'jogos/:id', component: JogoComponent },
+  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent }
 ];
 
 @NgModule({
@@ -44,7 +46,8 @@ const appRoutes: Routes = [
     JogoComponent,
     JogoListaComponent,
     PagamentoComponent,
-    BoletoComponent
+    BoletoComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,6 @@ const appRoutes: Routes = [
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxPrintModule,
     CommonModule,
     ToastrModule.forRoot()
   ],

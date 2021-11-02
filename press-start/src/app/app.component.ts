@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  visibility: boolean = false;
+  title = 'app';
+  router: string;
+
+  constructor(private _router: Router){
+          this.router = _router.url; 
+          console.log(this.router);
+    }
 }

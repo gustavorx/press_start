@@ -165,7 +165,7 @@
                                     <input id="cpf" [(ngModel)]="cpf" name="cpf" placeholder="Apenas números" class="form-control" value="" maxlength="11" pattern="[0-9]+$" required>
                                 </div>
                                 <div class="row m-1">
-                                    <button routerLink="/pagamento/boleto">Prosseguir</button>
+                                    <button routerLink="/pagamento/boleto/{{cpf}}/{{nomeCompleto}}">Prosseguir</button>
                                 </div>
                             </div>
                             <div class="col-4 border">

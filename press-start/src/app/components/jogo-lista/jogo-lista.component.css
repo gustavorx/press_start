@@ -7,15 +7,16 @@
 }
 
 .jogo-card {
-    width: 25rem;
-    height: 20rem;
+    width: 20rem;
+    height: 17rem;
     margin: 1rem;
 }
 
 .grid-jogos {
-    height: 100%;
+    height: auto;
     width: 100%;
     position: relative;
     background-size: cover;
     background-image: linear-gradient(-60deg, #080427 30%, #211e3d 30%);
+    padding-left: 5rem;
   }

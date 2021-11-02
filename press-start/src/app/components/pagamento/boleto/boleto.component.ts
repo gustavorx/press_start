@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 
 @Component({
@@ -11,16 +12,33 @@ export class BoletoComponent implements OnInit {
   
   esconderImprimir: boolean = false;
   codigo: string = "";
-  
+  cpf: string = "";
+  nomeCompleto: string = "";
+
+  constructor(private route: ActivatedRoute) {}
+
   ngOnInit(): void {
     this.gerarCodigoPix();
+    this.cpf = this.route.snapshot.paramMap.get('cpf') ?? "";
+    this.nomeCompleto = this.route.snapshot.paramMap.get('nomeCompleto') ?? "";
+    let teste = document.getElementById("header-menu");
+    if(teste != null){
+      teste.style.display='none';
+    }
   }
-  
+
+  ngOnDestroy(): void {
+    let teste = document.getElementById("header-menu");
+    if(teste != null){
+      teste.style.display='flex';
+    }
+  }
+
+
   imprimir(){
-      this.esconderImprimir = true;
       setTimeout(function(){ 
         window.print();
-       }, 500);   
+       }, 3000);  
   }
 
   gerarCodigoPix(){
