@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import axios from 'axios';
 import { JogoModel } from '../Models/jogo.model';
@@ -9,22 +10,57 @@ import { JogoModel } from '../Models/jogo.model';
   templateUrl: './jogo.component.html',
   styleUrls: ['./jogo.component.css']
 })
+
 export class JogoComponent implements OnInit {
   Id: string = "";
   carrinhoSession: string = "carrinho";
   Jogo?: JogoModel;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private toastr: ToastrService, private route: ActivatedRoute) {}
+
+  comprar() {
+    this.adicionarAoCarrinho(false);
+    window.location.replace('/carrinho');
+  }
+
+  adicionarAoCarrinho(showToast = true) {
+    var carrinho = localStorage.getItem('carrinho');
+
+    var carrinhoArr = [];
+
+    if (carrinho) {
+      carrinhoArr = JSON.parse(carrinho);
+    } else {
+      carrinhoArr = [];
+    }
+
+    var existente = false;
+    carrinhoArr.forEach((jogo: { id: string; }) => {
+      if (jogo.id == this.Id) {
+        existente = true;
+      }
+    });
+
+    if (!existente) {
+      carrinhoArr.push({id: this.Jogo?._id, nome: this.Jogo?.nome, preco: this.Jogo?.preco, imagemLink: this.Jogo?.imagemLink});
+    }
+
+    if (showToast) {
+      this.toastr.success('Produto adicionado ao carrinho!');
+    }
+
+    localStorage.setItem('carrinho', JSON.stringify(carrinhoArr)); 
+  }
 
   ngOnInit(): void {
     this.Id = this.route.snapshot.paramMap.get('id') ?? "";
 
     axios.get(`http://localhost:8080/jogos/${this.Id}`)
-      .then((response) => {
+      .then((response: { data: any; }) => {
         let jogo = response.data;
         this.Jogo = new JogoModel(jogo._id, jogo.nome, jogo.descricao, jogo.preco, jogo.desenvolvedora, jogo.distribuidora, jogo.lancamento, jogo.classificacao, jogo.imagemLink);
       })
-      .catch((error) => {
+      .catch((error: string) => {
         throw new Error("Erro ao buscar jogo " + this.Id + " => " + error)
       })
   }
@@ -33,16 +69,16 @@ export class JogoComponent implements OnInit {
     // TODO implementar trailer
   }
 
-  adicionarAoCarrinho() {
-    let carrinhoString = sessionStorage.getItem(this.carrinhoSession);
+  // adicionarAoCarrinho() {
+  //   let carrinhoString = sessionStorage.getItem(this.carrinhoSession);
 
-    if (carrinhoString != null) {
-      let carrinho = JSON.parse(carrinhoString);
-      carrinho.push(this.Jogo);
-      sessionStorage.setItem(this.carrinhoSession, JSON.stringify(carrinho));
-    } else {
-      sessionStorage.setItem(this.carrinhoSession, JSON.stringify([this.Jogo]));
-    }
-    // location.replace("http://localhost:4200/jogos"); // TODO redirecionar para o carrinho
-  }
+  //   if (carrinhoString != null) {
+  //     let carrinho = JSON.parse(carrinhoString);
+  //     carrinho.push(this.Jogo);
+  //     sessionStorage.setItem(this.carrinhoSession, JSON.stringify(carrinho));
+  //   } else {
+  //     sessionStorage.setItem(this.carrinhoSession, JSON.stringify([this.Jogo]));
+  //   }
+  //   // location.replace("http://localhost:4200/jogos"); // TODO redirecionar para o carrinho
+  // }
 }

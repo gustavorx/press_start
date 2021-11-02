@@ -1,5 +1,6 @@
 <!-- Menu -->
-<app-menu></app-menu>
+<!-- <app-menu *ngIf="router != 'pagamento/boleto/'"></app-menu> -->
+<app-menu *ngIf="!router.includes('boleto')"></app-menu>
 
 <!-- Mostra o conteúdo do routerLink -->
 <router-outlet></router-outlet>

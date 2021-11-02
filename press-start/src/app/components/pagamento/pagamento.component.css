@@ -1,0 +1,51 @@
+html,
+body {
+  height: 100%;
+  height: 60.55rem;
+  /* background-image: url(../login/cyberpunk2077.jpg);
+    background-size: cover; */
+  background-image: linear-gradient(-60deg, #080427 30%, #211e3d 30%);
+}
+
+.container {
+  margin-top: 5%;
+  max-width: 1000px;
+}
+
+.whiteH1 {
+  color: #fdfdfd;
+}
+
+.opcoes {
+  color: #fdfdfd;
+  background-color: rgb(41, 39, 63);
+  border-radius: 4px;
+  line-height: 2.5rem;
+}
+
+.opcoes:hover {
+  border: solid;
+  border-width: 2px;
+  border-color: #fdfdfd;
+}
+
+.alterar {
+  color: #fdfdfd;
+}
+
+.alterar:hover {
+  text-decoration: underline;
+}
+
+.codigo {
+  width: 17rem;
+  height: 17rem;
+}
+
+.creditoAprovado1 {
+  font-size: 20px;
+}
+
+.creditoAprovado2 {
+  font-size: 30px;
+}
