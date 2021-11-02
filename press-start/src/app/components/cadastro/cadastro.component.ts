@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cadastro',
@@ -8,11 +10,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./cadastro.component.css']
 })
 
-export class CadastroComponent {
+export class CadastroComponent implements OnInit {
 
-  constructor(private http: HttpClient, private route: Router) { }
+  subscription: Subscription = new Subscription;
+
+  constructor(private http: HttpClient, private route: Router, private idUser: LoginService) { }
+
+  ngOnInit(): void {
+    //pega Id do usuario ao fazer login
+    this.subscription = this.idUser.idAtual.subscribe(message => this.id = message);
+
+    let url: string = `http://localhost:8080/usuarios/${this.id}`;
+
+    fetch(url)
+      .then(data => { return data.json() })
+      .then(res => {
+        if(res.tipo == "Administrador master"){
+          this.mostraTipo = true;
+        }
+      }).catch(error => console.error(error));
+  }
   
   //Dados pessoais
+  id: string = "";
   nome: string = "";
   cpf: string = "";
   telefone: string = "";
@@ -23,6 +43,7 @@ export class CadastroComponent {
 
   //Tipo de usuario
   tipo: string = "Comum";
+  mostraTipo = false;
   
   //Dados endereço
   cep: string = "";

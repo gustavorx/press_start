@@ -52,7 +52,7 @@
                                 <button *ngIf="alterarSenhas == false" type="button" class="btn btn-outline-danger mt-4" (click)="alterarSenha()">Alterar senha</button>
                             </div>
                             <div class="col" *ngIf="mostraTipo == true">
-                                <label class="text-white mt-2" for="sexo">Tipo de usuário</label>
+                                <label class="text-white mt-2" for="tipo">Tipo de usuário</label>
                                 <select id="tipo" [(ngModel)]="tipo" name="tipo" class="form-select">
                                     <option>Administrador master</option>
                                     <option>Administrador</option>
@@ -112,7 +112,7 @@
                     <div class="d-flex justify-content-end py-4">
                         <button class="btn btn-outline-info" type="submit">Salvar</button>
                         <span class="px-2"></span>
-                        <button routerLink="/" class="btn btn-outline-light" formnovalidate>Cancelar</button>
+                        <button routerLink="jogos/" class="btn btn-outline-light" formnovalidate>Cancelar</button>
                     </div>
                 </form>
             </div>
