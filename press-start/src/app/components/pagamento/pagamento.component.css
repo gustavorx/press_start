@@ -49,3 +49,27 @@ body {
 .creditoAprovado2 {
   font-size: 30px;
 }
+
+.erroFraseCurta {
+  border: solid;
+  border-color: brown;
+  color: cornsilk;
+  width: 40%;
+  font-size: 11px;
+  margin-top: 0.5rem;
+  margin-bottom: -2%;
+  border-radius: 4%;
+  text-align: center;
+}
+
+.erroFraseLonga {
+  border: solid;
+  border-color: brown;
+  color: cornsilk;
+  width: 65%;
+  font-size: 11px;
+  margin-top: 0.5rem;
+  margin-bottom: -2%;
+  border-radius: 4%;
+  text-align: center;
+}
