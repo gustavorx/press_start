@@ -23,6 +23,16 @@ export class PagamentoComponent {
   telefoneValido = false;
   nascimentoValido = false;
 
+  erroNumeroCartao = false;
+  erroCpf = false;
+  erroDataValidade = false;
+  erroCvv = false;
+  erroNome = false;
+  erroTelefone = false;
+  erroNascimento = false;
+
+  parcelas: number[] = [1, 2, 3];
+  parcelaSelecionada: number = 1;
 
   numeroCartao: string = "";
   dataValidade: string = "";
@@ -108,7 +118,7 @@ export class PagamentoComponent {
 
   validaNumeroCartao(){
     if(this.numeroCartao.length <= 0){
-      alert("Preencha o numero do cartão");
+      this.erroNumeroCartao = true;
     } else {
       console.log("1");
       this.numeroCartaoValido = true;
@@ -117,7 +127,7 @@ export class PagamentoComponent {
 
   validaCpf(){
     if(this.cpf.length <= 0){
-      alert("Preencha o CPF");
+      this.erroCpf = true;
     } else {
       console.log("2");
       this.cpfValido = true;
@@ -126,7 +136,7 @@ export class PagamentoComponent {
 
   validaDataValidade(){
     if(this.dataValidade.length <= 0){
-      alert("Preencha a data de validade");
+      this.erroDataValidade = true;
     } else {
       console.log("3");
       this.dataValidadeValida = true;
@@ -135,7 +145,7 @@ export class PagamentoComponent {
 
   validaCvv(){
     if(this.cvv.length <= 0){
-      alert("Preencha o código de segurança do cartão");
+      this.erroCvv = true;
     } else {
       console.log("4");
       this.cvvValido = true;
@@ -144,7 +154,7 @@ export class PagamentoComponent {
 
   validaNome(){
     if(this.nomeCompleto.length <= 0){
-      alert("Preencha seu nome completo");
+      this.erroNome = true;
     } else {
       console.log("5");
       this.nomeValido = true;
@@ -153,7 +163,7 @@ export class PagamentoComponent {
 
   validaTelefone(){
     if(this.telefone.length <= 0){
-      alert("Preencha seu telefone");
+      this.erroTelefone = true;
     } else {
       console.log("6");
       this.telefoneValido = true;
@@ -162,7 +172,7 @@ export class PagamentoComponent {
 
   validaNascimento(){
     if(this.nascimento.length <= 0){
-      alert("Preencha sua data de nascimento");
+      this.erroNascimento = true;
     } else {
       console.log("7");
       this.nascimentoValido = true;
@@ -193,5 +203,11 @@ export class PagamentoComponent {
 
     return valorTotal;
 
+  }
+
+  getValorParcelado(){
+    let total = this.getValorTotal();
+    let parcelado = total / this.parcelaSelecionada;
+    return parcelado;
   }
 }

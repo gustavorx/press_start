@@ -69,36 +69,50 @@
                                     <label class="text-white" for="numeroCartao">Número do cartão</label>
                                     <input type="text" class="form-control" id="numeroCartao" [(ngModel)]="numeroCartao" name="numeroCartao"  maxlength="16" pattern="^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$"
                                     placeholder="0000 0000 0000 0000" required>
+                                    <p class="erroFraseCurta" *ngIf="erroNumeroCartao">Preencha o Número do cartão</p>
                                 </div>
                                 <div class="row">
                                     <div class="col m-1">
                                         <label class="text-white mt-2" for="validade">Validade</label>
                                         <input type="text" class="form-control" id="dataValidade" [(ngModel)]="dataValidade" name="dataValidade" placeholder="MM/AAAA" type="text" maxlength="7" pattern="^((0[1-9])|(1[0-2]))\/((2021)|(20[1-2][0-9]))$"
                                         required>
+                                        <p class="erroFraseLonga" *ngIf="erroDataValidade">Preencha a data de Validade</p>
                                     </div>
                                     <div class="col m-1">
                                         <label class="text-white mt-2" for="cvv">Código de Segurança</label>
                                         <input type="text" class="form-control" id="cvv" [(ngModel)]="cvv" name="cvv" placeholder="000" maxlength="3" pattern="[0-9]+$" required>
+                                        <p class="erroFraseLonga" *ngIf="erroCvv">Preencha o Código de Segurança</p>
                                     </div>
                                 </div>
                                 <div class="row m-1">
                                     <label class="text-white" for="nome">Nome Completo</label>
                                     <input type="text" class="form-control" id="nomeCompleto" [(ngModel)]="nomeCompleto" name="nomeCompleto" placeholder="Digite seu nome" required>
+                                    <p class="erroFraseCurta" *ngIf="erroNome">Preencha seu Nome Completo</p>
                                 </div>
-                                <div class="row m-1">
-                                    <label class="text-white mt-2" for="cpf">CPF</label>
+                                <div class="row">
+                                    <div class="col m-1">
+                                        <label class="text-white mt-2" for="cpf">CPF</label>
                                     <input id="cpf" [(ngModel)]="cpf" name="cpf" placeholder="Apenas números" class="form-control" value="" maxlength="11" pattern="[0-9]+$" required>
+                                    <p class="erroFraseCurta" *ngIf="erroCpf">Preencha o Número do CPF</p>
+                                    </div>
+                                    <div class="col m-1">
+                                        <label class="text-white mt-2" for="cpf">Parcelas</label><br>
+                                        <select [(ngModel)]="parcelaSelecionada" name="parcelas">
+                                            <option style="width: 25rem;" *ngFor="let parcela of parcelas" [value]="parcela">{{parcela}}</option>
+                                        </select>
+                                    </div>                                    
                                 </div>
                                 <div class="row">
                                     <div class="col m-1">
                                         <label class="text-white mt-2" for="telefone">Telefone</label>
                                         <input type="text" class="form-control" id="telefone" [(ngModel)]="telefone" name="telefone" placeholder="Apenas números com DDD" maxlength="11" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$" required>
+                                        <p class="erroFraseLonga" *ngIf="erroTelefone">Preencha o Número de Telefone</p>
                                     </div>
                                     <div class="col m-1">
                                         <label class="text-white mt-2" for="dataDeNascimento">Data De Nascimento</label>
                                         <input type="text" class="form-control" id="nascimento" [(ngModel)]="nascimento" name="nascimento" placeholder="DD/MM/AAAA" type="text" maxlength="8" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
-                                            required>
-            
+                                        required>
+                                        <p class="erroFraseLonga" *ngIf="erroNascimento">Preencha a data de nascimento</p>            
                                     </div>
                                 </div>
                                 <div class="row">
@@ -133,7 +147,7 @@
                                     <hr class="whiteH1">
                                 </div>
                                 <div class="row grey" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">1 x de {{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}} sem juros</label>
+                                    <label class="text-white">{{parcelaSelecionada}} x de {{getValorParcelado().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}} sem juros</label>
                                     <div class="text-white">Total a pagar <b class="text-white">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</b></div>
                                     <hr class="whiteH1">
                                 </div>
