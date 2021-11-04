@@ -1,0 +1,23 @@
+.codigo {
+  width: 50rem;
+  height: 6rem;
+}
+
+button {
+  float: right;
+  margin-right: 300px;
+}
+
+.alterar {
+  color: #030303;
+}
+
+.alterar:hover {
+  text-decoration: underline;
+}
+
+@media print {
+  #printPageButton {
+    display: none;
+  }
+}

@@ -1,0 +1,238 @@
+
+    <html>
+        <body>
+        <div class="row"><br></div>
+        <div class="row" [hidden]="esconderImprimir">
+            <div class="col-2"></div>
+            <div class="col-7"><p class="alterar" id="printPageButton" routerLink="/pagamento" style="cursor: pointer;">Alterar forma de pagamento</p></div>
+            <div class="col-3"></div>
+        </div>
+        <div class="row"><br></div>
+
+        <div class="container" id="print-section">
+            <div class="row border">
+                <div class="col-2 border">
+                    BRADESCO
+                </div>
+                <div class="col-2 border">
+                    237-2
+                </div>
+                <div class="col-8 border">
+                    <p class="font-weight-bold text-right"> {{ codigo }} </p>
+                </div>
+            </div>
+    
+            <div class="row border">
+                <div class="col-9 border">
+                    <div class="row">
+                        Local de pagamento
+                    </div>
+                    <div class="row">
+                        PAGAVEL PREFERENCIALMENTE NAS AGENCIAS BRADESCO
+                    </div>
+                </div>
+                <div class="col-3 border">
+                    <div class="row">
+                        Vencimento
+                    </div>
+                    <div class="row">
+                        <p class="text-right">25/10/2021</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row border">
+                <div class="col-9 border">
+                    <div class="row">
+                        Cedente
+                    </div>
+                    <div class="row">
+                        Press Start Comp Ltda.
+                    </div>
+                </div>
+                <div class="col-3 border">
+                    <div class="row">
+                        Agência / Código cedente
+                    </div>
+                    <div class="row">
+                        <p class="text-right">111-8/0002222-5</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row border">
+                <div class="col-2 border">
+                    <div class="row">
+                        Data do documento
+                    </div>
+                    <div class="row">
+                        20/10/2021
+                    </div>
+                </div>
+                <div class="col-2 border">
+                    <div class="row">
+                        No documento
+                    </div>
+                    <div class="row">
+                        NF 1 1/1
+                    </div>
+                </div>
+                <div class="col-2 border">
+                    <div class="row">
+                        Espécie doc.
+                    </div>
+                    <div class="row">
+                        
+                    </div>
+                </div>
+                <div class="col-1 border">
+                    <div class="row">
+                        Aceite
+                    </div>
+                    <div class="row">
+                        N
+                    </div>
+                </div>
+                <div class="col-2 border">
+                    <div class="row">
+                        Data de processamento
+                    </div>
+                    <div class="row">
+                        20/10/2021
+                    </div>
+                </div>
+                <div class="col-3 border">
+                    <div class="row">
+                        Carteira / Nosso número
+                    </div>
+                    <div class="row">
+                        <p class="text-right">06/000000001001-6</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row border">
+                <div class="col-2 border">
+                    <div class="row">
+                        Uso do banco
+                    </div>
+                    <div class="row">
+                    </div>
+                </div>
+                <div class="col-1 border">
+                    <div class="row">
+                        Carteira
+                    </div>
+                    <div class="row">
+                        06
+                    </div>
+                </div>
+                <div class="col-1 border">
+                    <div class="row">
+                        Espécie
+                    </div>
+                    <div class="row">
+                        R$
+                    </div>
+                </div>
+                <div class="col-3 border">
+                    <div class="row">
+                        Quantidade
+                    </div>
+                    <div class="row">
+                        1
+                    </div>
+                </div>
+                <div class="col-2 border">
+                    <div class="row">
+                        (x) Valor
+                    </div>
+                    <div class="row">
+                        <p class="text-right">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</p>
+                    </div>
+                </div>
+                <div class="col-3 border">
+                    <div class="row">
+                        (=) Valor documento
+                    </div>
+                    <div class="row">
+                        <p class="text-right">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row border">
+                <div class="col-9 border">
+                    <div class="row">
+                        Instruções(Texto de responsabilidade do cedente)
+                    </div>
+                    <div class="row">
+                        <p>Não receber após o vencimento</p>
+                        <p>Boleto 1 de 1 referente a NF de 06/05/2019 com chave</p>
+                        <p>1302-6571-9990-9091-0207-5511-1000-0000-0151-8005-1273</p>
+                    </div>
+                </div>
+                <div class="col-3 border">
+                    <div class="row border">
+                        (-) Desconto / Abatimentos
+                    </div>
+                    <div class="row border">
+                        (-) Outras deduções
+                    </div>
+                    <div class="row border">
+                        (+) Mora / Multa
+                    </div>
+                    <div class="row border">
+                        (+) Outros acréscimos
+                    </div>
+                    <div class="row border">
+                        (=) Valor cobrado
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row border">
+                <div class="col-9 border">
+                    <div class="row">
+                        Sacado
+                    </div>
+                    <div class="row">
+                        <p><span>{{ nomeCompleto }}</span><span> CPF: <span>{{ cpf }}</span></span></p>
+                    </div>
+                </div>
+                <div class="col-3 border">
+                    <div class="row">
+                        Cód. baixa
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-8">
+                    <span>
+                        Sacador / Avalista
+                    </span>
+                </div>
+                <div class="col-4">
+                    <span>
+                        Avaliação mecânica - Ficha de compensação
+                    </span>
+                </div>
+            </div>
+            <br>
+            <img src="../../../../assets/pagamento/codigo-de-barras.jpg" class="codigo">
+            <br>
+            <a> {{ codigo }} </a>
+        </div>
+    
+        <!-- <button [useExistingCss]="true" printSectionId="print-section" ngxPrint> Imprimir </button> -->
+        <div class="row"><br></div>
+        <div class="row">
+        <div class="col-2"></div>
+        <div class="col-7"><input type="button" id="printPageButton" value="Imprimir" [hidden]="esconderImprimir" (click)="imprimir()" /></div>
+        <div class="col-3"></div>
+        </div>
+        </body>
+    </html>
+
+  
