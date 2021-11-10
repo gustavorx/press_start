@@ -1,54 +1,51 @@
-<html>
+<div class="caixa d-flex flex-wrap justify-content-center align-items-center">
+    <div class="container">
+        <form #cadastro="ngForm" (ngSubmit)="cadastrar(cadastro.value)" ngNativeValidate>
+            <div class="text-white">
+                <h3>Dados pessoais</h3>
+                <hr>
+            </div>
 
-<body>
-    <div class="d-flex flex-wrap justify-content-center align-items-center">
-        <div class="container">
-            <form #cadastro="ngForm" (ngSubmit)="cadastrar(cadastro.value)" ngNativeValidate>
-                <div class="text-white">
-                    <h3>Dados pessoais</h3>
-                    <hr>
+            <!-- Dados de cadastro -->
+            <div class="row">
+                <div class="col">
+                    <label class="text-white" for="nome">Nome</label>
+                    <input type="text" class="form-control" id="nome" [(ngModel)]="nome" name="nome" placeholder="Digite seu nome" required>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="text-white mt-2" for="cpf">CPF</label>
+                    <input type="text" class="form-control" id="cpf" [(ngModel)]="cpf" name="cpf" placeholder="Digite seu CPF" maxlength="11" pattern="[0-9]+$" required>
 
-                <!-- Dados de cadastro -->
-                <div class="row">
-                    <div class="col">
-                        <label class="text-white" for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome" [(ngModel)]="nome" name="nome" placeholder="Digite seu nome" required>
-                    </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <label class="text-white mt-2" for="cpf">CPF</label>
-                        <input type="text" class="form-control" id="cpf" [(ngModel)]="cpf" name="cpf" placeholder="Digite seu CPF" maxlength="11" pattern="[0-9]+$" required>
+                <div class="col">
+                    <label class="text-white mt-2" for="telefone">Telefone Celular</label>
+                    <input type="text" class="form-control" id="telefone" [(ngModel)]="telefone" name="telefone" placeholder="Apenas números com DDD" maxlength="11" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$" required>
+                </div>
+                <div class="col">
+                    <label class="text-white mt-2" for="dtNasc">Data De Nascimento</label>
+                    <input type="text" class="form-control" id="dtNasc" [(ngModel)]="dtNasc" name="dtNasc" placeholder="DD/MM/AAAA" type="text" maxlength="10" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
+                        required>
 
-                    </div>
-                    <div class="col">
-                        <label class="text-white mt-2" for="telefone">Telefone Celular</label>
-                        <input type="text" class="form-control" id="telefone" [(ngModel)]="telefone" name="telefone" placeholder="Apenas números com DDD" maxlength="11" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$" required>
-                    </div>
-                    <div class="col">
-                        <label class="text-white mt-2" for="dtNasc">Data De Nascimento</label>
-                        <input type="text" class="form-control" id="dtNasc" [(ngModel)]="dtNasc" name="dtNasc" placeholder="DD/MM/AAAA" type="text" maxlength="10" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
-                            required>
-
-                    </div>
-                    <div class="col">
-                        <label class="text-white mt-2" for="sexo">Sexo</label>
-                        <select id="sexo" [(ngModel)]="sexo" name="sexo" class="form-select">
+                </div>
+                <div class="col">
+                    <label class="text-white mt-2" for="sexo">Sexo</label>
+                    <select id="sexo" [(ngModel)]="sexo" name="sexo" class="form-select">
                             <option>Masculino</option>
                             <option>Feminino</option>
                             <option selected>Prefiro não informar</option>
                         </select>
-                    </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <label class="text-white mt-2" for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" placeholder="joao.silva@exemplo.com" required>
-                        <label class="text-white mt-2" for="senha">Senha</label>
-                        <div class="input-group mb-2">
-                            <input type="{{sPsw}}" id="senha" [(ngModel)]="senha" name="senha" class="form-control" minlength="8" maxlength="16" aria-describedby="show-psw" required>
-                            <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw"
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="text-white mt-2" for="email">E-mail</label>
+                    <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" placeholder="joao.silva@exemplo.com" required>
+                    <label class="text-white mt-2" for="senha">Senha</label>
+                    <div class="input-group mb-2">
+                        <input type="{{sPsw}}" id="senha" [(ngModel)]="senha" name="senha" class="form-control" minlength="8" maxlength="16" aria-describedby="show-psw" required>
+                        <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw"
                                     *ngIf="mostrarSenha == true"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                                         height="24" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
                                         <path
@@ -67,74 +64,71 @@
                                             d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                     </svg></i>
                             </span>
-                        </div>
                     </div>
-                    <div class="col" *ngIf="mostraTipo == true">
-                        <label class="text-white mt-2" for="tipo">Tipo de usuário</label>
-                        <select id="tipo" [(ngModel)]="tipo" name="tipo" class="form-select">
+                </div>
+                <div class="col" *ngIf="mostraTipo == true">
+                    <label class="text-white mt-2" for="tipo">Tipo de usuário</label>
+                    <select id="tipo" [(ngModel)]="tipo" name="tipo" class="form-select">
                             <option>Administrador master</option>
                             <option>Administrador</option>
                             <option selected>Comum</option>
                         </select>
-                    </div>
                 </div>
+            </div>
 
-                <!-- Dados de endereço -->
-                <div class="row">
-                    <!-- Search input-->
-                    <div class="col-md-4">
-                        <label class="text-white mt-2" for="cep">CEP</label>
-                        <input id="cep" [(ngModel)]="cep" name="cep" placeholder="Apenas números" class="form-control" value="" type="search" maxlength="8" pattern="[0-9]+$" required>
-                    </div>
-                    <div class="col-md-2">
-                        <label>.</label>
-                        <button type="button" class="btn btn-outline-success form-control mt-2" (click)="pesquisaCep()">Procurar</button>
-                    </div>
+            <!-- Dados de endereço -->
+            <div class="row">
+                <!-- Search input-->
+                <div class="col-md-4">
+                    <label class="text-white mt-2" for="cep">CEP</label>
+                    <input id="cep" [(ngModel)]="cep" name="cep" placeholder="Apenas números" class="form-control" value="" type="search" maxlength="8" pattern="[0-9]+$" required>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <label class="text-white mt-2" for="rua">Rua</label>
-                        <input type="text" class="form-control" id="rua" [(ngModel)]="rua" name="rua" value="{{ rua }}" readonly="readonly" required>
-
-                    </div>
-                    <div class="col">
-                        <label class="text-white mt-2" for="numero">Número</label>
-                        <input id="numero" [(ngModel)]="numero" name="numero" type="text" class="form-control" placeholder="Digite o número da sua casa" required>
-                    </div>
-                    <div class="col">
-                        <label class="text-white mt-2" for="bairro">Bairro</label>
-                        <input type="text" class="form-control" id="bairro" [(ngModel)]="bairro" name="bairro" value="{{ bairro }}" readonly="readonly">
-                    </div>
+                <div class="col-md-2">
+                    <label>.</label>
+                    <button type="button" class="btn btn-outline-success form-control mt-2" (click)="pesquisaCep()">Procurar</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="text-white mt-2" for="rua">Rua</label>
+                    <input type="text" class="form-control" id="rua" [(ngModel)]="rua" name="rua" value="{{ rua }}" readonly="readonly" required>
 
                 </div>
-
-                <div class="row">
-                    <div class="col">
-                        <label class="text-white mt-2" for="cidade">Cidade</label>
-                        <input type="text" class="form-control" id="cidade" [(ngModel)]="cidade" name="cidade" value="{{ cidade }}" readonly="readonly">
-
-                    </div>
-                    <div class="col">
-                        <label class="text-white mt-2" for="estado">Estado</label>
-                        <input type="text" class="form-control" id="estado" [(ngModel)]="estado" name="estado" value="{{ estado }}" readonly="readonly">
-                    </div>
-                    <div class="col">
-                        <label class="text-white mt-2" for="complemento">Complemento</label>
-                        <input [(ngModel)]="complemento" name="complemento" type="text" class="form-control" id="complemento">
-                    </div>
+                <div class="col">
+                    <label class="text-white mt-2" for="numero">Número</label>
+                    <input id="numero" [(ngModel)]="numero" name="numero" type="text" class="form-control" placeholder="Digite o número da sua casa" required>
+                </div>
+                <div class="col">
+                    <label class="text-white mt-2" for="bairro">Bairro</label>
+                    <input type="text" class="form-control" id="bairro" [(ngModel)]="bairro" name="bairro" value="{{ bairro }}" readonly="readonly">
                 </div>
 
-                <div class="alert alert-warning text-center mt-5 " role="alert" *ngIf="alerta.length > 0">
-                    {{alerta}}
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="text-white mt-2" for="cidade">Cidade</label>
+                    <input type="text" class="form-control" id="cidade" [(ngModel)]="cidade" name="cidade" value="{{ cidade }}" readonly="readonly">
+
                 </div>
-                <div class="d-flex justify-content-end py-4">
-                    <button class="btn btn-outline-info" type="submit">Cadastrar-se</button>
-                    <span class="px-2"></span>
-                    <button routerLink="/" class="btn btn-outline-light" formnovalidate>Voltar</button>
+                <div class="col">
+                    <label class="text-white mt-2" for="estado">Estado</label>
+                    <input type="text" class="form-control" id="estado" [(ngModel)]="estado" name="estado" value="{{ estado }}" readonly="readonly">
                 </div>
-            </form>
-        </div>
+                <div class="col">
+                    <label class="text-white mt-2" for="complemento">Complemento</label>
+                    <input [(ngModel)]="complemento" name="complemento" type="text" class="form-control" id="complemento">
+                </div>
+            </div>
+
+            <div class="alert alert-warning text-center mt-5 " role="alert" *ngIf="alerta.length > 0">
+                {{alerta}}
+            </div>
+            <div class="d-flex justify-content-end py-4">
+                <button class="btn btn-outline-info" type="submit">Cadastrar-se</button>
+                <span class="px-2"></span>
+                <button routerLink="/" class="btn btn-outline-light" formnovalidate>Voltar</button>
+            </div>
+        </form>
     </div>
-</body>
-
-</html>
+</div>

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { LoginService } from '../login.service';
-import { Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,13 +11,11 @@ import { Subscription } from 'rxjs';
 
 export class CadastroComponent implements OnInit {
 
-  subscription: Subscription = new Subscription;
-
-  constructor(private http: HttpClient, private route: Router, private idUser: LoginService) { }
+  constructor(private http: HttpClient, private route: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     //pega Id do usuario ao fazer login
-    this.subscription = this.idUser.idAtual.subscribe(message => this.id = message);
+    this.id = localStorage.getItem('token');
 
     let url: string = `http://localhost:8080/usuarios/${this.id}`;
 
@@ -32,7 +29,7 @@ export class CadastroComponent implements OnInit {
   }
   
   //Dados pessoais
-  id: string = "";
+  id: any = "";
   nome: string = "";
   cpf: string = "";
   telefone: string = "";
