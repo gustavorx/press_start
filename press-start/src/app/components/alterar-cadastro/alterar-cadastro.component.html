@@ -1,182 +1,174 @@
-<html>
+<div class="caixa d-flex flex-wrap justify-content-center align-items-center">
+    <div class="container">
 
-<body>
-    <div class="d-flex flex-wrap justify-content-center align-items-center">
-        <div class="container">
+        <!-- Seção de cadastro -->
+        <div *ngIf="alterarSenhas == false">
+            <form #atualizar="ngForm" (ngSubmit)="update(atualizar.value)" ngNativeValidate>
+                <div class="text-white">
+                    <h3>Editar dados pessoais</h3>
+                    <hr>
+                </div>
 
-            <!-- Seção de cadastro -->
-            <div *ngIf="alterarSenhas == false">
-                <form #atualizar="ngForm" (ngSubmit)="update(atualizar.value)" ngNativeValidate>
-                    <div class="text-white">
-                        <h3>Editar dados pessoais</h3>
-                        <hr>
+                <!-- Dados de cadastro -->
+                <div class="row">
+                    <div class="col">
+                        <label class="text-white" for="nome">Nome</label>
+                        <input type="text" class="form-control" id="nome" [(ngModel)]="nome" name="nome" placeholder="Digite seu nome" required>
                     </div>
-                    <fieldset id="desabilitar">
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="text-white mt-2" for="cpf">CPF</label>
+                        <input type="text" class="form-control" id="cpf" [(ngModel)]="cpf" name="cpf" placeholder="Digite seu CPF" maxlength="11" pattern="[0-9]{11}" required>
 
-                        <!-- Dados de cadastro -->
-                        <div class="row">
-                            <div class="col">
-                                <label class="text-white" for="nome">Nome</label>
-                                <input type="text" class="form-control" id="nome" [(ngModel)]="nome" name="nome" placeholder="Digite seu nome" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label class="text-white mt-2" for="cpf">CPF</label>
-                                <input type="text" class="form-control" id="cpf" [(ngModel)]="cpf" name="cpf" placeholder="Digite seu CPF" maxlength="11" pattern="[0-9]+$" required>
+                    </div>
+                    <div class="col">
+                        <label class="text-white mt-2" for="telefone">Telefone Celular</label>
+                        <input type="text" class="form-control" id="telefone" [(ngModel)]="telefone" name="telefone" placeholder="Apenas números com DDD" minlength="11" maxlength="11" pattern="^[0-9]*$" required>
+                    </div>
+                    <div class="col">
+                        <label class="text-white mt-2" for="dtNasc">Data De Nascimento</label>
+                        <input type="text" class="form-control" id="dtNasc" [(ngModel)]="dtNasc" name="dtNasc" placeholder="DD/MM/AAAA" type="text" maxlength="10" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
+                            required>
 
-                            </div>
-                            <div class="col">
-                                <label class="text-white mt-2" for="telefone">Telefone Celular</label>
-                                <input type="text" class="form-control" id="telefone" [(ngModel)]="telefone" name="telefone" placeholder="Apenas números com DDD" maxlength="11" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$" required>
-                            </div>
-                            <div class="col">
-                                <label class="text-white mt-2" for="dtNasc">Data De Nascimento</label>
-                                <input type="text" class="form-control" id="dtNasc" [(ngModel)]="dtNasc" name="dtNasc" placeholder="DD/MM/AAAA" type="text" maxlength="10" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
-                                    required>
-
-                            </div>
-                            <div class="col">
-                                <label class="text-white mt-2" for="sexo">Sexo</label>
-                                <select id="sexo" [(ngModel)]="sexo" name="sexo" class="form-select">
+                    </div>
+                    <div class="col">
+                        <label class="text-white mt-2" for="sexo">Sexo</label>
+                        <select id="sexo" [(ngModel)]="sexo" name="sexo" class="form-select">
                                 <option>Masculino</option>
                                 <option>Feminino</option>
                                 <option selected>Prefiro não informar</option>
                             </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label class="text-white mt-2" for="email">E-mail</label>
-                                <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" placeholder="Digite seu e-mail" required>
-                                <button *ngIf="alterarSenhas == false" type="button" class="btn btn-outline-danger mt-4" (click)="alterarSenha()">Alterar senha</button>
-                            </div>
-                            <div class="col" *ngIf="mostraTipo == true">
-                                <label class="text-white mt-2" for="sexo">Tipo de usuário</label>
-                                <select id="tipo" [(ngModel)]="tipo" name="tipo" class="form-select">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="text-white mt-2" for="email">E-mail</label>
+                        <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" placeholder="Digite seu e-mail" required>
+                        <button *ngIf="alterarSenhas == false" type="button" class="btn btn-outline-danger mt-4" (click)="alterarSenha()">Alterar senha</button>
+                    </div>
+                    <div class="col" *ngIf="mostraTipo == true">
+                        <label class="text-white mt-2" for="tipo">Tipo de usuário</label>
+                        <select id="tipo" [(ngModel)]="tipo" name="tipo" class="form-select">
                                     <option>Administrador master</option>
                                     <option>Administrador</option>
                                     <option selected>Comum</option>
                                 </select>
-                            </div>
-                        </div>
-
-                        <!-- Dados de endereço -->
-                        <div class="row">
-                            <!-- Search input-->
-                            <div class="col-md-4">
-                                <label class="text-white mt-2" for="cep">CEP</label>
-                                <input id="cep" [(ngModel)]="cep" name="cep" placeholder="Apenas números" class="form-control" value="" type="search" maxlength="8" pattern="[0-9]+$" required>
-                            </div>
-                            <div class="col-md-2">
-                                <label>.</label>
-                                <button type="button" class="btn btn-outline-success form-control mt-2" (click)="pesquisaCep()">Procurar</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label class="text-white mt-2" for="rua">Rua</label>
-                                <input type="text" class="form-control" id="rua" [(ngModel)]="rua" name="rua" value="{{ rua }}" readonly="readonly" required>
-
-                            </div>
-                            <div class="col">
-                                <label class="text-white mt-2" for="numero">Número</label>
-                                <input type="text" class="form-control" id="numero" [(ngModel)]="numero" name="numero" placeholder="Digite o número da sua casa" required>
-                            </div>
-                            <div class="col">
-                                <label class="text-white mt-2" for="bairro">Bairro</label>
-                                <input name="bairro" type="text" class="form-control" id="bairro" [(ngModel)]="bairro" name="bairro" value="{{ bairro }}" readonly="readonly">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <label class="text-white mt-2" for="cidade">Cidade</label>
-                                <input type="text" class="form-control" id="cidade" [(ngModel)]="cidade" name="cidade" value="{{ cidade }}" readonly="readonly">
-
-                            </div>
-                            <div class="col">
-                                <label class="text-white mt-2" for="estado">Estado</label>
-                                <input type="text" class="form-control" id="estado" [(ngModel)]="estado" name="estado" value="{{ estado }}" readonly="readonly">
-                            </div>
-                            <div class="col">
-                                <label class="text-white mt-2" for="complemento">Complemento</label>
-                                <input [(ngModel)]="complemento" name="complemento" type="text" class="form-control" id="complemento">
-                            </div>
-                        </div>
-
-                    </fieldset>
-                    <div class="alert alert-{{aviso}} text-center mt-5 " role="alert" *ngIf="alerta.length > 0">
-                        {{alerta}}
                     </div>
-                    <div class="d-flex justify-content-end py-4">
-                        <button class="btn btn-outline-info" type="submit">Salvar</button>
-                        <span class="px-2"></span>
-                        <button routerLink="/" class="btn btn-outline-light" formnovalidate>Cancelar</button>
+                </div>
+
+                <!-- Dados de endereço -->
+                <div class="row">
+                    <!-- Search input-->
+                    <div class="col-md-4">
+                        <label class="text-white mt-2" for="cep">CEP</label>
+                        <input id="cep" [(ngModel)]="cep" name="cep" placeholder="Apenas números" class="form-control" value="" type="search" maxlength="8" pattern="[0-9]+$" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label>.</label>
+                        <button type="button" class="btn btn-outline-success form-control mt-2" (click)="pesquisaCep()">Procurar</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="text-white mt-2" for="rua">Rua</label>
+                        <input type="text" class="form-control" id="rua" [(ngModel)]="rua" name="rua" value="{{ rua }}" readonly="readonly" required>
+
+                    </div>
+                    <div class="col">
+                        <label class="text-white mt-2" for="numero">Número</label>
+                        <input type="text" class="form-control" id="numero" [(ngModel)]="numero" name="numero" placeholder="Digite o número da sua casa" required>
+                    </div>
+                    <div class="col">
+                        <label class="text-white mt-2" for="bairro">Bairro</label>
+                        <input name="bairro" type="text" class="form-control" id="bairro" [(ngModel)]="bairro" name="bairro" value="{{ bairro }}" readonly="readonly">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label class="text-white mt-2" for="cidade">Cidade</label>
+                        <input type="text" class="form-control" id="cidade" [(ngModel)]="cidade" name="cidade" value="{{ cidade }}" readonly="readonly">
+
+                    </div>
+                    <div class="col">
+                        <label class="text-white mt-2" for="estado">Estado</label>
+                        <input type="text" class="form-control" id="estado" [(ngModel)]="estado" name="estado" value="{{ estado }}" readonly="readonly">
+                    </div>
+                    <div class="col">
+                        <label class="text-white mt-2" for="complemento">Complemento</label>
+                        <input [(ngModel)]="complemento" name="complemento" type="text" class="form-control" id="complemento">
+                    </div>
+                </div>
+
+                <div class="alert alert-{{aviso}} text-center mt-5 " role="alert" *ngIf="alerta.length > 0">
+                    {{alerta}}
+                </div>
+                <div class="d-flex justify-content-end py-4">
+                    <button class="btn btn-outline-info" type="submit">Salvar</button>
+                    <span class="px-2"></span>
+                    <button routerLink="/" class="btn btn-outline-light" formnovalidate>Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Seção de alterar senhas -->
+        <div *ngIf="alterarSenhas == true">
+            <div class="mx-5 px-5">
+                <H3 class="text-white text-center mt-4 pb-5" for="senha">Alterar Senha</H3>
+                <label class="" for="senhaAntiga"></label>
+                <div class="input-group mb-3">
+                    <input form="formAlterarSenha" type="{{sPsw}}" [(ngModel)]="senhaAntiga" name="senhaAntiga" class="form-control" placeholder="Senha antiga" minlength="8" maxlength="16" aria-describedby="show-psw" required>
+                    <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                            <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                            <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                            <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                          </svg></i>
+                          <i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == false"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                          </svg></i>
+                        </span>
+                </div>
+                <form id="formAlterarSenha" #atualizar="ngForm" (ngSubmit)="update(atualizar.value)" ngNativeValidate>
+                    <label class="mt-4" for="senha"></label>
+                    <div class="input-group mb-3">
+                        <input type="{{sPsw}}" [(ngModel)]="novaSenha" name="senha" class="form-control" placeholder="Nova senha" minlength="8" maxlength="16" aria-describedby="show-psw" required>
+                        <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                            <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                            <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                            <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                          </svg></i>
+                          <i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == false"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                          </svg></i>
+                        </span>
                     </div>
                 </form>
-            </div>
-
-            <!-- Seção de alterar senhas -->
-            <div *ngIf="alterarSenhas == true">
-                <div class="mx-5 px-5">
-                    <H3 class="text-white text-center mt-4 pb-5" for="senha">Alterar Senha</H3>
-                    <label class="" for="senhaAntiga"></label>
-                    <div class="input-group mb-3">
-                        <input form="formAlterarSenha" type="{{sPsw}}" [(ngModel)]="senhaAntiga" name="senhaAntiga" class="form-control" placeholder="Senha antiga" minlength="8" maxlength="16" aria-describedby="show-psw" required>
-                        <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
-                            <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
-                            <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
-                            <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
-                          </svg></i>
-                          <i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == false"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                          </svg></i>
-                        </span>
-                    </div>
-                    <form id="formAlterarSenha" #atualizar="ngForm" (ngSubmit)="update(atualizar.value)" ngNativeValidate>
-                        <label class="mt-4" for="senha"></label>
-                        <div class="input-group mb-3">
-                            <input type="{{sPsw}}" [(ngModel)]="novaSenha" name="senha" class="form-control" placeholder="Nova senha" minlength="8" maxlength="16" aria-describedby="show-psw" required>
-                            <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
-                            <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
-                            <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
-                            <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
-                          </svg></i>
-                          <i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == false"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                          </svg></i>
-                        </span>
-                        </div>
-                    </form>
-                    <label class="mt-4" for="repitaSenha"></label>
-                    <div class="input-group mb-3">
-                        <input form="formAlterarSenha" type="{{sPsw}}" [(ngModel)]="repitaSenha" name="repitaSenha" class="form-control" placeholder="Confirme a nova senha" minlength="8" maxlength="16" aria-describedby="show-psw" required>
-                        <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                <label class="mt-4" for="repitaSenha"></label>
+                <div class="input-group mb-3">
+                    <input form="formAlterarSenha" type="{{sPsw}}" [(ngModel)]="repitaSenha" name="repitaSenha" class="form-control" placeholder="Confirme a nova senha" minlength="8" maxlength="16" aria-describedby="show-psw" required>
+                    <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
                         <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
                         <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
                         <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
                       </svg></i>
-                      <i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == false"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                      <i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == false"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                         <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                         <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                       </svg></i>
                     </span>
-                    </div>
-                    <div class="alert alert-{{aviso}} text-center mt-5 " role="alert" *ngIf="alerta.length > 0">
-                        {{alerta}}
-                    </div>
-                    <div class="d-flex justify-content-end py-4">
-                        <button class="btn btn-outline-info" type="submit" form="formAlterarSenha">Salvar</button>
-                        <span class="px-2"></span>
-                        <button class="btn btn-outline-light" (click)="alterarSenha()" formnovalidate>Cancelar</button>
-                    </div>
+                </div>
+                <div class="alert alert-{{aviso}} text-center mt-5 " role="alert" *ngIf="alerta.length > 0">
+                    {{alerta}}
+                </div>
+                <div class="d-flex justify-content-end py-4">
+                    <button class="btn btn-outline-info" type="submit" form="formAlterarSenha">Salvar</button>
+                    <span class="px-2"></span>
+                    <button class="btn btn-outline-light" (click)="alterarSenha()" formnovalidate>Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
-</body>
-
-</html>
+</div>

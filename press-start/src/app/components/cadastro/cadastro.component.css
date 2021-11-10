@@ -1,13 +1,4 @@
-html,
-body {
-    height: 100%;
-    height: 60.55rem;
-    /* background-image: url(../login/cyberpunk2077.jpg);
-    background-size: cover; */
+.caixa {
+    height: 90%;
     background-image: linear-gradient(-60deg, #080427 30%, #211e3d 30%);
-}
-
-.container {
-    margin-top: 5%;
-    max-width: 1000px;
 }
