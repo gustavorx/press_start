@@ -1,0 +1,26 @@
+<div class="border">
+    <div class="row" style="--bs-gutter-x: 0rem">
+        <h3 class="text-white">Resumo do Pedido</h3>
+        <hr class="whiteH1">
+    </div>
+    <div class="row" style="--bs-gutter-x: 0rem">
+        <label class="text-white">Itens do pedido</label>
+        <div *ngFor="let produto of getProdutos()" class="row">
+            <div class="col">
+                <div class="text-white">{{produto.nome}}</div>
+            </div>
+            <div class="col">
+                <div class="text-white">{{produto.preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</div>
+            </div>
+        </div>
+    </div>
+    <hr class="whiteH1">
+    <div class="row" style="--bs-gutter-x: 0rem">
+        <label class="text-white">Forma de pagamento</label>
+        <div class="text-white">Cartão de Crédito</div>>
+    </div>
+    <div class="row grey" style="--bs-gutter-x: 0rem">
+        <label class="text-white">{{parcelaSelecionada}} x de {{getValorParcelado().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}} sem juros</label>
+        <div class="text-white">Total a pagar <b class="text-white">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</b></div>
+    </div>
+</div>

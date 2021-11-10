@@ -69,6 +69,7 @@ export class PagamentoComponent {
     this.esconderPix = true;
     this.esconderMetodos = false;
     this.esconderDescricao = false;
+    this.creditoFinalizado = false;
   }
 
   gerarCodigoPix(){

@@ -21,6 +21,10 @@
                 <div class="row"><br></div>
                 <div class="row">
                     <div class="col-4"></div>
+                    <div class="col-4">
+                        <app-resumoPedido></app-resumoPedido>
+                    </div>
+                    <!-- <div class="col-4"></div>
                     <div class="col-4 border">
                         <div class="row" style="--bs-gutter-x: 0rem">
                             <h3 class="text-white">Resumo do Pedido</h3>
@@ -52,13 +56,13 @@
                             <div class="text-white">Total a pagar <b class="text-white">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</b></div>
                         </div>
                     </div>
-                    <div class="col-4"></div>
+                    <div class="col-4"></div> -->
                 </div>
             </div>          
             <div class="container" [hidden]="esconderCartao || creditoFinalizado">
                 <form>
                     <div class="text-white">
-                        <p class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</p>
+                        <p><span>⬅</span><span class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</span></p>
                         <h3>Cartão de Crédito</h3>
                         <hr>
                     </div>
@@ -120,39 +124,11 @@
                                 </div>
                             </div>
                             <div class="col-1"></div>
-                            <div class="col-4 border">
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <h3 class="text-white">Resumo do Pedido</h3>
-                                    <hr class="whiteH1">
-                                </div>
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">Itens do pedido</label>
-                                    <div *ngFor="let produto of getProdutos()" class="row">
-                                        <div class="col">
-                                            <div class="text-white">{{produto.nome}}</div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="text-white">{{produto.preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr class="whiteH1">
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">Forma de pagamento</label>
-                                    <div class="text-white">Cartão de Crédito</div>>
-                                </div>
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">Tempo de processamento</label>
-                                    <div class="text-white">Até 1 dia útil</div>
-                                    <hr class="whiteH1">
-                                </div>
-                                <div class="row grey" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">{{parcelaSelecionada}} x de {{getValorParcelado().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}} sem juros</label>
-                                    <div class="text-white">Total a pagar <b class="text-white">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</b></div>
-                                    <hr class="whiteH1">
-                                </div>
+                            <div class="col-4">
+                                <app-resumoPedido></app-resumoPedido>
+                                <div class="row"><br></div>
                                 <div class="d-flex flex-wrap justify-content-center align-items-center">
-                                    <button type="submit" (click)="finalizarPagamentoCredito()"> Finalizar Compra 🔒</button>
+                                    <button type="submit" class="btn btn-lg btn-outline-success btn-compra" (click)="finalizarPagamentoCredito()"> Finalizar Compra 🔒</button>
                                 </div>
                             </div>
                         </div>
@@ -162,7 +138,7 @@
             <!-- BOLETO -->
             <div class="container" *ngIf="!esconderBoleto">
                 <div class="text-white">
-                    <p class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</p>
+                    <p><span>⬅</span><span class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</span></p>
                     <h3>Preencha seus dados para a emissão do boleto</h3>
                     <hr>
                 </div>
@@ -182,7 +158,10 @@
                                     <button routerLink="/pagamento/boleto/{{cpf}}/{{nomeCompleto}}">Prosseguir</button>
                                 </div>
                             </div>
-                            <div class="col-4 border">
+                            <div class="col-4">
+                                <app-resumoPedido></app-resumoPedido>
+                            </div>
+                            <!-- <div class="col-4 border">
                                 <div class="row" style="--bs-gutter-x: 0rem">
                                     <h3 class="text-white">Resumo do Pedido</h3>
                                     <hr class="whiteH1">
@@ -208,7 +187,7 @@
                                     <label class="text-white">1 x de {{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}} sem juros</label>
                                     <div class="text-white">Total a pagar <b class="text-white">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</b></div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
 
@@ -217,7 +196,7 @@
             <!-- PIX -->
             <div class="container" *ngIf="!esconderPix">
                 <div class="text-white">
-                    <p class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</p>
+                    <p><span>⬅</span><span class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</span></p>
                     <h3>Finalize o pagamento usando o Pix!</h3>
                     <hr>
                 </div>
@@ -243,11 +222,14 @@
                                         <input type="text" class="form-control" id="qrCode" value="{{ qrCode }}">
                                     </div>
                                     <div class="col-2">
-                                        <button (click)="copiarCodigo()">copiar</button>
+                                        <button class="btn btn-lg btn-outline-info btn-copiar" (click)="copiarCodigo()">copiar</button>
                                     </div>                                
                                 </div>
                             </div>
-                            <div class="col-4 border">
+                            <div class="col-4">
+                                <app-resumoPedido></app-resumoPedido>
+                            </div>
+                            <!-- <div class="col-4 border">
                                 <div class="row" style="--bs-gutter-x: 0rem">
                                     <h3 class="text-white">Resumo do Pedido</h3>
                                     <hr class="whiteH1">
@@ -273,7 +255,7 @@
                                     <label class="text-white">1 x de {{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}} sem juros</label>
                                     <div class="text-white">Total a pagar <b class="text-white">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</b></div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
             </div>
@@ -281,8 +263,9 @@
 
             <div class="container" [hidden]="!creditoFinalizado">
                 <div class="text-white">
+                    <p><span>⬅</span><span class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</span></p>
                     <h2>Pagamento pré aprovado✔️</h2>
-                    <hr>
+                    <hr>                    
                 </div>
 
                     <form>
@@ -293,7 +276,10 @@
                                     <p class="creditoAprovado2">Seu jogo logo estará disponível!</p> 
                                 </div>
                             </div>
-                            <div class="col-4 border">
+                            <div class="col-4">
+                                <app-resumoPedido></app-resumoPedido>
+                            </div>
+                            <!-- <div class="col-4 border">
                                 <div class="row" style="--bs-gutter-x: 0rem">
                                     <h3 class="text-white">Resumo do Pedido</h3>
                                     <hr class="whiteH1">
@@ -316,7 +302,7 @@
                                 <div class="row grey" style="--bs-gutter-x: 0rem">
                                     <div class="text-white">Total a pago <b class="text-white">R$ 19,74</b></div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
 
