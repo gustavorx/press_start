@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { CarrinhoComponent } from './components/carrinho/carrinho.component';
@@ -17,21 +17,20 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { JogoListaComponent } from './components/jogo-lista/jogo-lista.component';
 import { HomeComponent } from './components/home/home.component';
+import { AuthGuard } from './components/guards/auth.guard'; 
+import { LoggedInAuthGuard } from './components/guards/loggedInAuth.guard'; 
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [LoggedInAuthGuard] },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'carrinho', component: CarrinhoComponent },
-  { path: 'alterar-cadastro', component: AlterarCadastroComponent },
-  { path: 'alterar-cadastro', component: AlterarCadastroComponent },
-  { path: 'pagamento', component: PagamentoComponent},
-  { path: 'pagamento/boleto/:cpf/:nomeCompleto', component: BoletoComponent},
+  { path: 'alterar-cadastro', component: AlterarCadastroComponent, canActivate: [AuthGuard] },
+  { path: 'pagamento', component: PagamentoComponent, canActivate: [AuthGuard]},
+  { path: 'pagamento/boleto/:cpf/:nomeCompleto', component: BoletoComponent },
   { path: 'jogos', component: JogoListaComponent },
   { path: 'jogos/:id', component: JogoComponent },
-  { path: 'alterar-cadastro', component: AlterarCadastroComponent },
   { path: 'jogos', component: JogoListaComponent },
   { path: 'jogos/:id', component: JogoComponent },
-  { path: 'home', component: HomeComponent },
   { path: '', component: HomeComponent }
 ];
 
@@ -53,12 +52,13 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     CommonModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [AuthGuard, LoggedInAuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
