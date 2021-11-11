@@ -58,7 +58,7 @@ export class JogoComponent implements OnInit {
     axios.get(`http://localhost:8080/jogos/${this.Id}`)
       .then((response: { data: any; }) => {
         let jogo = response.data;
-        this.Jogo = new JogoModel(jogo._id, jogo.nome, jogo.descricao, jogo.preco, jogo.desenvolvedora, jogo.distribuidora, jogo.lancamento, jogo.classificacao, jogo.imagemLink, jogo.youtubeId);
+        this.Jogo = new JogoModel(jogo._id, jogo.nome, jogo.descricao, jogo.preco, jogo.desenvolvedora, jogo.distribuidora, jogo.dataLancamento, jogo.classificacao, jogo.imagemLink, jogo.youtubeId);
       })
       .catch((error: string) => {
         throw new Error("Erro ao buscar jogo " + this.Id + " => " + error)
