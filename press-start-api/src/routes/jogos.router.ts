@@ -37,7 +37,7 @@ jogosRouter.get("/:id", async (req: Request, res: Response) => {
 jogosRouter.post("/", async (req: Request, res: Response) => {
     try {
         const response = req.body;
-        const novoJogo: JogoRequest = new JogoRequest(response.nome, response.descricao, response.preco, response.desenvolvedora, response.distribuidora, response.lancamento, response.classificacao, response.imagemLink);
+        const novoJogo: JogoRequest = new JogoRequest(response.nome, response.descricao, response.preco, response.desenvolvedora, response.distribuidora, response.lancamento, response.classificacao, response.imagemLink, response.youtubeId);
 
         const result = await collections.jogos?.insertOne(novoJogo);
 
@@ -55,7 +55,7 @@ jogosRouter.put("/:id", async (req: Request, res: Response) => {
 
     try {
         const response = req.body;
-        const jogoAtualizado: JogoRequest = new JogoRequest(response.nome, response.descricao, response.preco, response.desenvolvedora, response.distribuidora, response.lancamento, response.classificacao, response.imagemLink);
+        const jogoAtualizado: JogoRequest = new JogoRequest(response.nome, response.descricao, response.preco, response.desenvolvedora, response.distribuidora, response.lancamento, response.classificacao, response.imagemLink, response.youtubeId);
 
         const query = { _id: new ObjectId(id) };
 

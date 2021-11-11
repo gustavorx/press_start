@@ -16,7 +16,7 @@ export class JogoComponent implements OnInit {
   carrinhoSession: string = "carrinho";
   Jogo?: JogoModel;
 
-  constructor(private toastr: ToastrService, private route: ActivatedRoute) {}
+  constructor(private toastr: ToastrService, private route: ActivatedRoute) { }
 
   comprar() {
     this.adicionarAoCarrinho(false);
@@ -42,14 +42,14 @@ export class JogoComponent implements OnInit {
     });
 
     if (!existente) {
-      carrinhoArr.push({id: this.Jogo?._id, nome: this.Jogo?.nome, preco: this.Jogo?.preco, imagemLink: this.Jogo?.imagemLink});
+      carrinhoArr.push({ id: this.Jogo?._id, nome: this.Jogo?.nome, preco: this.Jogo?.preco, imagemLink: this.Jogo?.imagemLink });
     }
 
     if (showToast) {
       this.toastr.success('Produto adicionado ao carrinho!');
     }
 
-    localStorage.setItem('carrinho', JSON.stringify(carrinhoArr)); 
+    localStorage.setItem('carrinho', JSON.stringify(carrinhoArr));
   }
 
   ngOnInit(): void {
@@ -58,27 +58,10 @@ export class JogoComponent implements OnInit {
     axios.get(`http://localhost:8080/jogos/${this.Id}`)
       .then((response: { data: any; }) => {
         let jogo = response.data;
-        this.Jogo = new JogoModel(jogo._id, jogo.nome, jogo.descricao, jogo.preco, jogo.desenvolvedora, jogo.distribuidora, jogo.lancamento, jogo.classificacao, jogo.imagemLink);
+        this.Jogo = new JogoModel(jogo._id, jogo.nome, jogo.descricao, jogo.preco, jogo.desenvolvedora, jogo.distribuidora, jogo.lancamento, jogo.classificacao, jogo.imagemLink, jogo.youtubeId);
       })
       .catch((error: string) => {
         throw new Error("Erro ao buscar jogo " + this.Id + " => " + error)
       })
   }
-
-  verTrailer() {
-    // TODO implementar trailer
-  }
-
-  // adicionarAoCarrinho() {
-  //   let carrinhoString = sessionStorage.getItem(this.carrinhoSession);
-
-  //   if (carrinhoString != null) {
-  //     let carrinho = JSON.parse(carrinhoString);
-  //     carrinho.push(this.Jogo);
-  //     sessionStorage.setItem(this.carrinhoSession, JSON.stringify(carrinho));
-  //   } else {
-  //     sessionStorage.setItem(this.carrinhoSession, JSON.stringify([this.Jogo]));
-  //   }
-  //   // location.replace("http://localhost:4200/jogos"); // TODO redirecionar para o carrinho
-  // }
 }

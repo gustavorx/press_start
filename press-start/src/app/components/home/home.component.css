@@ -22,13 +22,13 @@ a {
 .jogo-card {
     width: 20rem;
     height: 18rem;
-    margin: 1rem;
+    margin-right: 2rem;
+    margin-top: 0.5rem;
     color: black
 }
 
 .mais-vendidos {
     padding-top: 1rem;
-    padding-left: 1rem;
 }
 
 .nome-jogo {

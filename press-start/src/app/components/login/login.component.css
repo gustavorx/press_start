@@ -1,13 +1,7 @@
-html,
-body {
-    height: 100%;
-    height: 60.55rem;
-    background-image: url(cyberpunk2077.jpg);
-    background-size: cover;
-    /* background-image: linear-gradient(-60deg, #080427 30%, #211e3d 30%); */
-}
-
 .card-login {
+    height: 90%;
+    background-image: url(../../../assets/images/cyberpunk2077.jpg);
+    background-size: cover;
     display: flex;
 }
 

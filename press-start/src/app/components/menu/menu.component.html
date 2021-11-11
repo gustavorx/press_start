@@ -8,12 +8,19 @@
     <ul class="menu-busca">
         <li><input class="input-busca" type="text" placeholder="O que você quer jogar hoje?"></li>
     </ul>
-    <ul class="menu-usuario">
-        <li>
-            <a class="menu-usuario-perfil" routerLink="/alterar-cadastro">
-                <img src="../../../assets/avatar/cyberpunk-avatar.jpg" alt="avatar" class="avatar"> Gustavo
-            </a>
-        </li>
-        <li><a routerLink="/carrinho">Carrinho</a></li>
+    <ul class="menu-usuario dropdown" *ngIf="logado">
+        <button class="dropdown-toggle dropdown-usuario" type="button" id="dropdownUsuario" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <img src="../../../assets/avatar/cyberpunk-avatar.jpg" alt="avatar" class="avatar">{{nomeUsuario}}
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-usuario" aria-labelledby="dropdownUsuario">
+            <li><a class="dropdown-item" routerLink="/alterar-cadastro">Meus dados</a></li>
+            <li><a class="dropdown-item" routerLink="/carrinho">Carrinho</a></li>
+            <li><a class="dropdown-item" routerLink="/" (click)="logout()">Logout</a></li>
+        </ul>
+    </ul>
+    <ul *ngIf="!logado">
+        <li><a routerLink="/login">Login</a></li>
     </ul>
 </header>
