@@ -65,9 +65,21 @@ a {
   width: 3.2rem;
   height: 3.2rem;
   border-radius: 50%;
+  margin-right: 0.5rem;
 }
 
 .logo {
   width: 7.5rem;
   height: 4.5rem;
+}
+
+.dropdown-usuario{
+  background-color: transparent;
+  border: none;
+  color: inherit
+}
+
+.dropdown-menu-usuario{
+  background-color: #211e3d;
+  color: #fff;
 }

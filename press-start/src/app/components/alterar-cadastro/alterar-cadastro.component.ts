@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import axios, { Axios } from 'axios';
 
 @Component({
   selector: 'app-alterar-cadastro',
@@ -103,16 +104,19 @@ export class AlterarCadastroComponent implements OnInit {
   }
 
   //Atualiza no banco
-  update(data: JSON) {
+  async update(data: JSON) {
+
     if (this.senhaOg == this.senhaAntiga && this.novaSenha == this.repitaSenha) {
-      this.http.put(`http://localhost:8080/usuarios/${this.id}`, data, { responseType: 'text' }).subscribe();
+      const response = await axios.put(`http://localhost:8080/usuarios/${this.id}`, data);
       this.aviso = "success";
       this.alerta = "Senha alterado com sucesso";
+      window.location.href = "/alterar-cadastro";
     }
     else if (this.alterarSenhas == false) {
-      this.http.put(`http://localhost:8080/usuarios/${this.id}`, data, { responseType: 'text' }).subscribe();
+      const response = await axios.put(`http://localhost:8080/usuarios/${this.id}`, data);
       this.aviso = "success";
       this.alerta = "Informações atualizadas com sucesso";
+      window.location.href = "/alterar-cadastro";
     }
     else if (this.senhaAntiga.length <= 7 || this.novaSenha.length <= 7 || this.repitaSenha.length <= 7) {
       this.aviso = "warning";

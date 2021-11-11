@@ -11,8 +11,7 @@ export class AppComponent {
   title = 'app';
   router: string;
 
-  constructor(private _router: Router){
-          this.router = _router.url; 
-          console.log(this.router);
-    }
+  constructor(private _router: Router) {
+    this.router = _router.url;
+  }
 }
