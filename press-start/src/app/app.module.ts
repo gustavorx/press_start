@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { JogoListaComponent } from './components/jogo-lista/jogo-lista.component';
 import { HomeComponent } from './components/home/home.component';
+import { SobreComponent } from './components/sobre/sobre.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
   { path: 'jogos', component: JogoListaComponent },
   { path: 'jogos/:id', component: JogoComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'sobre', component: SobreComponent },
   { path: '', component: HomeComponent }
 ];
 
@@ -47,7 +49,8 @@ const appRoutes: Routes = [
     JogoListaComponent,
     PagamentoComponent,
     BoletoComponent,
-    HomeComponent
+    HomeComponent,
+    SobreComponent
   ],
   imports: [
     BrowserModule,
