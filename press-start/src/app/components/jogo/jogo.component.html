@@ -36,8 +36,8 @@
                         <div class="d-flex justify-content-between">
                             <input class="btn btn-lg btn-outline-info btn-jogo" type="button" value="+ Carrinho"
                                 (click)="adicionarAoCarrinho()">
-                            <input class="btn btn-lg btn-outline-success btn-jogo" type="button" value="Ver trailer"
-                                (click)="verTrailer()">
+                            <a class="btn btn-lg btn-outline-success btn-jogo" value="Ver trailer" data-lity=""
+                                href="https://www.youtube.com/watch?v={{Jogo?.youtubeId}}">Ver trailer</a>
                             <div class="card-text">
                                 <img class="pegi-icon" src="../../../assets/icons/pegi-3.jpg"
                                     *ngIf="Jogo.classificacao == 3">

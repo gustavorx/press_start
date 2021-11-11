@@ -60,7 +60,7 @@ export class LoginComponent {
         this.id = res._id;
         localStorage.setItem('isLoggedIn', "true");
         localStorage.setItem('token', this.id);
-        this.route.navigate(['/']);
+        window.location.href = "/";
       }).catch(msg => this.msgErro = "E-mail ou senha inválidos. Tente novamente");
   }
 

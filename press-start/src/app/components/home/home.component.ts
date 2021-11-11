@@ -20,9 +20,7 @@ export class HomeComponent implements OnInit {
       .then((response) => {
         this.jogos = response.data
         this.jogosCarrosel = this.jogos.slice(0, 3)
-        console.log(this.jogosCarrosel)
         this.jogosMaisVendidos = this.jogos.slice(3, 6)
-        console.log(this.jogosMaisVendidos)
       })
       .catch((erro) => console.error(erro))
   }
