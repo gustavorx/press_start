@@ -33,6 +33,20 @@ jogosRouter.get("/:id", async (req: Request, res: Response) => {
 
 });
 
+jogosRouter.get("/find/:nome", async (req: Request, res: Response) => {
+    const nomeDoJogo = req?.params?.nome;
+    try {
+        const query = { nome: new RegExp(`${nomeDoJogo}`, 'i') };
+        const jogo = (await collections.jogos?.find(query).toArray()) as JogoRequest[];
+
+        if (jogo) res.status(200).json(jogo);
+        else res.status(402).json(`Jogo com nome ${nomeDoJogo} não encontrado `)
+    } catch (error) {
+        res.status(500).json(`Erro ao buscar o jogo com nome ${nomeDoJogo}: ${error}`)
+    }
+
+});
+
 // POST
 jogosRouter.post("/", async (req: Request, res: Response) => {
     try {
