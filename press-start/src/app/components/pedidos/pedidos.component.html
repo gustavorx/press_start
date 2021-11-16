@@ -9,74 +9,41 @@
                 </div>
                 <div class="row"><br></div>
                 <div class="row">
-                    <table>
-                        <tr>
-                            <th class="text-white">
-                                Numero
-                            </th>
-                            <th class="text-white">
-                                Valor
-                            </th>
-                            <th class="text-white">
-                                Data
-                            </th>
-                        </tr>
-                        <tr>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                            <td class="text-white">
-                                Teste
-                            </td>
-                        </tr>
-                    </table>
+                    <section *ngIf="pedidos">
+                        <table>
+                            <tr>
+                                <th class="text-white">
+                                    Numero
+                                </th>
+                                <th class="text-white">
+                                    Produto
+                                </th>
+                                <th class="text-white">
+                                    Valor
+                                </th>
+                                <th class="text-white">
+                                    Data
+                                </th>
+                            </tr>
+                            <tr id="{{pedido._id}}" *ngFor="let pedido of pedidos">
+                                <td class="text-white">
+                                    {{pedido._id}}
+                                </td>
+                                <td class="text-white">
+                                    {{pedido.produto}}
+                                </td>
+                                <td class="text-white">
+                                    {{pedido.valor}}
+                                </td>
+                                <td class="text-white">
+                                    {{pedido.data}}
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section *ngIf="!pedidos">
+                        <div class="whiteH1"> Você ainda não possui nenhum pedido </div>
+                    </section>
                 </div>
             </div>
         </div>        

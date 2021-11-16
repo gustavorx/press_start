@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
 })
 
 export class PagamentoComponent {
+
+  constructor(private http: HttpClient) { }
    
   esconderDescricao = false;
   esconderCartao = true;
@@ -60,7 +63,8 @@ export class PagamentoComponent {
     this.esconderPix = false;
     this.esconderMetodos = true;
     this.esconderDescricao = true;
-    this.gerarCodigoPix()
+    this.gerarCodigoPix();
+    this.comprar();
   }
 
   alterarPagameto(){
@@ -112,7 +116,7 @@ export class PagamentoComponent {
       && this.dataValidadeValida && this.cvvValido 
       && this.nomeValido && this.telefoneValido 
       && this.nascimentoValido){
-        console.log("teste")
+        this.comprar();
       this.creditoFinalizado = true;
     }    
   }
@@ -121,7 +125,6 @@ export class PagamentoComponent {
     if(this.numeroCartao.length <= 0){
       this.erroNumeroCartao = true;
     } else {
-      console.log("1");
       this.numeroCartaoValido = true;
     }
   }
@@ -130,7 +133,6 @@ export class PagamentoComponent {
     if(this.cpf.length <= 0){
       this.erroCpf = true;
     } else {
-      console.log("2");
       this.cpfValido = true;
     }
   }
@@ -139,7 +141,6 @@ export class PagamentoComponent {
     if(this.dataValidade.length <= 0){
       this.erroDataValidade = true;
     } else {
-      console.log("3");
       this.dataValidadeValida = true;
     }
   }
@@ -148,7 +149,6 @@ export class PagamentoComponent {
     if(this.cvv.length <= 0){
       this.erroCvv = true;
     } else {
-      console.log("4");
       this.cvvValido = true;
     }
   }
@@ -157,7 +157,6 @@ export class PagamentoComponent {
     if(this.nomeCompleto.length <= 0){
       this.erroNome = true;
     } else {
-      console.log("5");
       this.nomeValido = true;
     }
   }
@@ -166,7 +165,6 @@ export class PagamentoComponent {
     if(this.telefone.length <= 0){
       this.erroTelefone = true;
     } else {
-      console.log("6");
       this.telefoneValido = true;
     }
   }
@@ -175,7 +173,6 @@ export class PagamentoComponent {
     if(this.nascimento.length <= 0){
       this.erroNascimento = true;
     } else {
-      console.log("7");
       this.nascimentoValido = true;
     }
   }
@@ -211,4 +208,38 @@ export class PagamentoComponent {
     let parcelado = total / this.parcelaSelecionada;
     return parcelado;
   }
+
+  recebeCarrinho(){
+    var carrinho = localStorage.getItem('carrinho');
+
+    var carrinhoArr = [];
+
+    if (carrinho) {
+      carrinhoArr = JSON.parse(carrinho);
+    } else {
+      carrinhoArr = [];
+    }
+
+    return carrinhoArr;
+  }   
+
+  comprar() {
+    var carrinhoArr = this.recebeCarrinho();
+    console.log(carrinhoArr);
+    let today = new Date().toLocaleDateString();
+
+    carrinhoArr.forEach((jogo: { nome: string; preco: number }) => {
+      var pedidoData: any = {
+        usuario: localStorage.getItem('token'),
+        produto: jogo.nome,
+        data: today,
+        valor: jogo.preco
+      }
+
+      this.http.post("http://localhost:8080/Pedidos", pedidoData, { responseType: 'text' }).subscribe();
+    });
+
+    // this.route.navigate(['/login']); // Redireciona para a página de login após cadastro
+  }
+
 }
