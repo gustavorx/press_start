@@ -49,6 +49,7 @@
   background: url(../../../assets/icons/search.svg) var(--azul-menu-input)
     no-repeat 0.5rem 0.35rem;
   padding-left: 2rem;
+  color: #ffffff;
 }
 
 .input-busca::placeholder {
