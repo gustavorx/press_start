@@ -83,3 +83,13 @@ a {
   background-color: #211e3d;
   color: #fff;
 }
+
+.dropdown-busca{
+  background-color: #211e3d;
+  color: #ffffff;
+  margin: 1rem;
+}
+
+.dropdown-busca li {
+  width: 20rem;
+}
