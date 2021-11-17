@@ -16,6 +16,7 @@ export class MenuComponent {
   nomeUsuario: string = "";
   nomeJogoPesquisado: string = "";
   jogos: JogoModel[] = [];
+  tipoAdm: string = "";
 
   constructor(private router: Router, private authService: AuthService, private auth: AuthGuard) {
     this.logado = auth.isLoggedIn();
@@ -24,6 +25,7 @@ export class MenuComponent {
       axios.get(`http://localhost:8080/usuarios/${idUsuario}`)
         .then((response) => {
           this.nomeUsuario = response.data.nome;
+          this.tipoAdm = response.data.tipo;
         })
         .catch((error) => console.error(error))
     }
