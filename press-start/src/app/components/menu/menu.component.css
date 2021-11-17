@@ -49,6 +49,7 @@
   background: url(../../../assets/icons/search.svg) var(--azul-menu-input)
     no-repeat 0.5rem 0.35rem;
   padding-left: 2rem;
+  color: #ffffff;
 }
 
 .input-busca::placeholder {
@@ -82,4 +83,14 @@ a {
 .dropdown-menu-usuario{
   background-color: #211e3d;
   color: #fff;
+}
+
+.dropdown-busca{
+  background-color: #211e3d;
+  color: #ffffff;
+  margin: 1rem;
+}
+
+.dropdown-busca li {
+  width: 20rem;
 }
