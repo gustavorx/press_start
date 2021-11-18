@@ -47,14 +47,6 @@
                         <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" placeholder="Digite seu e-mail" required>
                         <button *ngIf="alterarSenhas == false" type="button" class="btn btn-outline-danger mt-4" (click)="alterarSenha()">Alterar senha</button>
                     </div>
-                    <div class="col" *ngIf="mostraTipo == true">
-                        <label class="text-white mt-2" for="tipo">Tipo de usuário</label>
-                        <select id="tipo" [(ngModel)]="tipo" name="tipo" class="form-select">
-                                    <option>Administrador master</option>
-                                    <option>Administrador</option>
-                                    <option selected>Comum</option>
-                                </select>
-                    </div>
                 </div>
 
                 <!-- Dados de endereço -->
@@ -114,10 +106,10 @@
 
         <!-- Seção de alterar senhas -->
         <div *ngIf="alterarSenhas == true">
-            <div class="mx-5 px-5">
+            <div class="box">
                 <H3 class="text-white text-center mt-4 pb-5" for="senha">Alterar Senha</H3>
                 <label class="" for="senhaAntiga"></label>
-                <div class="input-group mb-3">
+                <div class="input-group mb-2">
                     <input form="formAlterarSenha" type="{{sPsw}}" [(ngModel)]="senhaAntiga" name="senhaAntiga" class="form-control" placeholder="Senha antiga" minlength="8" maxlength="16" aria-describedby="show-psw" required>
                     <span type="button" (click)="showPsw()"><i class="input-group-text" id="show-psw" *ngIf="mostrarSenha == true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
                             <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>

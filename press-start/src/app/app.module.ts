@@ -18,11 +18,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { JogoListaComponent } from './components/jogo-lista/jogo-lista.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './components/guards/auth.guard'; 
-import { LoggedInAuthGuard } from './components/guards/loggedInAuth.guard'; 
+import { LoggedInAuthGuard } from './components/guards/loggedInAuth.guard';
+import { UsuarioComponent } from './components/usuario/usuario.component'; 
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoggedInAuthGuard] },
-  { path: 'cadastro', component: CadastroComponent },
+  { path: 'cadastro', component: CadastroComponent, canActivate: [LoggedInAuthGuard] },
   { path: 'carrinho', component: CarrinhoComponent },
   { path: 'alterar-cadastro', component: AlterarCadastroComponent, canActivate: [AuthGuard] },
   { path: 'pagamento', component: PagamentoComponent, canActivate: [AuthGuard]},
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
   { path: 'jogos/:id', component: JogoComponent },
   { path: 'jogos', component: JogoListaComponent },
   { path: 'jogos/:id', component: JogoComponent },
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent },
+  { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
@@ -46,7 +48,8 @@ const appRoutes: Routes = [
     JogoListaComponent,
     PagamentoComponent,
     BoletoComponent,
-    HomeComponent
+    HomeComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
