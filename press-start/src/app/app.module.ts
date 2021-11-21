@@ -20,13 +20,15 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './components/guards/auth.guard'; 
 import { LoggedInAuthGuard } from './components/guards/loggedInAuth.guard';
 import { UsuarioComponent } from './components/usuario/usuario.component'; 
+import { AdmJogosComponent } from './components/adm-jogos/adm-jogos.component';
+import { JogoService } from './components/services/jogo.service';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoggedInAuthGuard] },
   { path: 'cadastro', component: CadastroComponent, canActivate: [LoggedInAuthGuard] },
   { path: 'carrinho', component: CarrinhoComponent },
   { path: 'alterar-cadastro', component: AlterarCadastroComponent, canActivate: [AuthGuard] },
-  { path: 'pagamento', component: PagamentoComponent, canActivate: [AuthGuard]},
+  { path: 'pagamento', component: PagamentoComponent, canActivate: [AuthGuard] },
   { path: 'pagamento/boleto/:cpf/:nomeCompleto', component: BoletoComponent },
   { path: 'jogos', component: JogoListaComponent },
   { path: 'jogos/:id', component: JogoComponent },
@@ -34,7 +36,9 @@ const appRoutes: Routes = [
   { path: 'jogos/:id', component: JogoComponent },
   { path: '', component: HomeComponent },
   { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard] },
-];
+  { path: 'jogo/adm/:id', component: AdmJogosComponent },
+  { path: 'jogo/adm', component: AdmJogosComponent }
+;
 
 @NgModule({
   declarations: [
@@ -49,7 +53,9 @@ const appRoutes: Routes = [
     PagamentoComponent,
     BoletoComponent,
     HomeComponent,
+    AdmJogosComponent,
     UsuarioComponent
+
   ],
   imports: [
     BrowserModule,
@@ -61,7 +67,7 @@ const appRoutes: Routes = [
     CommonModule,
     ToastrModule.forRoot()
   ],
-  providers: [AuthGuard, LoggedInAuthGuard],
+  providers: [AuthGuard, LoggedInAuthGuard, JogoService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

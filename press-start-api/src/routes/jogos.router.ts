@@ -56,7 +56,7 @@ jogosRouter.post("/", async (req: Request, res: Response) => {
         const result = await collections.jogos?.insertOne(novoJogo);
 
         result
-            ? res.status(201).json(`Jogo criado com sucesso. Id: ${result.insertedId}`)
+            ? res.status(201).json({ mensagem: `Jogo criado com sucesso. Id: ${result.insertedId}`, Id: result.insertedId })
             : res.status(500).json("Falha ao criar novo jogo.");
     } catch (error) {
         res.status(400).json("Erro ao criar jogo: " + error);
@@ -69,7 +69,7 @@ jogosRouter.put("/:id", async (req: Request, res: Response) => {
 
     try {
         const response = req.body;
-        const jogoAtualizado: JogoRequest = new JogoRequest(response.nome, response.descricao, response.preco, response.desenvolvedora, response.distribuidora, response.lancamento, response.classificacao, response.imagemLink, response.youtubeId);
+        const jogoAtualizado: JogoRequest = new JogoRequest(response.nome, response.descricao, response.preco, response.desenvolvedora, response.distribuidora, response.dataLancamento, response.classificacao, response.imagemLink, response.youtubeId);
 
         const query = { _id: new ObjectId(id) };
 
