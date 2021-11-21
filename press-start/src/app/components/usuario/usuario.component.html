@@ -1,0 +1,129 @@
+<div class="caixa d-flex flex-wrap justify-content-center align-items-center">
+    <div class="caixa2 container">
+        <div class="text-white">
+            <h3>Admin center</h3>
+            <hr>
+        </div>
+
+        <!-- Pesquisar Usuário -->
+        <form #pesquisa="ngForm" (ngSubmit)="pesquisarUser(pesquisa.value)" *ngIf="mostrarUser == false" ngNativeValidate>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="text-white" for="senhaAntiga">Pesquisar Usuário</label>
+                    <input type="text" [(ngModel)]="cpf" name="cpf" class="form-control" placeholder="CPF" minlength="11" maxlength="11" required>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-outline-success form-control mt-4">Pesquisar</button>
+                </div>
+            </div>
+            <div class="alert alert-{{aviso}} text-center mt-5 " role="alert" *ngIf="alerta.length > 0">
+                {{alerta}}
+            </div>
+        </form>
+
+        <!-- Dados de cadastro -->
+        <form #cadastro="ngForm" (ngSubmit)="salvar(cadastro.value)" *ngIf="mostrarUser == true" ngNativeValidate>
+            <fieldset [disabled]="true">
+                <div class="row">
+                    <div class="col">
+                        <label class="text-white" for="nome">Nome</label>
+                        <input type="text" class="form-control" id="nome" [(ngModel)]="nome" name="nome" placeholder="Digite seu nome" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="text-white mt-2" for="cpf">CPF</label>
+                        <input type="text" class="form-control" id="cpf" [(ngModel)]="cpf" name="cpf" placeholder="Digite seu CPF" maxlength="11" pattern="[0-9]+$" required>
+
+                    </div>
+                    <div class="col">
+                        <label class="text-white mt-2" for="telefone">Telefone Celular</label>
+                        <input type="text" class="form-control" id="telefone" [(ngModel)]="telefone" name="telefone" placeholder="Apenas números com DDD" maxlength="11" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$" required>
+                    </div>
+                    <div class="col">
+                        <label class="text-white mt-2" for="dtNasc">Data De Nascimento</label>
+                        <input type="text" class="form-control" id="dtNasc" [(ngModel)]="dtNasc" name="dtNasc" placeholder="DD/MM/AAAA" type="text" maxlength="10" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
+                            required>
+
+                    </div>
+                    <div class="col">
+                        <label class="text-white mt-2" for="sexo">Sexo</label>
+                        <select id="sexo" [(ngModel)]="sexo" name="sexo" class="form-select">
+                            <option>Masculino</option>
+                            <option>Feminino</option>
+                            <option selected>Prefiro não informar</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="text-white mt-2" for="email">E-mail</label>
+                        <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" placeholder="joao.silva@exemplo.com" required>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Tipo de usuário -->
+            <div class="col">
+                <label class="text-white mt-2" for="tipo">Tipo de usuário</label>
+                <select id="tipo" [(ngModel)]="tipo" name="tipo" class="form-select" required>
+                    <option>Administrador master</option>
+                    <option>Administrador</option>
+                    <option selected>Comum</option>
+                </select>
+            </div>
+
+            <fieldset [disabled]="true">
+                <!-- Dados de endereço -->
+                <div class="row">
+                    <!-- Search input-->
+                    <div class="col-md-4">
+                        <label class="text-white mt-2" for="cep">CEP</label>
+                        <input id="cep" [(ngModel)]="cep" name="cep" placeholder="Apenas números" class="form-control" value="" type="search" maxlength="8" pattern="[0-9]+$" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="text-white mt-2" for="rua">Rua</label>
+                        <input type="text" class="form-control" id="rua" [(ngModel)]="rua" name="rua" value="{{ rua }}" readonly="readonly" required>
+
+                    </div>
+                    <div class="col">
+                        <label class="text-white mt-2" for="numero">Número</label>
+                        <input id="numero" [(ngModel)]="numero" name="numero" type="text" class="form-control" placeholder="Digite o número da sua casa" required>
+                    </div>
+                    <div class="col">
+                        <label class="text-white mt-2" for="bairro">Bairro</label>
+                        <input type="text" class="form-control" id="bairro" [(ngModel)]="bairro" name="bairro" value="{{ bairro }}" readonly="readonly">
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label class="text-white mt-2" for="cidade">Cidade</label>
+                        <input type="text" class="form-control" id="cidade" [(ngModel)]="cidade" name="cidade" value="{{ cidade }}" readonly="readonly">
+
+                    </div>
+                    <div class="col">
+                        <label class="text-white mt-2" for="estado">Estado</label>
+                        <input type="text" class="form-control" id="estado" [(ngModel)]="estado" name="estado" value="{{ estado }}" readonly="readonly">
+                    </div>
+                    <div class="col">
+                        <label class="text-white mt-2" for="complemento">Complemento</label>
+                        <input [(ngModel)]="complemento" name="complemento" type="text" class="form-control" id="complemento">
+                    </div>
+                </div>
+
+                <div class="alert alert-{{aviso}} text-center mt-5 " role="alert" *ngIf="alerta.length > 0">
+                    {{alerta}}
+                </div>
+            </fieldset>
+            <div class="d-flex justify-content-end py-4">
+                <button class="btn btn-outline-info" type="submit">Salvar</button>
+                <span class="px-2"></span>
+                <button routerLink="/" class="btn btn-outline-light" formnovalidate>Voltar</button>
+            </div>
+        </form>
+    </div>
+</div>
