@@ -17,9 +17,9 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { JogoListaComponent } from './components/jogo-lista/jogo-lista.component';
 import { HomeComponent } from './components/home/home.component';
-import { AuthGuard } from './components/guards/auth.guard'; 
+import { AuthGuard } from './components/guards/auth.guard';
 import { LoggedInAuthGuard } from './components/guards/loggedInAuth.guard';
-import { UsuarioComponent } from './components/usuario/usuario.component'; 
+import { UsuarioComponent } from './components/usuario/usuario.component';
 import { AdmJogosComponent } from './components/adm-jogos/adm-jogos.component';
 import { JogoService } from './components/services/jogo.service';
 
@@ -38,7 +38,7 @@ const appRoutes: Routes = [
   { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard] },
   { path: 'jogo/adm/:id', component: AdmJogosComponent },
   { path: 'jogo/adm', component: AdmJogosComponent }
-;
+];
 
 @NgModule({
   declarations: [
