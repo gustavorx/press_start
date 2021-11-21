@@ -1,0 +1,78 @@
+<section class="background-section">
+    <div class="container pb-3">
+        <div class="mb-3 fs-1">
+            <div class="cards-jogos-group" *ngIf="Jogo != undefined; else elseBlock">Editando: {{Jogo?.nome}}</div>
+            <ng-template #elseBlock>
+                <div class="cards-jogos-group">Adicionar jogo</div>
+            </ng-template>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input id="floatingNome" type="text" class="form-control" placeholder="Nome" [(ngModel)]="nome">
+            <label for="floatingNome">Nome</label>
+        </div>
+
+        <div class="form-floating mb-3 d-flex">
+            <input id="floatingLinkImagem" type="text" class="form-control rounded-0 rounded-start"
+                [(ngModel)]="imagemLink" placeholder="Link da imagem" aria-describedby="buttonVerImagem">
+            <label for="floatingLinkImagem form-label">URL da imagem</label>
+            <button type="button" class="btn btn-outline-primary rounded-0 rounded-end imagem-button"
+                id="buttonVerImagem" (click)="abrirImagem()">Abrir
+                imagem</button>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input id="descricao" type="text" class="form-control" placeholder="Descriçao" [(ngModel)]="descricao">
+            <label for="descricao">Descriçao</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input id="desenvolvedor" type="text" class="form-control" [(ngModel)]="desenvolvedora"
+                placeholder="Desenvolvedora" placeholder="Desenvolvedora">
+            <label for="desenvolvedor">Desenvolvedor</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input name="distribuidora" type="text" class="form-control" [(ngModel)]="distribuidora"
+                placeholder="Distribuidora">
+            <label for="distribuidora" class="form-label">Distribuidora</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input id="preco" type="text" class="form-control" [(ngModel)]="precoFormatado" placeholder="Preço">
+            <label for="preco" class="form-label">Preço</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input id="lancamento" type="text" class="form-control" [(ngModel)]="dataLancamentoFormatado"
+                placeholder="Preço">
+            <label for="lancamento" class="form-label">Lançamento</label>
+        </div>
+
+        <div class="form-floating mb-3 d-flex">
+            <input id="floatingTrailer" type="text" class="form-control rounded-0 rounded-start" [(ngModel)]="youtubeId"
+                placeholder="URL do trailer no youtube" aria-describedby="trailerUrlYoutube">
+            <label for="floatingTrailer form-label">URL do trailer no youtube</label>
+            <button type="button" class="btn btn-outline-primary rounded-0 rounded-end url-youtube-button"
+                id="trailerUrlYoutube" (click)="abrirTrailer()">Abrir
+                trailer</button>
+        </div>
+
+        <div class="form-floating mb-3">
+            <select id="classificacao" class="form-select" [(ngModel)]="classificacao">
+                <option>3</option>
+                <option>7</option>
+                <option>12</option>
+                <option>16</option>
+                <option selected>18</option>
+            </select>
+            <label for="classificacao">Classificaçao:</label>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <button *ngIf="this.Id != undefined" type="button" class="btn btn-outline-danger"
+                routerLink="/jogos/{{this.Id}}">Cancelar</button>
+            <button type="button" class="btn btn-outline-primary ms-3" (click)="salvar()">Salvar</button>
+        </div>
+    </div>
+</section>

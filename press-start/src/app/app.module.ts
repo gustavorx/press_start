@@ -17,21 +17,25 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { JogoListaComponent } from './components/jogo-lista/jogo-lista.component';
 import { HomeComponent } from './components/home/home.component';
-import { AuthGuard } from './components/guards/auth.guard'; 
-import { LoggedInAuthGuard } from './components/guards/loggedInAuth.guard'; 
+import { AuthGuard } from './components/guards/auth.guard';
+import { LoggedInAuthGuard } from './components/guards/loggedInAuth.guard';
+import { AdmJogosComponent } from './components/adm-jogos/adm-jogos.component';
+import { JogoService } from './components/services/jogo.service';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoggedInAuthGuard] },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'carrinho', component: CarrinhoComponent },
   { path: 'alterar-cadastro', component: AlterarCadastroComponent, canActivate: [AuthGuard] },
-  { path: 'pagamento', component: PagamentoComponent, canActivate: [AuthGuard]},
+  { path: 'pagamento', component: PagamentoComponent, canActivate: [AuthGuard] },
   { path: 'pagamento/boleto/:cpf/:nomeCompleto', component: BoletoComponent },
   { path: 'jogos', component: JogoListaComponent },
   { path: 'jogos/:id', component: JogoComponent },
   { path: 'jogos', component: JogoListaComponent },
   { path: 'jogos/:id', component: JogoComponent },
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent },
+  { path: 'jogo/adm/:id', component: AdmJogosComponent },
+  { path: 'jogo/adm', component: AdmJogosComponent }
 ];
 
 @NgModule({
@@ -46,7 +50,8 @@ const appRoutes: Routes = [
     JogoListaComponent,
     PagamentoComponent,
     BoletoComponent,
-    HomeComponent
+    HomeComponent,
+    AdmJogosComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,7 @@ const appRoutes: Routes = [
     CommonModule,
     ToastrModule.forRoot()
   ],
-  providers: [AuthGuard, LoggedInAuthGuard],
+  providers: [AuthGuard, LoggedInAuthGuard, JogoService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

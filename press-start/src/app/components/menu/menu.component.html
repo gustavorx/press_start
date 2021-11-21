@@ -26,7 +26,7 @@
             <li><a class="dropdown-item" routerLink="/alterar-cadastro">Meus dados</a></li>
             <li><a class="dropdown-item" routerLink="/carrinho">Carrinho</a></li>
             <li *ngIf="tipoAdm == 'Administrador master'"><a class="dropdown-item" routerLink="/">Usuários</a></li>
-            <li *ngIf="tipoAdm != 'Comum'"><a class="dropdown-item" routerLink="/">Jogos</a></li>
+            <li *ngIf="tipoAdm != 'Comum'"><a class="dropdown-item" routerLink="/jogo/adm">Adicionar jogo</a></li>
             <li><a class="dropdown-item" routerLink="/" (click)="logout()">Logout</a></li>
         </ul>
     </ul>

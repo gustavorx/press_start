@@ -15,6 +15,7 @@ export class JogoComponent implements OnInit {
   Id: string = "";
   carrinhoSession: string = "carrinho";
   Jogo?: JogoModel;
+  adm: boolean = false;
 
   constructor(private toastr: ToastrService, private route: ActivatedRoute) { }
 
@@ -53,6 +54,15 @@ export class JogoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const idUsuario: string = localStorage.getItem("token") ?? "";
+    if (idUsuario != "") {
+      axios.get(`http://localhost:8080/usuarios/${idUsuario}`)
+        .then((response) => {
+          response.data.tipo != "Comum" ? this.adm = true : this.adm = false;;
+        })
+        .catch((error) => console.error(error))
+    }
+
     this.Id = this.route.snapshot.paramMap.get('id') ?? "";
 
     axios.get(`http://localhost:8080/jogos/${this.Id}`)
@@ -63,5 +73,15 @@ export class JogoComponent implements OnInit {
       .catch((error: string) => {
         throw new Error("Erro ao buscar jogo " + this.Id + " => " + error)
       })
+  }
+
+  async deletarJogo() {
+    const response = await axios.delete(`http://localhost:8080/jogos/${this.Id}`);
+
+    if (response.status == 202) {
+      window.location.href = "/jogos";
+    } else {
+      this.toastr.error('Nao foi possível deletar o jogo.');
+    }
   }
 }
