@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { JogoModel } from '../Models/jogo.model';
 import { JogoService } from '../services/jogo.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { AlterarCadastroComponent } from '../alterar-cadastro/alterar-cadastro.component';
 import axios from 'axios';
 import { ToastrService } from 'ngx-toastr';
 
@@ -30,32 +29,48 @@ export class AdmJogosComponent implements OnInit {
   dataLancamentoFormatado: string = "";
   precoFormatado: string = "";
 
-  constructor(private jogoService: JogoService, private route: ActivatedRoute, private toastr: ToastrService) {
+  IdUsuario: string = "";
+
+  constructor(private jogoService: JogoService, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private route: Router) {
     this.jogoSvc = jogoService;
   }
 
-  ngOnInit(): void {
-    this.Id = this.route.snapshot.params.id;
+  async ngOnInit(): Promise<void> {
+    this.IdUsuario = localStorage.getItem('token') ?? "";
 
-    if (this.Id) {
-      this.jogoSvc.buscarJogo(this.Id).then((jogos) => {
-        this.Jogo = jogos;
+    if (this.IdUsuario != "") {
+      let url: string = `http://localhost:8080/usuarios/${this.IdUsuario}`;
 
-        this.nome = this.Jogo?.nome ?? "";;
-        this.descricao = this.Jogo?.descricao ?? "";;
-        this.preco = this.Jogo?.preco;
-        this.precoFormatado = this.Jogo?.preco?.toLocaleString('pt-br', {
-          style: 'currency',
-          currency: 'BRL'
-        }) ?? "";
-        this.desenvolvedora = this.Jogo?.desenvolvedora ?? "";;
-        this.distribuidora = this.Jogo?.distribuidora ?? "";
-        this.dataLancamento = this.Jogo?.dataLancamento;
-        this.dataLancamentoFormatado = new Date(this.Jogo?.dataLancamento.toString() ?? "").toLocaleDateString('pt-BR', { timeZone: 'UTC' });
-        this.classificacao = this.Jogo?.classificacao ?? 18;;
-        this.imagemLink = this.Jogo?.imagemLink ?? "";;
-        this.youtubeId = this.Jogo?.youtubeId != null ? `https://www.youtube.com/watch?v=${this.Jogo?.youtubeId}` : "";
-      });
+      const responseUsuario = await axios.get(url);
+
+      if (responseUsuario.status == 200 && responseUsuario.data.tipo != "Comum") {
+        this.Id = this.activatedRoute.snapshot.params.id;
+
+        if (this.Id) {
+          this.jogoSvc.buscarJogo(this.Id).then((jogos) => {
+            this.Jogo = jogos;
+
+            this.nome = this.Jogo?.nome ?? "";;
+            this.descricao = this.Jogo?.descricao ?? "";;
+            this.preco = this.Jogo?.preco;
+            this.precoFormatado = this.Jogo?.preco?.toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL'
+            }) ?? "";
+            this.desenvolvedora = this.Jogo?.desenvolvedora ?? "";;
+            this.distribuidora = this.Jogo?.distribuidora ?? "";
+            this.dataLancamento = this.Jogo?.dataLancamento;
+            this.dataLancamentoFormatado = new Date(this.Jogo?.dataLancamento.toString() ?? "").toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+            this.classificacao = this.Jogo?.classificacao ?? 18;;
+            this.imagemLink = this.Jogo?.imagemLink ?? "";;
+            this.youtubeId = this.Jogo?.youtubeId != null ? `https://www.youtube.com/watch?v=${this.Jogo?.youtubeId}` : "";
+          });
+        }
+      } else {
+        this.route.navigate([""]);
+      }
+    } else {
+      this.route.navigate([""]);
     }
   }
 

@@ -36,8 +36,8 @@ const appRoutes: Routes = [
   { path: 'jogos/:id', component: JogoComponent },
   { path: '', component: HomeComponent },
   { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard] },
-  { path: 'jogo/adm/:id', component: AdmJogosComponent },
-  { path: 'jogo/adm', component: AdmJogosComponent }
+  { path: 'jogo/adm/:id', component: AdmJogosComponent, canActivate: [AuthGuard] },
+  { path: 'jogo/adm', component: AdmJogosComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

@@ -51,7 +51,7 @@ jogosRouter.get("/find/:nome", async (req: Request, res: Response) => {
 jogosRouter.post("/", async (req: Request, res: Response) => {
     try {
         const response = req.body;
-        const novoJogo: JogoRequest = new JogoRequest(response.nome, response.descricao, response.preco, response.desenvolvedora, response.distribuidora, response.lancamento, response.classificacao, response.imagemLink, response.youtubeId);
+        const novoJogo: JogoRequest = new JogoRequest(response.nome, response.descricao, response.preco, response.desenvolvedora, response.distribuidora, response.dataLancamento, response.classificacao, response.imagemLink, response.youtubeId);
 
         const result = await collections.jogos?.insertOne(novoJogo);
 
