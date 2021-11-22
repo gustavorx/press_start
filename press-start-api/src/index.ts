@@ -5,6 +5,7 @@ import { connectToDatabase } from "./services/database.service"
 import { jogosRouter } from "./routes/jogos.router";
 import { usuariosRouter } from "./routes/usuarios.router";
 import { loginRouter } from "./routes/login.router";
+import { pedidosRouter } from './routes/pedidos.router';
 
 const app = express();
 const porta = 8080;
@@ -35,6 +36,7 @@ connectToDatabase()
     .then(() => {
         app.use("/jogos", jogosRouter);
         app.use("/usuarios", usuariosRouter);
+        app.use("/pedidos", pedidosRouter);
         app.use("/login", loginRouter);
 
         app.listen(porta, () => {
