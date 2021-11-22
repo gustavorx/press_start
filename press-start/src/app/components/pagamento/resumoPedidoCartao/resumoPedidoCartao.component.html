@@ -21,7 +21,7 @@
     </div>
     <div class="row" style="--bs-gutter-x: 0rem">
         <label class="text-white mt-2" for="parcelas">Parcelas</label><br>
-        <select [(ngModel)]="parcelaSelecionada" name="parcelas" style="width: 50px;">
+        <select [(ngModel)]="parcelaSelecionada" name="parcelas" style="width: 50px; margin-left: 3%; height: 1.5rem;" class="form-select">
             <option style="width: 25rem;" *ngFor="let parcela of parcelas" [value]="parcela">{{parcela}}</option>
         </select>
     </div>

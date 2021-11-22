@@ -38,7 +38,7 @@
                             <div class="col-7">
                                 <div class="row m-1">
                                     <label class="text-white" for="numeroCartao">Número do cartão</label>
-                                    <input type="text" class="form-control" id="numeroCartao" [(ngModel)]="numeroCartao" name="numeroCartao"  maxlength="16" pattern="^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$"
+                                    <input type="text" class="form-control" id="numeroCartao" [(ngModel)]="numeroCartao" name="numeroCartao"  maxlength="19" pattern="^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$"
                                     placeholder="0000 0000 0000 0000" required>
                                     <p class="erroFraseCurta" *ngIf="erroNumeroCartao">Preencha o Número do cartão</p>
                                 </div>
@@ -75,7 +75,7 @@
                                     </div>
                                     <div class="col m-1">
                                         <label class="text-white mt-2" for="dataDeNascimento">Data De Nascimento</label>
-                                        <input type="text" class="form-control" id="nascimento" [(ngModel)]="nascimento" name="nascimento" placeholder="DD/MM/AAAA" type="text" maxlength="8" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
+                                        <input type="text" class="form-control" id="nascimento" [(ngModel)]="nascimento" name="nascimento" placeholder="DD/MM/AAAA" type="text" maxlength="10" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
                                         required>
                                         <p class="erroFraseLonga" *ngIf="erroNascimento">Preencha a data de nascimento</p>            
                                     </div>
@@ -182,7 +182,6 @@
             <!-- CRÉDITO -> PAGAMENTO PRE APROVADO -->
             <div class="container" [hidden]="!creditoFinalizado">
                 <div class="text-white">
-                    <p><span>⬅</span><span class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</span></p>
                     <h2>Pagamento pré aprovado✔️</h2>
                     <hr>                    
                 </div>
@@ -191,12 +190,15 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="row text-white" style="--bs-gutter-x: 0rem">
-                                    <p class="creditoAprovado1">Seu pagamento está sendo processado por sua operadora de cartão de crédito.</p><br>
+                                    <p class="creditoAprovado1">Seu pagamento está sendo processado</p><br>
                                     <p class="creditoAprovado2">Seu jogo logo estará disponível!</p> 
                                 </div>
-                            </div>
-                            <div class="col-4">
-                                <app-resumoPedido></app-resumoPedido>
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    <div class="col-11">
+                                        <button class="btn btn-lg btn-outline-success btn-concluir" routerLink="/">Voltar ao início</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>

@@ -44,7 +44,7 @@
                     <div class="row"><br></div>
                     <div class="row">
                         <div class="col-3"></div>
-                        <div class="col-9"><button class="btn btn-lg btn-outline-success btn-jogo" (click)="more = !more">{{ more ? 'Mostrar Menos':'Mostrar Mais' }}</button></div>
+                        <div class="col-9"><button *ngIf="showMore" class="btn btn-lg btn-outline-success btn-jogo" (click)="more = !more">{{ more ? 'Mostrar Menos':'Mostrar Mais' }}</button></div>
                     </div>                    
                     <section *ngIf="!pedidos">
                         <div class="whiteH1"> Você ainda não possui nenhum pedido </div>

@@ -85,7 +85,8 @@ export class PagamentoComponent {
 
   concluirPix(){
     this.comprar();
-    this.router.navigate(['/']);
+    this.esconderPix = true;
+    this.creditoFinalizado = true;
   }
 
   gerarCodigoPix(){
@@ -101,12 +102,14 @@ export class PagamentoComponent {
     this.qrCode = part1 + "brgovbcbpix" + part2 + "-" + part3 + "-" + part4 + "-" + part5 + part6 + "PRES_START6009SaoPauloBR" + part7 + "mpqrinter" + part8;
   }
 
-  copiarCodigo(){
+  copiarCodigo(showToast = true){
     var copyText: string = this.qrCode;
   
     navigator.clipboard.writeText(copyText);
-  
-    alert("Copied the text: " + copyText);
+
+    if (showToast) {
+      this.toastr.success('Código copiado: ' + copyText);
+    }
   }
 
   stringAleatoria(length: number, chars: string | any[]) {
