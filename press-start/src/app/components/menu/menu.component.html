@@ -6,11 +6,16 @@
         <li><a routerLink="/jogos">Jogos</a></li>
     </ul>
     <ul class="menu-busca">
-        <li><input class="input-busca" type="text" placeholder="O que você quer jogar hoje?"></li>
+        <li>
+            <input class="dropdown-toggle input-busca" (keyup)="buscarJogosPeloNome()" type="text" placeholder="O que você quer jogar hoje?" id="dropdownMenuSearch" data-bs-toggle="dropdown" [(ngModel)]="nomeJogoPesquisado">
+            <ul id="list" class="dropdown-menu dropdown-busca" aria-labelledby="dropdownMenuSearch">
+                <li *ngFor="let jogo of jogos"><a class="dropdown-item" href="/jogos/{{jogo._id}}">{{jogo.nome}}</a>
+                </li>
+            </ul>
+        </li>
     </ul>
     <ul class="menu-usuario dropdown" *ngIf="logado">
-        <button class="dropdown-toggle dropdown-usuario" type="button" id="dropdownUsuario" data-bs-toggle="dropdown"
-            aria-expanded="false">
+        <button class="dropdown-toggle dropdown-usuario" type="button" id="dropdownUsuario" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="../../../assets/avatar/cyberpunk-avatar.jpg" alt="avatar" class="avatar">{{nomeUsuario}}
         </button>
 
@@ -18,10 +23,15 @@
             <li><a class="dropdown-item" routerLink="/alterar-cadastro">Meus dados</a></li>
             <li><a class="dropdown-item" routerLink="/carrinho">Carrinho</a></li>
             <li><a class="dropdown-item" routerLink="/pedidos">Meus Pedidos</a></li>
+            <li *ngIf="tipoAdm == 'Administrador master'"><a class="dropdown-item" routerLink="/usuario">Usuários</a>
+            </li>
+            <li *ngIf="tipoAdm != 'Comum'"><a class="dropdown-item" routerLink="/jogo/adm">Adicionar jogo</a></li>
             <li><a class="dropdown-item" routerLink="/" (click)="logout()">Logout</a></li>
         </ul>
     </ul>
-    <ul *ngIf="!logado">
-        <li><a routerLink="/login">Login</a></li>
+    <ul class="mr-5" *ngIf="!logado">
+        <a routerLink="/login">Login</a>
+        <a class="mx-3" routerLink="/cadastro">Inscrever-se</a>
+        <a routerLink="/carrinho">Carrinho</a>
     </ul>
 </header>

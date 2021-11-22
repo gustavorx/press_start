@@ -19,23 +19,29 @@ import { JogoListaComponent } from './components/jogo-lista/jogo-lista.component
 import { HomeComponent } from './components/home/home.component';
 import { ResumoPedidoComponent } from './components/pagamento/resumoPedido/resumoPedido.component';
 import { PedidosComponent } from './components/pedidos/pedidos.component';
-import { AuthGuard } from './components/guards/auth.guard'; 
-import { LoggedInAuthGuard } from './components/guards/loggedInAuth.guard'; 
+import { LoggedInAuthGuard } from './components/guards/loggedInAuth.guard';
+import { AuthGuard } from './components/guards/auth.guard';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { AdmJogosComponent } from './components/adm-jogos/adm-jogos.component';
+import { JogoService } from './components/services/jogo.service';
 import { ResumoPedidoComponentCartao } from './components/pagamento/resumoPedidoCartao/resumoPedidoCartao.component';
+
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoggedInAuthGuard] },
-  { path: 'cadastro', component: CadastroComponent },
+  { path: 'cadastro', component: CadastroComponent, canActivate: [LoggedInAuthGuard] },
   { path: 'carrinho', component: CarrinhoComponent },
   { path: 'alterar-cadastro', component: AlterarCadastroComponent, canActivate: [AuthGuard] },
-  { path: 'pagamento', component: PagamentoComponent, canActivate: [AuthGuard]},
+  { path: 'pagamento', component: PagamentoComponent, canActivate: [AuthGuard] },
   { path: 'pagamento/boleto/:cpf/:nomeCompleto', component: BoletoComponent },
   { path: 'jogos', component: JogoListaComponent },
   { path: 'jogos/:id', component: JogoComponent },
   { path: 'jogos', component: JogoListaComponent },
   { path: 'jogos/:id', component: JogoComponent },
-  { path: 'home', component: HomeComponent },
   { path: '', component: HomeComponent },
+  { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard] },
+  { path: 'jogo/adm/:id', component: AdmJogosComponent, canActivate: [AuthGuard] },
+  { path: 'jogo/adm', component: AdmJogosComponent, canActivate: [AuthGuard] },
   { path: 'pedidos', component: PedidosComponent }
 ];
 
@@ -54,7 +60,9 @@ const appRoutes: Routes = [
     ResumoPedidoComponent,
     PedidosComponent,
     HomeComponent,
-    ResumoPedidoComponentCartao
+    ResumoPedidoComponentCartao,
+    AdmJogosComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +74,7 @@ const appRoutes: Routes = [
     CommonModule,
     ToastrModule.forRoot()
   ],
-  providers: [AuthGuard, LoggedInAuthGuard],
+  providers: [AuthGuard, LoggedInAuthGuard, JogoService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

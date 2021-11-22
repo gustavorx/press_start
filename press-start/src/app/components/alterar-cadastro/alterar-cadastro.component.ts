@@ -31,9 +31,6 @@ export class AlterarCadastroComponent implements OnInit {
         this.email = res.email;
         this.senhaOg = res.senha;
         this.tipo = res.tipo;
-        if (this.tipo == "Administrador master") {
-          this.mostraTipo = true;
-        }
         this.cep = res.cep;
         this.numero = res.numero;
         this.rua = res.rua;
@@ -55,7 +52,6 @@ export class AlterarCadastroComponent implements OnInit {
 
   //Tipo de usuario
   tipo: string = "";
-  mostraTipo = false;
 
   //Alterar senha
   senhaOg: string = "";

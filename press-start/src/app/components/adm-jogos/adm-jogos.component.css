@@ -1,0 +1,17 @@
+.background-section {
+    height: auto;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-image: linear-gradient(-60deg, #080427 30%, #211e3d 30%);
+    color: #FFFFFF;
+}
+
+
+input, label{
+    color: #000000;
+}
+
+.imagem-button, .url-youtube-button {
+    height: calc(3.5rem + 2px);
+}

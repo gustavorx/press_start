@@ -1,5 +1,5 @@
 .jogo-section {
-        height: 100%;
+        height: 90%;
         width: 100%;
         position: relative;
         background-size: cover;
@@ -31,4 +31,8 @@
 
 .jogo-lancamento {
         padding-left: 5rem;
+}
+
+.btn-adm-jogo{
+        margin-left: 1rem;
 }
