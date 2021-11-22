@@ -1,44 +1,38 @@
-<html>
+<div class="d-flex flex-wrap justify-content-center align-items-center">
+  <div class="container">
+    <form action="" ngNativeValidate>
+      <div class="text-white">
+        <h3>Carrinho</h3>
+        <hr>
+      </div>
+      <fieldset id="desabilitar">
+        <table class="table table-borderless" style="color: white;">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Nome</th>
+              <th scope="col">Valor</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let produto of getProdutos()">
+              <td style="text-align: center;">
+                <img src="{{produto.imagemLink}}" alt="" style="width: 200px;">
+              </td>
+              <td>{{produto.nome}}</td>
+              <td>{{produto.preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</td>
+              <td><span style="cursor: pointer; background-color: #920000; padding: 5px 10px; border-radius: 5px;" (click)="removerProduto(produto.id)">Remover</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </fieldset>
+      <div class="d-flex justify-content-end py-5">
+        <a routerLink="/jogos" class="btn btn-lg btn-info" type="submit">Continuar comprando</a>
+        <span class="px-2"></span>
+        <a routerLink="/pagamento" class="btn btn-lg btn-light" formnovalidate>Prosseguir para pagamento</a>
+      </div>
+    </form>
 
-<body>
-  <div class="d-flex flex-wrap justify-content-center align-items-center">
-    <div class="container">
-      <form action="" ngNativeValidate>
-        <div class="text-white">
-          <h3>Carrinho</h3>
-          <hr>
-        </div>
-        <fieldset id="desabilitar">
-          <table class="table table-borderless" style="color: white;">
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col">Nome</th>
-                <th scope="col">Valor</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let produto of getProdutos()">
-                <td style="text-align: center;">
-                  <img src="{{produto.imagemLink}}" alt="" style="width: 200px;">
-                </td>
-                <td>{{produto.nome}}</td>
-                <td>{{produto.preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</td>
-                <td><span style="cursor: pointer; background-color: #920000; padding: 5px 10px; border-radius: 5px;" (click)="removerProduto(produto.id)">Remover</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </fieldset>
-        <div class="d-flex justify-content-end py-5">
-          <a routerLink="/jogos" class="btn btn-lg btn-info" type="submit">Continuar comprando</a>
-          <span class="px-2"></span>
-          <a routerLink="/pagamento" class="btn btn-lg btn-light" formnovalidate>Prosseguir para pagamento</a>
-        </div>
-      </form>
-
-    </div>
   </div>
-</body>
-
-</html>
+</div>
