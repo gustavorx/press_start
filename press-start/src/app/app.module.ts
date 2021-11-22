@@ -21,6 +21,7 @@ import { ResumoPedidoComponent } from './components/pagamento/resumoPedido/resum
 import { PedidosComponent } from './components/pedidos/pedidos.component';
 import { AuthGuard } from './components/guards/auth.guard'; 
 import { LoggedInAuthGuard } from './components/guards/loggedInAuth.guard'; 
+import { ResumoPedidoComponentCartao } from './components/pagamento/resumoPedidoCartao/resumoPedidoCartao.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoggedInAuthGuard] },
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
     BoletoComponent,
     ResumoPedidoComponent,
     PedidosComponent,
-    HomeComponent
+    HomeComponent,
+    ResumoPedidoComponentCartao
   ],
   imports: [
     BrowserModule,

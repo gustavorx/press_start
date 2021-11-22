@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-pagamento',
@@ -9,7 +11,7 @@ import { Component } from '@angular/core';
 
 export class PagamentoComponent {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toastr: ToastrService, private router: Router) { }
    
   esconderDescricao = false;
   esconderCartao = true;
@@ -34,8 +36,11 @@ export class PagamentoComponent {
   erroTelefone = false;
   erroNascimento = false;
 
-  parcelas: number[] = [1, 2, 3];
-  parcelaSelecionada: number = 1;
+  boletoNomeValido = false;
+  boletoCpfValido = false;
+
+  erroBoletoNome = false;
+  erroBoletoCpf = false;
 
   numeroCartao: string = "";
   dataValidade: string = "";
@@ -45,6 +50,9 @@ export class PagamentoComponent {
   telefone: string = "";
   nascimento: string = "";
   qrCode: string = "";
+
+  boletoNome: string = "";
+  boletoCpf: string = "";
 
 
   mostrarCartao(){
@@ -64,7 +72,6 @@ export class PagamentoComponent {
     this.esconderMetodos = true;
     this.esconderDescricao = true;
     this.gerarCodigoPix();
-    this.comprar();
   }
 
   alterarPagameto(){
@@ -74,6 +81,11 @@ export class PagamentoComponent {
     this.esconderMetodos = false;
     this.esconderDescricao = false;
     this.creditoFinalizado = false;
+  }
+
+  concluirPix(){
+    this.comprar();
+    this.router.navigate(['/']);
   }
 
   gerarCodigoPix(){
@@ -101,24 +113,6 @@ export class PagamentoComponent {
     var result = '';
     for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
     return result;
-  }
-
-  finalizarPagamentoCredito(){
-    this.validaNumeroCartao();
-    this.validaCpf();
-    this.validaDataValidade();
-    this.validaCvv();
-    this.validaNome();
-    this.validaTelefone();
-    this.validaNascimento();
-
-    if(this.cpfValido && this.numeroCartaoValido 
-      && this.dataValidadeValida && this.cvvValido 
-      && this.nomeValido && this.telefoneValido 
-      && this.nascimentoValido){
-        this.comprar();
-      this.creditoFinalizado = true;
-    }    
   }
 
   validaNumeroCartao(){
@@ -177,6 +171,22 @@ export class PagamentoComponent {
     }
   }
 
+  validaBoletoNome(){
+    if(this.boletoNome.length <= 0){
+      this.erroBoletoNome = true;
+    } else {
+      this.boletoNomeValido = true;
+    }
+  }
+
+  validaBoletoCpf(){
+    if(this.boletoCpf.length <= 0){
+      this.erroBoletoCpf = true;
+    } else {
+      this.boletoCpfValido = true;
+    }
+  }
+
   getProdutos() {
     var carrinho = localStorage.getItem('carrinho');
 
@@ -203,12 +213,6 @@ export class PagamentoComponent {
 
   }
 
-  getValorParcelado(){
-    let total = this.getValorTotal();
-    let parcelado = total / this.parcelaSelecionada;
-    return parcelado;
-  }
-
   recebeCarrinho(){
     var carrinho = localStorage.getItem('carrinho');
 
@@ -223,7 +227,35 @@ export class PagamentoComponent {
     return carrinhoArr;
   }   
 
-  comprar() {
+  finalizarPagamentoCredito(){
+    this.validaNumeroCartao();
+    this.validaCpf();
+    this.validaDataValidade();
+    this.validaCvv();
+    this.validaNome();
+    this.validaTelefone();
+    this.validaNascimento();
+
+    if(this.cpfValido && this.numeroCartaoValido 
+      && this.dataValidadeValida && this.cvvValido 
+      && this.nomeValido && this.telefoneValido 
+      && this.nascimentoValido){
+        this.comprar();
+      this.creditoFinalizado = true;
+    }    
+  }
+
+  finalizarPagamentoBoleto(){
+    this.validaBoletoNome();
+    this.validaBoletoCpf();
+
+    if(this.boletoNomeValido && this.boletoCpfValido){
+      this.comprar();
+      this.router.navigate([`/pagamento/boleto/${this.boletoCpf}/${this.boletoNome}`]);
+    }
+  }
+
+  comprar(showToast = true) {
     var carrinhoArr = this.recebeCarrinho();
     console.log(carrinhoArr);
     let today = new Date().toLocaleDateString();
@@ -239,7 +271,34 @@ export class PagamentoComponent {
       this.http.post("http://localhost:8080/Pedidos", pedidoData, { responseType: 'text' }).subscribe();
     });
 
-    // this.route.navigate(['/login']); // Redireciona para a página de login após cadastro
+    carrinhoArr.forEach((jogo: { id: string; }) => {
+      this.removerProduto(jogo.id);      
+    });
+
+    if (showToast) {
+      this.toastr.success('Concluído!');
+    }
+  }
+
+  removerProduto(id: string) {
+    var carrinho = localStorage.getItem('carrinho');
+
+    var carrinhoArr = [];
+
+    if (carrinho) {
+      carrinhoArr = JSON.parse(carrinho);
+    } else {
+      carrinhoArr = [];
+    }
+
+    var novoCarrinho: { id: string; }[] = [];
+    carrinhoArr.forEach((jogo: { id: string; }) => {
+      if (jogo.id != id) {
+        novoCarrinho.push(jogo)
+      }
+    });
+
+    localStorage.setItem('carrinho', JSON.stringify(novoCarrinho)); 
   }
 
 }

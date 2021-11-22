@@ -1,13 +1,13 @@
 
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-resumoPedido',
-  templateUrl: './resumoPedido.component.html',
-  styleUrls: ['./resumoPedido.component.css']
+  selector: 'app-resumoPedidoCartao',
+  templateUrl: './resumoPedidoCartao.component.html',
+  styleUrls: ['./resumoPedidoCartao.component.css']
 })
 
-export class ResumoPedidoComponent {
+export class ResumoPedidoComponentCartao {
   
   parcelas: number[] = [1, 2, 3];
   

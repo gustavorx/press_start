@@ -19,7 +19,13 @@
         <label class="text-white">Total</label>
         <br>
     </div>
+    <div class="row" style="--bs-gutter-x: 0rem">
+        <label class="text-white mt-2" for="parcelas">Parcelas</label><br>
+        <select [(ngModel)]="parcelaSelecionada" name="parcelas" style="width: 50px;">
+            <option style="width: 25rem;" *ngFor="let parcela of parcelas" [value]="parcela">{{parcela}}</option>
+        </select>
+    </div>
     <div class="row grey" style="--bs-gutter-x: 0rem">
-        <label class="text-white">{{getValorParcelado().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</label>
+        <label class="text-white">{{parcelaSelecionada}} x de {{getValorParcelado().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}} sem juros</label>
     </div>
 </div>

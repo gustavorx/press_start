@@ -65,13 +65,7 @@
                                         <label class="text-white mt-2" for="cpf">CPF</label>
                                     <input id="cpf" [(ngModel)]="cpf" name="cpf" placeholder="Apenas números" class="form-control" value="" maxlength="11" pattern="[0-9]+$" required>
                                     <p class="erroFraseCurta" *ngIf="erroCpf">Preencha o Número do CPF</p>
-                                    </div>
-                                    <div class="col m-1">
-                                        <label class="text-white mt-2" for="cpf">Parcelas</label><br>
-                                        <select [(ngModel)]="parcelaSelecionada" name="parcelas">
-                                            <option style="width: 25rem;" *ngFor="let parcela of parcelas" [value]="parcela">{{parcela}}</option>
-                                        </select>
-                                    </div>                                    
+                                    </div>                                  
                                 </div>
                                 <div class="row">
                                     <div class="col m-1">
@@ -92,7 +86,7 @@
                             </div>
                             <div class="col-1"></div>
                             <div class="col-4">
-                                <app-resumoPedido></app-resumoPedido>
+                                <app-resumoPedidoCartao></app-resumoPedidoCartao>
                                 <div class="row"><br></div>
                                 <div class="d-flex flex-wrap justify-content-center align-items-center">
                                     <button type="submit" class="btn btn-lg btn-outline-success btn-compra" (click)="finalizarPagamentoCredito()"> Finalizar Compra 🔒</button>
@@ -115,14 +109,17 @@
                             <div class="col-8">
                                 <div class="row m-1">
                                     <label class="text-white" for="nome">Nome Completo</label>
-                                    <input type="text" class="form-control" id="nomeCompleto" [(ngModel)]="nomeCompleto" name="nomeCompleto" placeholder="Digite seu nome" required>
+                                    <input type="text" class="form-control" id="boletoNome" [(ngModel)]="boletoNome" name="boletoNome" placeholder="Digite seu nome" required>
+                                    <p class="erroFraseCurta" *ngIf="erroBoletoNome">Preencha seu nome completo</p>
                                 </div>
                                 <div class="row m-1">
                                     <label class="text-white mt-2" for="cpf">CPF</label>
-                                    <input id="cpf" [(ngModel)]="cpf" name="cpf" placeholder="Apenas números" class="form-control" value="" maxlength="11" pattern="[0-9]+$" required>
+                                    <input id="boletoCpf" [(ngModel)]="boletoCpf" name="boletoCpf" placeholder="Apenas números" class="form-control" value="" maxlength="11" pattern="[0-9]+$" required>
+                                    <p class="erroFraseCurta" *ngIf="erroBoletoCpf">Preencha seu CPF</p>
                                 </div>
+                                <div class="row m-1" *ngIf="erroBoletoCpf"><br></div>
                                 <div class="row m-1">
-                                    <button routerLink="/pagamento/boleto/{{cpf}}/{{nomeCompleto}}" (click)="comprar()">Prosseguir</button>
+                                    <button (click)="finalizarPagamentoBoleto()">Prosseguir</button>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -167,13 +164,22 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                                <app-resumoPedido></app-resumoPedido>
+                                <div class="row">
+                                    <app-resumoPedido></app-resumoPedido>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3"></div>
+                                    <div class="col-9">
+                                        <br>
+                                        <button class="btn btn-lg btn-outline-success btn-concluir" (click)="concluirPix()">Concluir</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
             </div>
 
-
+            <!-- CRÉDITO -> PAGAMENTO PRE APROVADO -->
             <div class="container" [hidden]="!creditoFinalizado">
                 <div class="text-white">
                     <p><span>⬅</span><span class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</span></p>
@@ -194,7 +200,6 @@
                             </div>
                         </div>
                     </form>
-
             </div>
         </div>
     </body>

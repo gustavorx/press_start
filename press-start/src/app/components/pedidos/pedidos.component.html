@@ -19,13 +19,13 @@
                                     Produto
                                 </th>
                                 <th class="text-white">
-                                    Valor
+                                    Valor (R$)
                                 </th>
                                 <th class="text-white">
                                     Data
                                 </th>
                             </tr>
-                            <tr id="{{pedido._id}}" *ngFor="let pedido of pedidos">
+                            <tr id="{{pedido._id}}" *ngFor="let pedido of pedidos | slice:0:(more ? undefined : 10)">
                                 <td class="text-white">
                                     {{pedido._id}}
                                 </td>
@@ -41,6 +41,11 @@
                             </tr>
                         </table>
                     </section>
+                    <div class="row"><br></div>
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-9"><button class="btn btn-lg btn-outline-success btn-jogo" (click)="more = !more">{{ more ? 'Mostrar Menos':'Mostrar Mais' }}</button></div>
+                    </div>                    
                     <section *ngIf="!pedidos">
                         <div class="whiteH1"> Você ainda não possui nenhum pedido </div>
                     </section>

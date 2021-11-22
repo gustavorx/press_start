@@ -12,6 +12,7 @@ export class PedidosComponent implements OnInit {
   
   id: any;
   pedidos: PedidoModel[] = [];
+  more: boolean = false;
   
 
   ngOnInit() {
