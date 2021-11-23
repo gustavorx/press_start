@@ -1,22 +1,27 @@
 .jogo {
-    padding: 1rem;
-    max-width: 260px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  padding: 1rem;
+  max-width: 260px;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .jogo-card {
-    width: 29%;
-    height: auto;
-    margin: 1rem;
+  width: 29%;
+  height: auto;
+  margin: 1rem;
 }
 
 .grid-jogos {
-    height: auto;
-    width: 100%;
-    position: relative;
-    background-size: cover;
-    background-image: linear-gradient(-60deg, #080427 30%, #211e3d 30%);
-    padding-left: 5rem;
-  }
+  height: auto;
+  width: 100%;
+  position: relative;
+  background-size: cover;
+  background-image: linear-gradient(-60deg, #080427 30%, #211e3d 30%);
+  padding-left: 5rem;
+}
+
+.card-img-size {
+  height: 19rem;
+}

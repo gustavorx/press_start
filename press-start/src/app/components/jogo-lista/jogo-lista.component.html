@@ -1,6 +1,6 @@
 <div class="d-flex flex-wrap grid-jogos" *ngIf="jogos.length > 0">
     <div class="card jogo-card" id="{{jogo._id}}" *ngFor="let jogo of jogos">
-        <img class="card-img-top" src="{{jogo.imagemLink}}" alt="{{jogo.nome}} background">
+        <img class="card-img-top card-img-size" src="{{jogo.imagemLink}}" alt="{{jogo.nome}} background">
         <div class="card-body">
             <h5 class="card-title">{{jogo.nome}}</h5>
             <div class="d-flex justify-content-between align-items-center">

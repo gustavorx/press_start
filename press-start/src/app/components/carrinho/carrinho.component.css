@@ -1,3 +1,13 @@
 .container {
   margin-top: 5%;
 }
+
+.titulo {
+  font-size: 3rem;
+}
+
+.avisoSemProdutos {
+  color: #fdfdfd;
+  font-size: 1.5rem;
+  margin-bottom: 1px;
+}
