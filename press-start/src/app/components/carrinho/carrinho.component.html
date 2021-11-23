@@ -22,7 +22,8 @@
               </td>
               <td>{{produto.nome}}</td>
               <td>{{produto.preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</td>
-              <td><span style="cursor: pointer; background-color: #920000; padding: 5px 10px; border-radius: 5px;" (click)="removerProduto(produto.id)">Remover</span></td>
+              <td><span style="cursor: pointer; background-color: #920000; padding: 5px 10px; border-radius: 5px;"
+                  (click)="removerProduto(produto.id)">Remover</span></td>
             </tr>
           </tbody>
         </table>

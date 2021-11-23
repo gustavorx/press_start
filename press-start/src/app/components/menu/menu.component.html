@@ -22,6 +22,7 @@
         <ul class="dropdown-menu dropdown-menu-usuario" aria-labelledby="dropdownUsuario">
             <li><a class="dropdown-item" routerLink="/alterar-cadastro">Meus dados</a></li>
             <li><a class="dropdown-item" routerLink="/carrinho">Carrinho</a></li>
+            <li><a class="dropdown-item" routerLink="/pedidos">Meus Pedidos</a></li>
             <li *ngIf="tipoAdm == 'Administrador master'"><a class="dropdown-item" routerLink="/usuario">Usuários</a>
             </li>
             <li *ngIf="tipoAdm != 'Comum'"><a class="dropdown-item" routerLink="/jogo/adm">Adicionar jogo</a></li>

@@ -21,44 +21,15 @@
                 <div class="row"><br></div>
                 <div class="row">
                     <div class="col-4"></div>
-                    <div class="col-4 border">
-                        <div class="row" style="--bs-gutter-x: 0rem">
-                            <h3 class="text-white">Resumo do Pedido</h3>
-                            <hr class="whiteH1">
-                        </div>
-                        <div class="row" style="--bs-gutter-x: 0rem">
-                            <label class="text-white">Itens do pedido</label>
-                            <div *ngFor="let produto of getProdutos()" class="row">
-                                <div class="col">
-                                    <div class="text-white">{{produto.nome}}</div>
-                                </div>
-                                <div class="col">
-                                    <div class="text-white">{{produto.preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="whiteH1">
-                        <div class="row" style="--bs-gutter-x: 0rem">
-                            <label class="text-white">Forma de pagamento</label>
-                            <div class="text-white">Cartão de Crédito</div>>
-                        </div>
-                        <div class="row" style="--bs-gutter-x: 0rem">
-                            <label class="text-white">Tempo de processamento</label>
-                            <div class="text-white">Até 1 dia útil</div>
-                            <hr class="whiteH1">
-                        </div>
-                        <div class="row grey" style="--bs-gutter-x: 0rem">
-                            <label class="text-white">1 x de {{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}} sem juros</label>
-                            <div class="text-white">Total a pagar <b class="text-white">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</b></div>
-                        </div>
+                    <div class="col-4">
+                        <app-resumoPedido></app-resumoPedido>
                     </div>
-                    <div class="col-4"></div>
                 </div>
             </div>          
             <div class="container" [hidden]="esconderCartao || creditoFinalizado">
                 <form>
                     <div class="text-white">
-                        <p class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</p>
+                        <p><span>⬅</span><span class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</span></p>
                         <h3>Cartão de Crédito</h3>
                         <hr>
                     </div>
@@ -67,7 +38,7 @@
                             <div class="col-7">
                                 <div class="row m-1">
                                     <label class="text-white" for="numeroCartao">Número do cartão</label>
-                                    <input type="text" class="form-control" id="numeroCartao" [(ngModel)]="numeroCartao" name="numeroCartao"  maxlength="16" pattern="^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$"
+                                    <input type="text" class="form-control" id="numeroCartao" [(ngModel)]="numeroCartao" name="numeroCartao"  maxlength="19" pattern="^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$"
                                     placeholder="0000 0000 0000 0000" required>
                                     <p class="erroFraseCurta" *ngIf="erroNumeroCartao">Preencha o Número do cartão</p>
                                 </div>
@@ -94,13 +65,7 @@
                                         <label class="text-white mt-2" for="cpf">CPF</label>
                                     <input id="cpf" [(ngModel)]="cpf" name="cpf" placeholder="Apenas números" class="form-control" value="" maxlength="11" pattern="[0-9]+$" required>
                                     <p class="erroFraseCurta" *ngIf="erroCpf">Preencha o Número do CPF</p>
-                                    </div>
-                                    <div class="col m-1">
-                                        <label class="text-white mt-2" for="cpf">Parcelas</label><br>
-                                        <select [(ngModel)]="parcelaSelecionada" name="parcelas">
-                                            <option style="width: 25rem;" *ngFor="let parcela of parcelas" [value]="parcela">{{parcela}}</option>
-                                        </select>
-                                    </div>                                    
+                                    </div>                                  
                                 </div>
                                 <div class="row">
                                     <div class="col m-1">
@@ -110,7 +75,7 @@
                                     </div>
                                     <div class="col m-1">
                                         <label class="text-white mt-2" for="dataDeNascimento">Data De Nascimento</label>
-                                        <input type="text" class="form-control" id="nascimento" [(ngModel)]="nascimento" name="nascimento" placeholder="DD/MM/AAAA" type="text" maxlength="8" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
+                                        <input type="text" class="form-control" id="nascimento" [(ngModel)]="nascimento" name="nascimento" placeholder="DD/MM/AAAA" type="text" maxlength="10" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
                                         required>
                                         <p class="erroFraseLonga" *ngIf="erroNascimento">Preencha a data de nascimento</p>            
                                     </div>
@@ -120,39 +85,11 @@
                                 </div>
                             </div>
                             <div class="col-1"></div>
-                            <div class="col-4 border">
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <h3 class="text-white">Resumo do Pedido</h3>
-                                    <hr class="whiteH1">
-                                </div>
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">Itens do pedido</label>
-                                    <div *ngFor="let produto of getProdutos()" class="row">
-                                        <div class="col">
-                                            <div class="text-white">{{produto.nome}}</div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="text-white">{{produto.preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr class="whiteH1">
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">Forma de pagamento</label>
-                                    <div class="text-white">Cartão de Crédito</div>>
-                                </div>
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">Tempo de processamento</label>
-                                    <div class="text-white">Até 1 dia útil</div>
-                                    <hr class="whiteH1">
-                                </div>
-                                <div class="row grey" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">{{parcelaSelecionada}} x de {{getValorParcelado().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}} sem juros</label>
-                                    <div class="text-white">Total a pagar <b class="text-white">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</b></div>
-                                    <hr class="whiteH1">
-                                </div>
+                            <div class="col-4">
+                                <app-resumoPedidoCartao></app-resumoPedidoCartao>
+                                <div class="row"><br></div>
                                 <div class="d-flex flex-wrap justify-content-center align-items-center">
-                                    <button type="submit" (click)="finalizarPagamentoCredito()"> Finalizar Compra 🔒</button>
+                                    <button type="submit" class="btn btn-lg btn-outline-success btn-compra" (click)="finalizarPagamentoCredito()"> Finalizar Compra 🔒</button>
                                 </div>
                             </div>
                         </div>
@@ -162,7 +99,7 @@
             <!-- BOLETO -->
             <div class="container" *ngIf="!esconderBoleto">
                 <div class="text-white">
-                    <p class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</p>
+                    <p><span>⬅</span><span class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</span></p>
                     <h3>Preencha seus dados para a emissão do boleto</h3>
                     <hr>
                 </div>
@@ -172,42 +109,21 @@
                             <div class="col-8">
                                 <div class="row m-1">
                                     <label class="text-white" for="nome">Nome Completo</label>
-                                    <input type="text" class="form-control" id="nomeCompleto" [(ngModel)]="nomeCompleto" name="nomeCompleto" placeholder="Digite seu nome" required>
+                                    <input type="text" class="form-control" id="boletoNome" [(ngModel)]="boletoNome" name="boletoNome" placeholder="Digite seu nome" required>
+                                    <p class="erroFraseCurta" *ngIf="erroBoletoNome">Preencha seu nome completo</p>
                                 </div>
                                 <div class="row m-1">
                                     <label class="text-white mt-2" for="cpf">CPF</label>
-                                    <input id="cpf" [(ngModel)]="cpf" name="cpf" placeholder="Apenas números" class="form-control" value="" maxlength="11" pattern="[0-9]+$" required>
+                                    <input id="boletoCpf" [(ngModel)]="boletoCpf" name="boletoCpf" placeholder="Apenas números" class="form-control" value="" maxlength="11" pattern="[0-9]+$" required>
+                                    <p class="erroFraseCurta" *ngIf="erroBoletoCpf">Preencha seu CPF</p>
                                 </div>
+                                <div class="row m-1" *ngIf="erroBoletoCpf"><br></div>
                                 <div class="row m-1">
-                                    <button routerLink="/pagamento/boleto/{{cpf}}/{{nomeCompleto}}">Prosseguir</button>
+                                    <button (click)="finalizarPagamentoBoleto()">Prosseguir</button>
                                 </div>
                             </div>
-                            <div class="col-4 border">
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <h3 class="text-white">Resumo do Pedido</h3>
-                                    <hr class="whiteH1">
-                                </div>
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">Itens do pedido</label>
-                                    <div *ngFor="let produto of getProdutos()" class="row">
-                                        <div class="col">
-                                            <div class="text-white">{{produto.nome}}</div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="text-white">{{produto.preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr class="whiteH1">
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">Tempo de processamento</label>
-                                    <div class="text-white">Até 1 dia útil</div>
-                                    <hr class="whiteH1">
-                                </div>
-                                <div class="row grey" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">1 x de {{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}} sem juros</label>
-                                    <div class="text-white">Total a pagar <b class="text-white">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</b></div>
-                                </div>
+                            <div class="col-4">
+                                <app-resumoPedido></app-resumoPedido>
                             </div>
                         </div>
                     </form>
@@ -217,7 +133,7 @@
             <!-- PIX -->
             <div class="container" *ngIf="!esconderPix">
                 <div class="text-white">
-                    <p class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</p>
+                    <p><span>⬅</span><span class="alterar" (click)="alterarPagameto()" style="cursor: pointer;">Alterar forma de pagamento</span></p>
                     <h3>Finalize o pagamento usando o Pix!</h3>
                     <hr>
                 </div>
@@ -243,83 +159,49 @@
                                         <input type="text" class="form-control" id="qrCode" value="{{ qrCode }}">
                                     </div>
                                     <div class="col-2">
-                                        <button (click)="copiarCodigo()">copiar</button>
+                                        <button class="btn btn-lg btn-outline-info btn-copiar" (click)="copiarCodigo()">copiar</button>
                                     </div>                                
                                 </div>
                             </div>
-                            <div class="col-4 border">
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <h3 class="text-white">Resumo do Pedido</h3>
-                                    <hr class="whiteH1">
+                            <div class="col-4">
+                                <div class="row">
+                                    <app-resumoPedido></app-resumoPedido>
                                 </div>
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">Itens do pedido</label>
-                                    <div *ngFor="let produto of getProdutos()" class="row">
-                                        <div class="col">
-                                            <div class="text-white">{{produto.nome}}</div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="text-white">{{produto.preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</div>
-                                        </div>
+                                <div class="row">
+                                    <div class="col-3"></div>
+                                    <div class="col-9">
+                                        <br>
+                                        <button class="btn btn-lg btn-outline-success btn-concluir" (click)="concluirPix()">Concluir</button>
                                     </div>
-                                </div>
-                                <hr class="whiteH1">
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">Tempo de processamento</label>
-                                    <div class="text-white">Até 1 dia útil</div>
-                                    <hr class="whiteH1">
-                                </div>
-                                <div class="row grey" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">1 x de {{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}} sem juros</label>
-                                    <div class="text-white">Total a pagar <b class="text-white">{{getValorTotal().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}}</b></div>
                                 </div>
                             </div>
                         </div>
                     </form>
             </div>
 
-
+            <!-- CRÉDITO -> PAGAMENTO PRE APROVADO -->
             <div class="container" [hidden]="!creditoFinalizado">
                 <div class="text-white">
                     <h2>Pagamento pré aprovado✔️</h2>
-                    <hr>
+                    <hr>                    
                 </div>
 
                     <form>
                         <div class="row">
                             <div class="col-8">
                                 <div class="row text-white" style="--bs-gutter-x: 0rem">
-                                    <p class="creditoAprovado1">Seu pagamento está sendo processado por sua operadora de cartão de crédito.</p><br>
+                                    <p class="creditoAprovado1">Seu pagamento está sendo processado</p><br>
                                     <p class="creditoAprovado2">Seu jogo logo estará disponível!</p> 
                                 </div>
-                            </div>
-                            <div class="col-4 border">
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <h3 class="text-white">Resumo do Pedido</h3>
-                                    <hr class="whiteH1">
-                                </div>
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">itens do pedido</label>
-                                    <div class="col">
-                                        <div class="text-white">x1</div>
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    <div class="col-11">
+                                        <button class="btn btn-lg btn-outline-success btn-concluir" routerLink="/">Voltar ao início</button>
                                     </div>
-                                    <div class="col">
-                                        <div class="text-white">R$ 19,74</div>
-                                    </div>
-                                    <hr class="whiteH1">
-                                </div>
-                                <div class="row" style="--bs-gutter-x: 0rem">
-                                    <label class="text-white">Tempo de processamento</label>
-                                    <div class="text-white">Alguns minutos</div>
-                                    <hr class="whiteH1">
-                                </div>
-                                <div class="row grey" style="--bs-gutter-x: 0rem">
-                                    <div class="text-white">Total a pago <b class="text-white">R$ 19,74</b></div>
                                 </div>
                             </div>
                         </div>
                     </form>
-
             </div>
         </div>
     </body>
