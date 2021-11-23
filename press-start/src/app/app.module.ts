@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { JogoListaComponent } from './components/jogo-lista/jogo-lista.component';
 import { HomeComponent } from './components/home/home.component';
+import { SobreComponent } from './components/sobre/sobre.component';
 import { ResumoPedidoComponent } from './components/pagamento/resumoPedido/resumoPedido.component';
 import { PedidosComponent } from './components/pedidos/pedidos.component';
 import { LoggedInAuthGuard } from './components/guards/loggedInAuth.guard';
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
   { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard] },
   { path: 'jogo/adm/:id', component: AdmJogosComponent, canActivate: [AuthGuard] },
   { path: 'jogo/adm', component: AdmJogosComponent, canActivate: [AuthGuard] },
-  { path: 'pedidos', component: PedidosComponent }
+  { path: 'pedidos', component: PedidosComponent },
+  { path: 'sobre', component: SobreComponent }
 ];
 
 @NgModule({
@@ -62,7 +64,8 @@ const appRoutes: Routes = [
     HomeComponent,
     ResumoPedidoComponentCartao,
     AdmJogosComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    SobreComponent
   ],
   imports: [
     BrowserModule,
