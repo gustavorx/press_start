@@ -1,12 +1,3 @@
-.carrinho-section {
-  height: 100%;
-  width: 100%;
-  position: relative;
-  background-size: cover;
-  background-image: linear-gradient(-60deg, #080427 30%, #211e3d 30%);
-  color: #ffffff;
-}
-
 .container {
   margin-top: 5%;
 }
