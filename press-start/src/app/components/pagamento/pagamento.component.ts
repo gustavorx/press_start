@@ -54,7 +54,6 @@ export class PagamentoComponent {
   boletoNome: string = "";
   boletoCpf: string = "";
 
-
   mostrarCartao(){
     this.esconderCartao = false;
     this.esconderMetodos = true;
