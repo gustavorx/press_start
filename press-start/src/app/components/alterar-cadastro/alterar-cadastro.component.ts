@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { LoginService } from '../login.service';
-import { Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import axios, { Axios } from 'axios';
 
 @Component({
   selector: 'app-alterar-cadastro',
@@ -11,14 +11,12 @@ import { Subscription } from 'rxjs';
 })
 export class AlterarCadastroComponent implements OnInit {
 
-  subscription: Subscription = new Subscription;
-
-  constructor(private http: HttpClient, private route: Router, private idUser: LoginService) { }
+  constructor(private http: HttpClient, private route: Router, private authService: AuthService) { }
 
   //Busca dados do Usuario
   ngOnInit(): void {
     //pega Id do usuario ao fazer login
-    this.subscription = this.idUser.idAtual.subscribe(message => this.id = message);
+    this.id = localStorage.getItem('token');
 
     let url: string = `http://localhost:8080/usuarios/${this.id}`;
 
@@ -33,9 +31,6 @@ export class AlterarCadastroComponent implements OnInit {
         this.email = res.email;
         this.senhaOg = res.senha;
         this.tipo = res.tipo;
-        if(this.tipo == "Administrador master"){
-          this.mostraTipo = true;
-        }
         this.cep = res.cep;
         this.numero = res.numero;
         this.rua = res.rua;
@@ -44,11 +39,10 @@ export class AlterarCadastroComponent implements OnInit {
         this.estado = res.estado;
         this.complemento = res.complemento;
       }).catch(error => console.error(error));
-
   }
 
   //Dados pessoais
-  id: string = "";
+  id: any = "";
   nome: string = "...";
   cpf: string = "...";
   telefone: string = "...";
@@ -58,7 +52,6 @@ export class AlterarCadastroComponent implements OnInit {
 
   //Tipo de usuario
   tipo: string = "";
-  mostraTipo = false;
 
   //Alterar senha
   senhaOg: string = "";
@@ -77,7 +70,7 @@ export class AlterarCadastroComponent implements OnInit {
 
   //Muda para tela de alterar senha
   alterarSenhas = false;
-  
+
   alterarSenha() {
     if (this.alterarSenhas == false) {
       this.alterarSenhas = true
@@ -107,16 +100,19 @@ export class AlterarCadastroComponent implements OnInit {
   }
 
   //Atualiza no banco
-  update(data: JSON) {
+  async update(data: JSON) {
+
     if (this.senhaOg == this.senhaAntiga && this.novaSenha == this.repitaSenha) {
-      this.http.put(`http://localhost:8080/usuarios/${this.id}`, data, { responseType: 'text' }).subscribe();
+      const response = await axios.put(`http://localhost:8080/usuarios/${this.id}`, data);
       this.aviso = "success";
       this.alerta = "Senha alterado com sucesso";
+      window.location.href = "/alterar-cadastro";
     }
     else if (this.alterarSenhas == false) {
-      this.http.put(`http://localhost:8080/usuarios/${this.id}`, data, { responseType: 'text' }).subscribe();
+      const response = await axios.put(`http://localhost:8080/usuarios/${this.id}`, data);
       this.aviso = "success";
       this.alerta = "Informações atualizadas com sucesso";
+      window.location.href = "/alterar-cadastro";
     }
     else if (this.senhaAntiga.length <= 7 || this.novaSenha.length <= 7 || this.repitaSenha.length <= 7) {
       this.aviso = "warning";

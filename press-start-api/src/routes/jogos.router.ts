@@ -33,16 +33,30 @@ jogosRouter.get("/:id", async (req: Request, res: Response) => {
 
 });
 
+jogosRouter.get("/find/:nome", async (req: Request, res: Response) => {
+    const nomeDoJogo = req?.params?.nome;
+    try {
+        const query = { nome: new RegExp(`${nomeDoJogo}`, 'i') };
+        const jogo = (await collections.jogos?.find(query).toArray()) as JogoRequest[];
+
+        if (jogo) res.status(200).json(jogo);
+        else res.status(402).json(`Jogo com nome ${nomeDoJogo} não encontrado `)
+    } catch (error) {
+        res.status(500).json(`Erro ao buscar o jogo com nome ${nomeDoJogo}: ${error}`)
+    }
+
+});
+
 // POST
 jogosRouter.post("/", async (req: Request, res: Response) => {
     try {
         const response = req.body;
-        const novoJogo: JogoRequest = new JogoRequest(response.nome, response.descricao, response.preco, response.desenvolvedora, response.distribuidora, response.lancamento, response.classificacao, response.imagemLink);
+        const novoJogo: JogoRequest = new JogoRequest(response.nome, response.descricao, response.preco, response.desenvolvedora, response.distribuidora, response.dataLancamento, response.classificacao, response.imagemLink, response.youtubeId);
 
         const result = await collections.jogos?.insertOne(novoJogo);
 
         result
-            ? res.status(201).json(`Jogo criado com sucesso. Id: ${result.insertedId}`)
+            ? res.status(201).json({ mensagem: `Jogo criado com sucesso. Id: ${result.insertedId}`, Id: result.insertedId })
             : res.status(500).json("Falha ao criar novo jogo.");
     } catch (error) {
         res.status(400).json("Erro ao criar jogo: " + error);
@@ -55,7 +69,7 @@ jogosRouter.put("/:id", async (req: Request, res: Response) => {
 
     try {
         const response = req.body;
-        const jogoAtualizado: JogoRequest = new JogoRequest(response.nome, response.descricao, response.preco, response.desenvolvedora, response.distribuidora, response.lancamento, response.classificacao, response.imagemLink);
+        const jogoAtualizado: JogoRequest = new JogoRequest(response.nome, response.descricao, response.preco, response.desenvolvedora, response.distribuidora, response.dataLancamento, response.classificacao, response.imagemLink, response.youtubeId);
 
         const query = { _id: new ObjectId(id) };
 
