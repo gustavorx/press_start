@@ -30,7 +30,6 @@ export class CarrinhoComponent implements OnInit {
 
     if(carrinho?.includes("id")){
       this.existemProdutos = true;
-      console.log('vazio');
     }
 
     return carrinhoArr;
@@ -54,10 +53,13 @@ export class CarrinhoComponent implements OnInit {
       }
     });
 
-    this.existemProdutos = false;
-
     this.toastr.success('Produto removido do carrinho!');
 
     localStorage.setItem('carrinho', JSON.stringify(novoCarrinho)); 
+    console.log(novoCarrinho);
+    
+    if(novoCarrinho.length == 0){
+      this.existemProdutos = false;
+    }
   }
 }
