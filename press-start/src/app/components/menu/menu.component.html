@@ -7,7 +7,9 @@
     </ul>
     <ul class="menu-busca">
         <li>
-            <input class="dropdown-toggle input-busca" (keyup)="buscarJogosPeloNome()" type="text" placeholder="O que você quer jogar hoje?" id="dropdownMenuSearch" data-bs-toggle="dropdown" [(ngModel)]="nomeJogoPesquisado">
+            <input class="dropdown-toggle input-busca" (keyup)="buscarJogosPeloNome()" type="text"
+                placeholder="O que você quer jogar hoje?" id="dropdownMenuSearch" data-bs-toggle="dropdown"
+                [(ngModel)]="nomeJogoPesquisado">
             <ul id="list" class="dropdown-menu dropdown-busca" aria-labelledby="dropdownMenuSearch">
                 <li *ngFor="let jogo of jogos"><a class="dropdown-item" href="/jogos/{{jogo._id}}">{{jogo.nome}}</a>
                 </li>
@@ -15,7 +17,8 @@
         </li>
     </ul>
     <ul class="menu-usuario dropdown" *ngIf="logado">
-        <button class="dropdown-toggle dropdown-usuario" type="button" id="dropdownUsuario" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="dropdown-toggle dropdown-usuario" type="button" id="dropdownUsuario" data-bs-toggle="dropdown"
+            aria-expanded="false">
             <img src="../../../assets/avatar/cyberpunk-avatar.jpg" alt="avatar" class="avatar">{{nomeUsuario}}
         </button>
 
@@ -25,7 +28,8 @@
             <li><a class="dropdown-item" routerLink="/pedidos">Meus Pedidos</a></li>
             <li *ngIf="tipoAdm == 'Administrador master'"><a class="dropdown-item" routerLink="/usuario">Usuários</a>
             </li>
-            <li *ngIf="tipoAdm != 'Comum'"><a class="dropdown-item" routerLink="/jogo/adm">Adicionar jogo</a></li>
+            <li *ngIf="tipoAdm.includes('Administrador')"><a class="dropdown-item" routerLink="/jogo/adm">Adicionar
+                    jogo</a></li>
             <li><a class="dropdown-item" routerLink="/" (click)="logout()">Logout</a></li>
         </ul>
     </ul>
